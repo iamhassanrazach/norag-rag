@@ -1,0 +1,10 @@
+python-dotenv
+requests
+openai>=1.0.0
+chromadb
+sentence-transformers
+fastapi
+uvicorn
+pydantic
+pytest
+httpx
