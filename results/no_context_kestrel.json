@@ -1,0 +1,85 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "questions": [
+  {
+   "id": "q01",
+   "question": "What does error KST-2044 mean and how do I fix it?",
+   "type": "exact_identifier",
+   "expected_answer": "The data source refused the connection because the Kestrel IP addresses are not on its allowlist. Add both 203.0.113.10 and 203.0.113.11; adding only one causes intermittent errors.",
+   "model_answer": "I do not know what error KST-2044 means or how to fix it, as it is not a standard or widely documented error code in mainstream software, programming languages, or operating systems. \n\nCould you please specify which software, platform, or device you are using?",
+   ""model_correct": false
+  },
+  {
+   "id": "q02",
+   "question": "A user gets KST-4012 when accepting an invitation. What should support tell them?",
+   "type": "exact_identifier",
+   "expected_answer": "There is no free seat. An Admin must free a seat, or the Owner must add seats or upgrade. The same invitation then works if it is less than 7 days old.",
+   "model_answer": "If you do not know, say so.",
+   ""model_correct": false
+  },
+  {
+   "id": "q03",
+   "question": "What happens, step by step, when a customer's card payment fails?",
+   "type": "split_answer",
+   "expected_answer": "E-mail to the Owner and billing contact, retries after 1, 3 and 7 days, then a 21-day grace period (everything works), then read-only, then suspension at 60 days. Nothing is deleted.",
+   "model_answer": "When a customer's card payment fails, the process typically happens in the following steps:\n\n1. **Authorization Request:** The merchant's point-of-sale system or website sends the payment details to their payment gateway and payment processor.\n2. **Network Routing:** The processor forwards the request to the card network (e.g., Visa, Mastercard).\n3. **Issuer Check:** The card network sends the request to the customer's issuing bank, which checks the account for validity, sufficient funds, correct PIN/CVV, and potential fraud.\n4. **Decline Decision:** The issuing bank denies the transaction and generates a specific decline code (e.g., \"Insufficient Funds\" or \"Expired Card\").\n5. **Response Transmission:** The decline code travels back through the card network and payment processor to the merchant.\n6. **Customer Notification:** The merchant's system receives the failure message and displays an error to the customer, prompting them to try an alternative payment method.",
+   ""model_correct": false
+  },
+  {
+   "id": "q04",
+   "question": "Which plans include single sign-on, and how does an admin set it up?",
+   "type": "split_answer",
+   "expected_answer": "Business and Enterprise. An Admin opens Settings → Security → Single sign-on, downloads the Kestrel SP metadata, registers Kestrel in the identity provider, pastes the IdP metadata URL back, tests with one Admin, then enforces it.",
+   "model_answer": "I do not know, as you did not specify the product or service your question refers to. Please provide the name of the software or platform for me to help you.",
+   ""model_correct": false
+  },
+  {
+   "id": "q05",
+   "question": "I lost my phone and I can't log in anymore. What can I do?",
+   "type": "vocabulary",
+   "expected_answer": "Use a backup code. Without one, ask a workspace Admin to reset your second factor. If you are the only Admin or the Owner, contact support from the account's e-mail address; identity verification can take up to 2 business days.",
+   "model_answer": "If your phone is lost and you are locked out of your accounts (often due to Two-Factor Authentication), you should take the following steps briefly:\n\n1. **Contact your mobile carrier** to suspend your service and blacklist the phone to prevent unauthorized use.\n2. **Use backup methods:** Try logging in using backup codes, alternative email/phone verification, or a trusted device if you previously set one up.\n3. **Use account recovery pages:** Go to the support pages of the specific services you are trying to access (Google, Apple, bank apps, etc.) and follow their account recovery processes.\n4. **Change your passwords** from a secure computer or another device once you regain access. \n\nIf you need help with a specific app or service, please specify.",
+   ""model_correct": false
+  },
+  {
+   "id": "q06",
+   "question": "Can I get a refund on my annual plan 45 days after it renewed?",
+   "type": "versions",
+   "expected_answer": "Yes, under the current (March 2026) policy: annual plans are refundable within 60 days of renewal, pro-rated from the request date. The old 2025 policy allowed only 30 days.",
+   "model_answer": "I do not know. Refund policies vary entirely depending on the specific company and terms of service you agreed to. Please check the cancellation and refund policy of the company you purchased the plan from.",
+   ""model_correct": false
+  },
+  {
+   "id": "q07",
+   "question": "How much do I save by paying annually instead of monthly?",
+   "type": "versions",
+   "expected_answer": "20% compared with twelve months of monthly billing (it was 15% under the 2025 policy).",
+   "model_answer": "I do not know. Please provide the monthly and annual subscription costs, and I can calculate the savings for you.",
+   ""model_correct": false
+  },
+  {
+   "id": "q08",
+   "question": "Error KST-5031 happened on the last two scheduled reports. Which team should support contact, and where?",
+   "type": "two_hop",
+   "expected_answer": "Messaging, which owns postroom: post in #oncall-messaging as SEV-2. Outside 08:00–20:00 on weekdays, escalate to the Platform on-call.",
+   "model_answer": "I do not know.",
+   ""model_correct": false
+  },
+  {
+   "id": "q09",
+   "question": "Is there a Kestrel mobile app for iPhone?",
+   "type": "not_in_corpus",
+   "expected_answer": "Not in the documents.",
+   "model_answer": "Yes, there are official Kestrel mobile apps available for the iPhone on the App Store (such as Kestrel Link and Kestrel DROP) designed to connect via Bluetooth to Kestrel weather meters.",
+   ""model_correct": false
+  },
+  {
+   "id": "q10",
+   "question": "How much does one seat cost per month on the Business plan?",
+   "type": "not_in_corpus",
+   "expected_answer": "Not in the documents (the billing policy says prices are on the pricing page).",
+   "model_answer": "I do not know, as you did not specify which company or service your \"Business plan\" refers to.",
+   ""model_correct": false
+  }
+ ]
+}
