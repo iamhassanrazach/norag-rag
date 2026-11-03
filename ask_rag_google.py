@@ -59,7 +59,7 @@ chroma_client = chromadb.PersistentClient(path="./chroma_db")
 # One collection per document and chunking configuration: if you change the document or the settings above,
 # the script will offer to build a new index for them.
 # Note: the name depends on the document's file NAME, not on its content.
-DOCUMENT_NAME = os.path.splitext(os.path.basename(DOCUMENT_FILE))[0]
+DOCUMENT_NAME = os.path.splitext(os.path.basename(DOCUMENT_FILE))
 COLLECTION_NAME = f"{DOCUMENT_NAME}_{CHUNK_SIZE}_{OVERLAP_PERCENT}_{MIN_PARAGRAPH_LENGTH}"
 
 # Create or get the collection where we will store our document chunks and their embeddings
@@ -84,7 +84,7 @@ def index_document(filepath):
     
     # Watch out: paragraphs shorter than MIN_PARAGRAPH_LENGTH characters will be ignored
     # Question: (when) does it make sense to ignore very short paragraphs?
-    paragraphs = [p.strip() for p in text.split("\n\n") if len(p.strip()) >= MIN_PARAGRAPH_LENGTH]
+    paragraphs = 
     text = "\n\n".join(paragraphs)
 
     # Simple fixed-size chunking with overlap:
@@ -92,16 +92,16 @@ def index_document(filepath):
     # characters each time. Chunks can start or end in the middle of a word or a sentence.
     overlap = CHUNK_SIZE * OVERLAP_PERCENT // 100
     step = CHUNK_SIZE - overlap
-    chunks = [text[i:i + CHUNK_SIZE] for i in range(0, len(text), step)]
+    chunks =  for i in range(0, len(text), step)]
 
     # Indexing locally is much faster—no batching for quotas needed!
     # But ChromaDB accepts at most ~5000 chunks per call, so with small chunk sizes we add them in batches.
     BATCH_SIZE = 5000
     for start in range(0, len(chunks), BATCH_SIZE):
-        batch = chunks[start:start + BATCH_SIZE]
+        batch = chunks
         collection.add(
             documents=batch,
-            ids=[f"id_{i}" for i in range(start, start + len(batch))]
+            ids=
         )
     print(f"Indexed {len(chunks)} chunks locally.")
 
@@ -110,9 +110,9 @@ def index_document(filepath):
 # to retrieve the most relevant snippets based on the query.
 def get_rag_context(query, n_results=5):
     # Search the vector DB for the most relevant snippets
-    results = collection.query(query_texts=[query], n_results=n_results)
+    results = collection.query(query_texts=, n_results=n_results)
     # Flatten the list of documents retrieved
-    return "\n---\n".join(results['documents'][0])
+    return "\n---\n".join(results)
 
 # Generation Logic
 # Build a prompt that includes the retrieved context and the question,
@@ -132,18 +132,18 @@ def generate_response(question, context):
     if STREAM_ON:
         response = client.chat.completions.create(
             model=MODEL,
-            messages=[{"role": "user", "content": full_prompt}],
+            messages=,
             stream=True
         )
         for chunk in response:
-            if chunk.choices[0].delta.content:
-                print(chunk.choices[0].delta.content, end='', flush=True)
+            if chunk.choices.delta.content:
+                print(chunk.choices.delta.content, end='', flush=True)
     else:
         response = client.chat.completions.create(
             model=MODEL,
-            messages=[{"role": "user", "content": full_prompt}]
+            messages=
         )
-        print(response.choices[0].message.content)
+        print(response.choices.message.content)
 
 # Execution
 def main():
@@ -154,7 +154,7 @@ def main():
     # Only index once per document and chunking configuration, and only if the user agrees
     if collection.count() == 0:
         answer = input(f"No index found for this document and these chunking settings (collection '{COLLECTION_NAME}').\n"
-                       f"Index {DOCUMENT_FILE} now? [y/N] ")
+                       f"Index {DOCUMENT_FILE} now?  ")
         if answer.strip().lower() != "y":
             print("Indexing cancelled. Nothing to search in, exiting.")
             return

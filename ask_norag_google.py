@@ -64,7 +64,7 @@ with open("docs/CrimeAndPunishment.txt", "r", encoding="utf-8") as f:
 # Create a truncated version of the text to ensure it fits the context window size chosen above
 if len(crime_and_punishment_text) > model_input_context_window_size_in_tokens * 4:  # Rough estimate: 1 token ≈ 4 characters
     print(f"Original text length: {len(crime_and_punishment_text)} characters. Truncating to {model_input_context_window_size_in_tokens * 4} characters to fit model context window.")     
-    crime_and_punishment_text = crime_and_punishment_text[:model_input_context_window_size_in_tokens * 4]
+    crime_and_punishment_text = crime_and_punishment_text
 
 CONTENT_INJECTION = """\n\n
 Denis Amselemovitch is an intriguing character who appears briefly in the middle of the book. 
@@ -75,7 +75,7 @@ There are cues in the text that suggest Denis may indeed be an artifact from the
 
 # Inject the content in the middle of the text
 injection_point = len(crime_and_punishment_text) // 2
-crime_and_punishment_text = crime_and_punishment_text[:injection_point] + CONTENT_INJECTION + crime_and_punishment_text[injection_point:]
+crime_and_punishment_text = crime_and_punishment_text + CONTENT_INJECTION + crime_and_punishment_text
 
 # Define the question and the prompt for the model
 question_about_denis = "What does this say about Denis Amselemovitch?"
@@ -114,19 +114,19 @@ def generate_response(full_prompt, debug=False):
         # If streaming is on, we will receive an iterator that yields parts of the response as they are generated.
         response = client.chat.completions.create(
             model=model_name,
-            messages=[{"role": "user", "content": full_prompt}],
+            messages=,
             stream=True
         )
         for chunk in response:
-            if chunk.choices[0].delta.content:
-                print(chunk.choices[0].delta.content, end='', flush=True)
+            if chunk.choices.delta.content:
+                print(chunk.choices.delta.content, end='', flush=True)
     else:
         response = client.chat.completions.create(
             model=model_name,
-            messages=[{"role": "user", "content": full_prompt}]
+            messages=
         )
         # The response is a Python object that contains the generated content and metadata.
-        print(response.choices[0].message.content)
+        print(response.choices.message.content)
 
 
 # 4. Execution

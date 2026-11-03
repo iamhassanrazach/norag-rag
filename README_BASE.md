@@ -5,12 +5,14 @@ This workspace contains 2 Python applications to compare **NoRAG** (full-context
 ## Applications
 
 1. `ask_norag_google.py`
+
 - NoRAG with Google Gemini via OpenAI SDK (`gemini-3.5-flash-lite`).
 - Loads `docs/CrimeAndPunishment.txt`, injects a "needle" passage, and runs two direct large-context questions:
-	- a baseline question about Marmeladov (present in the original book)
-	- a needle question about Denis (the injected passage)
+  - a baseline question about Marmeladov (present in the original book)
+  - a needle question about Denis (the injected passage)
 
 2. `ask_rag_google.py`
+
 - RAG with Google Gemini for generation via OpenAI SDK.
 - Uses local embeddings (`all-MiniLM-L6-v2`) + local ChromaDB (`chroma_db/`) to retrieve relevant chunks before asking the model.
 - Default retrieval uses `n_results=5` for the question: `What does this say about Denis?`
@@ -26,8 +28,7 @@ This workspace contains 2 Python applications to compare **NoRAG** (full-context
 
 - Python 3.10+ (recommended)
 - API key:
-   - `GOOGLE_API_KEY` from [Google AI Studio](https://aistudio.google.com/app/apikey)
-
+  - `GOOGLE_API_KEY` from (https://aistudio.google.com/app/apikey)
 
 ## Setup
 
@@ -78,14 +79,19 @@ python ask_rag_google.py
 - Streaming output is enabled by default in both applications (controlled by `STREAM_ON` variable).
 
 - Using the shortened version of the text (`docs/CrimeAndPunishment-shorter.txt`)
-	- Go online at https://gemini.google.com/app
-	- At the prompt, start writing "Here is a story: ",
-	- Then paste the content of docs/CrimeAndPunishment-shorter.txt into the Gemini chat app and then, at the end of the prompt, ask "What can you tell me about Denis Amselemovitch?"
-	- Observe the response from Gemini.
+  - Go online at https://gemini.google.com/app
+  - At the prompt, start writing "Here is a story: ",
+  - Then paste the content of docs/CrimeAndPunishment-shorter.txt into the Gemini chat app and then, at the end of the prompt, ask "What can you tell me about Denis Amselemovitch?"
+  - Observe the response from Gemini.
 
 # Free books from Project Gutenberg
+
 - https://www.gutenberg.org/
+
 # Crime and Punishment by Fyodor Dostoevsky
+
 - https://www.gutenberg.org/ebooks/2554
+
 # Huckleberry Finn by Mark Twain
+
 - https://www.gutenberg.org/ebooks/76

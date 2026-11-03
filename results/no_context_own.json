@@ -1,0 +1,101 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "questions": [
+  {
+   "id": "o01",
+   "question": "How fast does the Lamborghini Revuelto accelerate from 0 to 100 km/h?",
+   "type": "versions",
+   "expected_answer": "2.5 seconds (the Aventador LP 700-4 needs 2.9 seconds).",
+   "model_answer": "The Lamborghini Revuelto accelerates from 0 to 100 km/h in 2.5 seconds.",
+   "model_correct": null
+  },
+  {
+   "id": "o02",
+   "question": "How much power does the V12 of the original Lamborghini Aventador LP 700-4 produce?",
+   "type": "versions",
+   "expected_answer": "700 PS (690 hp).",
+   "model_answer": "The V12 of the original Lamborghini Aventador LP 700-4 produces 700 horsepower (PS) or 690 brake horsepower (bhp).",
+   "model_correct": null
+  },
+  {
+   "id": "o03",
+   "question": "How much power did the Lamborghini Aventador SuperVeloce make, and how much lighter was it than the standard coupé?",
+   "type": "other",
+   "expected_answer": "750 PS (740 hp), with a weight reduction of 50 kg.",
+   "model_answer": "The Lamborghini Aventador SuperVeloce (SV) produced **740 horsepower** (750 PS) and was **50 kg (110 lbs)** lighter than the standard coupé.",
+   "model_correct": null
+  },
+  {
+   "id": "o04",
+   "question": "Which Lamborghini Aventador model had the feature of ALA?",
+   "type": "exact_identifier",
+   "expected_answer": "The Aventador SVJ, the first production V12 Lamborghini with the ALA system.",
+   "model_answer": "The Lamborghini Aventador **SVJ** (Superveloce Jota) featured ALA (*Aerodinamica Lamborghini Attiva*), an active aerodynamics system.",
+   "model_correct": null
+  },
+  {
+   "id": "o05",
+   "question": "How much electric power did the Lamborghini Revuelto produce from its total of 1015 PS?",
+   "type": "other",
+   "expected_answer": "190 PS (140 kW); the V12 provides the other 825 PS.",
+   "model_answer": "The Lamborghini Revuelto produces a total electric power of **180 PS** (178 hp) from its three electric motors, contributing to the car's combined total of 1,015 PS.",
+   "model_correct": null
+  },
+  {
+   "id": "o06",
+   "question": "What is the compression ratio of the engine used in the original Lamborghini Aventador LP 700-4?",
+   "type": "two_hop",
+   "expected_answer": "11.8 : 1. It is the second-generation V12 (L539); the Revuelto's third-generation V12 is 12.6 : 1.",
+   "model_answer": "The compression ratio of the engine in the original Lamborghini Aventador LP 700-4 is 11.8:1.",
+   "model_correct": null
+  },
+  {
+   "id": "o07",
+   "question": "What powers the Lamborghini Revuelto, and how big is its battery?",
+   "type": "split_answer",
+   "expected_answer": "A 6.5-liter V12 with three electric motors; the battery is 3.8 kWh.",
+   "model_answer": "The Lamborghini Revuelto is powered by a V12 plug-in hybrid system combining a 6.5-liter V12 engine with three electric motors. Its battery has a capacity of **3.8 kWh**.",
+   "model_correct": null
+  },
+  {
+   "id": "o08",
+   "question": "How far can the Lamborghini Revuelto go on electricity only?",
+   "type": "vocabulary",
+   "expected_answer": "About 10 km (WLTP).",
+   "model_answer": "The Lamborghini Revuelto can go approximately 10 kilometers (about 6 miles) on electricity only.",
+   "model_correct": null
+  },
+  {
+   "id": "o09",
+   "question": "How much does a new Lamborghini Revuelto cost?",
+   "type": "not_in_corpus",
+   "expected_answer": "Not in the documents.",
+   "model_answer": "A new Lamborghini Revuelto has a starting price of around $600,000.",
+   "model_correct": null
+  },
+  {
+   "id": "o10",
+   "question": "What is the fuel tank capacity of the Lamborghini Aventador?",
+   "type": "not_in_corpus",
+   "expected_answer": "Not in the documents.",
+   "model_answer": "The fuel tank capacity of the Lamborghini Aventador is 22.5 US gallons (85 liters).",
+   "model_correct": null
+  },
+  {
+   "id": "o11",
+   "question": "How much does the Lamborghini Revuelto weigh?",
+   "type": "versions",
+   "expected_answer": "1,772 kg dry weight (the Aventador LP 700-4 coupé is listed at 1,575 kg kerb weight).",
+   "model_answer": "The Lamborghini Revuelto has a dry weight of 1,772 kg (3,907 lbs).",
+   "model_correct": null
+  },
+  {
+   "id": "o12",
+   "question": "What happened to 15 Lamborghini Aventador Ultimae cars in February 2022, and what did Lamborghini do about it?",
+   "type": "other",
+   "expected_answer": "They were destroyed when the car carrier Felicity Ace caught fire and sank near the Azores; Lamborghini restarted Ultimae production to replace them.",
+   "model_answer": "In February 2022, 15 Lamborghini Aventador Ultimae cars were aboard the cargo ship *Felicity Ace*, which caught fire and sank off the coast of the Azores. \n\nTo make up for the loss, Lamborghini decided to restart production of the Aventador Ultimae—which had previously been sold out—to rebuild and deliver the 15 cars to the affected customers.",
+   "model_correct": null
+  }
+ ]
+}

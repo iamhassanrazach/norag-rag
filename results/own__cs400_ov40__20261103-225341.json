@@ -1,0 +1,1541 @@
+{
+ "meta": {
+  "corpus": "own",
+  "chunk_size": 400,
+  "overlap_percent": 40,
+  "ks": [
+   1,
+   3,
+   5,
+   10
+  ],
+  "with_answers": false,
+  "answer_k": null,
+  "n_chunks": 185,
+  "n_questions": 12,
+  "n_scored": 10,
+  "timestamp": "2026-11-03 22:53:41"
+ },
+ "summary": {
+  "overall": {
+   "n": 10,
+   "1": {
+    "hit_rate": 0.2,
+    "recall": 0.1
+   },
+   "3": {
+    "hit_rate": 0.7,
+    "recall": 0.6
+   },
+   "5": {
+    "hit_rate": 0.7,
+    "recall": 0.6
+   },
+   "10": {
+    "hit_rate": 0.8,
+    "recall": 0.7
+   }
+  },
+  "by_type": {
+   "exact_identifier": {
+    "n": 1,
+    "1": {
+     "hit_rate": 0.0,
+     "recall": 0.0
+    },
+    "3": {
+     "hit_rate": 0.0,
+     "recall": 0.0
+    },
+    "5": {
+     "hit_rate": 0.0,
+     "recall": 0.0
+    },
+    "10": {
+     "hit_rate": 1.0,
+     "recall": 1.0
+    }
+   },
+   "other": {
+    "n": 3,
+    "1": {
+     "hit_rate": 0.0,
+     "recall": 0.0
+    },
+    "3": {
+     "hit_rate": 0.667,
+     "recall": 0.5
+    },
+    "5": {
+     "hit_rate": 0.667,
+     "recall": 0.5
+    },
+    "10": {
+     "hit_rate": 0.667,
+     "recall": 0.5
+    }
+   },
+   "split_answer": {
+    "n": 1,
+    "1": {
+     "hit_rate": 1.0,
+     "recall": 0.5
+    },
+    "3": {
+     "hit_rate": 1.0,
+     "recall": 1.0
+    },
+    "5": {
+     "hit_rate": 1.0,
+     "recall": 1.0
+    },
+    "10": {
+     "hit_rate": 1.0,
+     "recall": 1.0
+    }
+   },
+   "two_hop": {
+    "n": 1,
+    "1": {
+     "hit_rate": 1.0,
+     "recall": 0.5
+    },
+    "3": {
+     "hit_rate": 1.0,
+     "recall": 0.5
+    },
+    "5": {
+     "hit_rate": 1.0,
+     "recall": 0.5
+    },
+    "10": {
+     "hit_rate": 1.0,
+     "recall": 0.5
+    }
+   },
+   "versions": {
+    "n": 3,
+    "1": {
+     "hit_rate": 0.0,
+     "recall": 0.0
+    },
+    "3": {
+     "hit_rate": 0.667,
+     "recall": 0.667
+    },
+    "5": {
+     "hit_rate": 0.667,
+     "recall": 0.667
+    },
+    "10": {
+     "hit_rate": 0.667,
+     "recall": 0.667
+    }
+   },
+   "vocabulary": {
+    "n": 1,
+    "1": {
+     "hit_rate": 0.0,
+     "recall": 0.0
+    },
+    "3": {
+     "hit_rate": 1.0,
+     "recall": 1.0
+    },
+    "5": {
+     "hit_rate": 1.0,
+     "recall": 1.0
+    },
+    "10": {
+     "hit_rate": 1.0,
+     "recall": 1.0
+    }
+   }
+  }
+ },
+ "unreachable_evidence": [],
+ "questions": [
+  {
+   "id": "o01",
+   "question": "How fast does the Lamborghini Revuelto accelerate from 0 to 100 km/h?",
+   "type": "versions",
+   "answerable": true,
+   "retrieved": [
+    {
+     "rank": 1,
+     "id": "aventador.txt::28",
+     "source": "aventador.txt",
+     "chunk_index": 28,
+     "distance": 0.3561052083969116,
+     "text": "9 hp; 29 kW), more than the original Aventador), and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. It could accelerate from 0 to 97 km/h (0 to 60 mph) in 2.9 seconds with a top speed of 217 mph (350.0 km/h).\n\nThe S came with four-wheel steering, permanent four-wheel-drive and updated suspension. Suspension was controlled by the 'Lamborghini Dinamica Veicolo Attiva' (LDVA) control unit with four sele",
+     "relevant": false
+    },
+    {
+     "rank": 2,
+     "id": "revuelto.txt::14",
+     "source": "revuelto.txt",
+     "chunk_index": 14,
+     "distance": 0.35912203788757324,
+     "text": "e\nTop speed\t350 km/h (217 mph)\n0–100 km/h (0–62 mph)\t2.5 seconds\n0–200 km/h (0–124 mph)\t6.6 seconds\n0–300 km/h (0–186 mph)\t15.3 seconds\nDry weight\t1,772 kg (3,907 lb)\nBrakes\tCarbon-ceramic brake discs\nFront: 410×38 mm, 10 piston calipers\nRear: 390×32 mm, 4 piston calipers\nBattery\nType\tLithium-ion\nRated capacity\t3.8 kWh\nRange (WLTP)\t10 km (6.2 mi)\nModels\nRevuelto SV (2026)\nOn 14 August 2026, Lambor",
+     "relevant": true
+    },
+    {
+     "rank": 3,
+     "id": "aventador.txt::14",
+     "source": "aventador.txt",
+     "chunk_index": 14,
+     "distance": 0.3658372759819031,
+     "text": "700-4 Roadster\nThe Roadster model was announced for production on 27 December 2012. Equipped with the same V12 engine as the coupé, Lamborghini claimed that it could accelerate from 0–97 km/h (0–60 mph) in 2.9 seconds and would achieve a top speed of 349 km/h (217 mph).\n\nThe removable roof consisted of two carbon fibre panels weighing 6 kg (13 lb) each, which required the reinforcement of the rear",
+     "relevant": false
+    },
+    {
+     "rank": 4,
+     "id": "aventador.txt::43",
+     "source": "aventador.txt",
+     "chunk_index": 43,
+     "distance": 0.3909350633621216,
+     "text": "2021. It was limited to 600 units (350 Coupés, 250 Roadsters). It came with the standard features of the Aventador S and SVJ. The engine produces 780 PS (574 kW; 769 hp) and the same 720 N⋅m (531 lb⋅ft) of torque as the SVJ. Lamborghini claimed acceleration from 0–100 km/h (0–62 mph) in 2.84 seconds, with a top speed of 220 mph (354 km/h). The Coupé has a claimed kerb weight of 1,550 kg (3,417 lb)",
+     "relevant": false
+    },
+    {
+     "rank": 5,
+     "id": "aventador.txt::37",
+     "source": "aventador.txt",
+     "chunk_index": 37,
+     "distance": 0.40470051765441895,
+     "text": "m/h (0–62 mph) in 2.8 seconds and 0–200 km/h (0–124 mph) in 8.6 seconds with a top speed of 217 mph (350.0 km/h).\n\nA camouflaged SVJ prototype driven by Lamborghini test driver Marco Mapelli set a new production car lap time of 6:44.97 around the Nürburgring Nordschleife in July 2018, beating the previous record-holder, the Porsche 911 GT2 RS.\n\nThe SVJ was the first production V12 Lamborghini mode",
+     "relevant": false
+    },
+    {
+     "rank": 6,
+     "id": "aventador.txt::36",
+     "source": "aventador.txt",
+     "chunk_index": 36,
+     "distance": 0.4282263517379761,
+     "text": "rque at 6,750 rpm. Measures such as extensive use of carbon fibre, and titanium in the exhaust system brought the weight down to 1,525 kg (3,362 lb), giving the car a power-to-weight ratio of 0.5 hp/kg. The SVJ could accelerate from 0–100 km/h (0–62 mph) in 2.8 seconds and 0–200 km/h (0–124 mph) in 8.6 seconds with a top speed of 217 mph (350.0 km/h).\n\nA camouflaged SVJ prototype driven by Lamborg",
+     "relevant": false
+    },
+    {
+     "rank": 7,
+     "id": "aventador.txt::10",
+     "source": "aventador.txt",
+     "chunk_index": 10,
+     "distance": 0.44709163904190063,
+     "text": "erformance\n0–100 km/h (0–62 mph): 2.9 seconds\n0–161 km/h (0–100 mph): 6.4 seconds\n400 m (1⁄4 mi): 10.5 seconds at 220 km/h (137 mph)\nTop speed:\nOfficial: 350 km/h (217 mph)\nMeasured by Sport Auto magazine: 354 km/h (220 mph)\n97–0 km/h (60–0 mph): 30 m (100 ft)\nCornering – 1.05 g.\nThe seven-speed single-clutch automated manual transmission, was built by Graziano Trasmissioni.\n\nThe new, electronical",
+     "relevant": false
+    },
+    {
+     "rank": 8,
+     "id": "aventador.txt::22",
+     "source": "aventador.txt",
+     "chunk_index": 22,
+     "distance": 0.45147883892059326,
+     "text": "ds to 2.8 seconds, with the theoretical top speed still \"somewhere in excess\" of 350 km/h (217 mph). Delivery of the car began in the second quarter of 2015 with production limited to 600 units. Road & Track recorded a 0–241 km/h (0–150 mph) time of 12.8 seconds, a 0–322 km/h (0–200 mph) time of 33.5 seconds, and a 0–1⁄4 mile (402 m) at the top speed of 227.4 km/h (141.3 mph) 0–322 km/h (0–200 mph",
+     "relevant": false
+    },
+    {
+     "rank": 9,
+     "id": "revuelto.txt::2",
+     "source": "revuelto.txt",
+     "chunk_index": 2,
+     "distance": 0.45171570777893066,
+     "text": " car on March 22, 2023 on a Twitter post, and was unveiled in an online event on 29 March 2023. The car is the first of the brand to adopt a plug-in hybrid propulsion system. While models like the Sián FKP 37 and Countach LPI 800-4 had utilised a mild form of a hybrid propulsion system, mainly to improve low-speed drivability, the Revuelto is the first Lamborghini to make use of a true form of a h",
+     "relevant": false
+    },
+    {
+     "rank": 10,
+     "id": "aventador.txt::87",
+     "source": "aventador.txt",
+     "chunk_index": 87,
+     "distance": 0.45381712913513184,
+     "text": "cceleration was 2.8 seconds with a top speed of 355 km/h (221 mph). Production was limited to 112 units, a number inspired by the LP112 type code of the original Countach project.\n\nUnibody construction as used for the Aventador LP 700-4\nCar and Driver titled their article \"The Best Lamborghini Ever.\" Motor Trend described it as \"the friendliest V12 supercar in the world.\" Praise for the new V12 po",
+     "relevant": false
+    }
+   ],
+   "metrics": {
+    "1": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "3": {
+     "hit": 1,
+     "recall": 1.0
+    },
+    "5": {
+     "hit": 1,
+     "recall": 1.0
+    },
+    "10": {
+     "hit": 1,
+     "recall": 1.0
+    }
+   },
+   "grade": null,
+   "failure_kind": null
+  },
+  {
+   "id": "o02",
+   "question": "How much power does the V12 of the original Lamborghini Aventador LP 700-4 produce?",
+   "type": "versions",
+   "answerable": true,
+   "retrieved": [
+    {
+     "rank": 1,
+     "id": "aventador.txt::63",
+     "source": "aventador.txt",
+     "chunk_index": 63,
+     "distance": 0.30320483446121216,
+     "text": " to celebrate Lamborghini's 50th anniversary, it was introduced at the 2013 Geneva Motor Show with a price of US$4,000,000, making it one of the most expensive production cars in the world. The 6.5-litre naturally aspirated V12 generated 552 kW (740 hp; 750 PS) at 8,400 rpm and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. The increase in power was achieved by enlarging the air intakes and modifying",
+     "relevant": false
+    },
+    {
+     "rank": 2,
+     "id": "revuelto.txt::11",
+     "source": "revuelto.txt",
+     "chunk_index": 11,
+     "distance": 0.32625746726989746,
+     "text": " Torsional rigidity has been improved by 25% and the front frame is 20% lighter. Lamborghini has used carbon fibre in the construction, and the back of the chassis contains high-strength aluminium alloys.\n\nPowertrain\nThe Revuelto features a new 6.5-liter V12 engine, complemented by three electric motors that produce a combined power of 746.5 kW (1,015 PS).\n\nEngine\tV12\nElectric motor\tFront e-axle\nI",
+     "relevant": false
+    },
+    {
+     "rank": 3,
+     "id": "aventador.txt::4",
+     "source": "aventador.txt",
+     "chunk_index": 4,
+     "distance": 0.32710206508636475,
+     "text": "tador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the L539, it was Lamborghini's fifth in-house engine and second V12 design since the 3.5-litre power plant found in the 350GT.\n\nDisplacement\t6,498 cc (396.5 cu in)\nMax. power\t700 PS (515 kW; 690 hp) at 8,250 rpm\nMin. power to weight\t378 PS (278",
+     "relevant": true
+    },
+    {
+     "rank": 4,
+     "id": "v12-engine.txt::4",
+     "source": "v12-engine.txt",
+     "chunk_index": 4,
+     "distance": 0.3304818868637085,
+     "text": "ini to design the engine for his car and, according to some accounts, paid him a bonus for every horsepower over what Ferrari's V12 could produce. The finished 3.5-litre (214 cu in) V12, with minor improvements, went on to become the 6.5 litre powering the Lamborghini Murciélago LP 640, and completed its service for Lamborghini with the final version of the Murciélago, the Murciélago LP 670-4 Supe",
+     "relevant": false
+    },
+    {
+     "rank": 5,
+     "id": "v12-engine.txt::8",
+     "source": "v12-engine.txt",
+     "chunk_index": 8,
+     "distance": 0.3514828085899353,
+     "text": "dged adequate, and when fitted with production carburettors, all the auxiliary systems, and detuned for road use, the engine still made 280 brake horsepower (209 kW; 284 PS).\n\nLamborghini Murciélago Roadster with its V12 engine on display\nOver the years, this V12 engine has nearly doubled in displacement - first to 6,192 cubic centimetres (377.9 cu in), and later to 6,496 cubic centimetres (396.4 ",
+     "relevant": false
+    },
+    {
+     "rank": 6,
+     "id": "v12-engine.txt::34",
+     "source": "v12-engine.txt",
+     "chunk_index": 34,
+     "distance": 0.35212182998657227,
+     "text": "-4, Aventador J\n720 PS (530 kW; 710 bhp) at 8,250 rpm\tAventador LP 720-4 50° Anniversario\n740 PS (544 kW; 730 bhp) at 8,400 rpm\tAventador S\n750 PS (552 kW; 740 bhp) at 8,400 rpm\tAventador LP 750-4 SuperVeloce and Veneno\n770 PS (566 kW; 759 bhp) at 8,500 rpm\t720 N⋅m (531 lbf⋅ft) at 6,720 rpm\tCentenario, Aventador LP770-4 SVJ and SC18 Alston, Lamborghini SC20\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAv",
+     "relevant": false
+    },
+    {
+     "rank": 7,
+     "id": "v12-engine.txt::35",
+     "source": "v12-engine.txt",
+     "chunk_index": 35,
+     "distance": 0.3594551086425781,
+     "text": "bhp) at 8,500 rpm\t720 N⋅m (531 lbf⋅ft) at 6,720 rpm\tCentenario, Aventador LP770-4 SVJ and SC18 Alston, Lamborghini SC20\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAventador LP780-4 Ultimae, Countach LPI 800-4\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAutentica\n780 PS (574 kW; 769 bhp) at 6,750 rpm\tInvencible\n785 PS (577 kW; 774 bhp) at 8,500 rpm\tSián FKP 37\n830 PS (610 kW; 819 bhp) at 8,500 rpm\t760 N⋅m (56",
+     "relevant": false
+    },
+    {
+     "rank": 8,
+     "id": "aventador.txt::87",
+     "source": "aventador.txt",
+     "chunk_index": 87,
+     "distance": 0.3630378842353821,
+     "text": "cceleration was 2.8 seconds with a top speed of 355 km/h (221 mph). Production was limited to 112 units, a number inspired by the LP112 type code of the original Countach project.\n\nUnibody construction as used for the Aventador LP 700-4\nCar and Driver titled their article \"The Best Lamborghini Ever.\" Motor Trend described it as \"the friendliest V12 supercar in the world.\" Praise for the new V12 po",
+     "relevant": false
+    },
+    {
+     "rank": 9,
+     "id": "aventador.txt::43",
+     "source": "aventador.txt",
+     "chunk_index": 43,
+     "distance": 0.3719187378883362,
+     "text": "2021. It was limited to 600 units (350 Coupés, 250 Roadsters). It came with the standard features of the Aventador S and SVJ. The engine produces 780 PS (574 kW; 769 hp) and the same 720 N⋅m (531 lb⋅ft) of torque as the SVJ. Lamborghini claimed acceleration from 0–100 km/h (0–62 mph) in 2.84 seconds, with a top speed of 220 mph (354 km/h). The Coupé has a claimed kerb weight of 1,550 kg (3,417 lb)",
+     "relevant": false
+    },
+    {
+     "rank": 10,
+     "id": "v12-engine.txt::11",
+     "source": "v12-engine.txt",
+     "chunk_index": 11,
+     "distance": 0.37479978799819946,
+     "text": "e directly to the F1-inspired design of Bizzarrini and his team more than forty years ago.\n\nAudi ownership and V12 successor\n\nThe V12 engine used in the Lamborghini Aventador LP 700-4\nWhen Automobili Lamborghini was purchased in 1998 by the German Volkswagen Group subsidiary Audi AG, the V12 engine continued undergoing constant upgrades, growing its displacement from 5.7 litres (Diablo VT) to the ",
+     "relevant": false
+    }
+   ],
+   "metrics": {
+    "1": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "3": {
+     "hit": 1,
+     "recall": 1.0
+    },
+    "5": {
+     "hit": 1,
+     "recall": 1.0
+    },
+    "10": {
+     "hit": 1,
+     "recall": 1.0
+    }
+   },
+   "grade": null,
+   "failure_kind": null
+  },
+  {
+   "id": "o03",
+   "question": "How much power did the Lamborghini Aventador SuperVeloce make, and how much lighter was it than the standard coupé?",
+   "type": "other",
+   "answerable": true,
+   "retrieved": [
+    {
+     "rank": 1,
+     "id": "aventador.txt::43",
+     "source": "aventador.txt",
+     "chunk_index": 43,
+     "distance": 0.31246960163116455,
+     "text": "2021. It was limited to 600 units (350 Coupés, 250 Roadsters). It came with the standard features of the Aventador S and SVJ. The engine produces 780 PS (574 kW; 769 hp) and the same 720 N⋅m (531 lb⋅ft) of torque as the SVJ. Lamborghini claimed acceleration from 0–100 km/h (0–62 mph) in 2.84 seconds, with a top speed of 220 mph (354 km/h). The Coupé has a claimed kerb weight of 1,550 kg (3,417 lb)",
+     "relevant": false
+    },
+    {
+     "rank": 2,
+     "id": "aventador.txt::18",
+     "source": "aventador.txt",
+     "chunk_index": 18,
+     "distance": 0.3156130909919739,
+     "text": "he roof, plus additional stiffening in the sills and A-pillars).\n\nAventador SuperVeloce LP 750-4 (2015–2017)\n\nRear view\nThe SuperVeloce (SV) (Italian pronunciation: ) was announced at the 2015 Geneva Motor Show. It featured an upgraded powertrain, with maximum power output increased to 750 PS (552 kW; 740 hp) from the standard coupé's 700 PS (515 kW; 690 hp). Combined with a weight reduction of 50",
+     "relevant": true
+    },
+    {
+     "rank": 3,
+     "id": "aventador.txt::48",
+     "source": "aventador.txt",
+     "chunk_index": 48,
+     "distance": 0.34962546825408936,
+     "text": "y including the model on a data sheet on its website. Lamborghini officially unveiled the Aventador J to the world at the 2012 Geneva Motor Show. The barchetta concept car used the same V12 engine as the standard Aventador, producing 700 PS (690 hp; 515 kW) with the same transmission as the coupé. It did not have air conditioning or radio to save further weight, for a total of 3,472 lb (1,575 kg).",
+     "relevant": false
+    },
+    {
+     "rank": 4,
+     "id": "v12-engine.txt::34",
+     "source": "v12-engine.txt",
+     "chunk_index": 34,
+     "distance": 0.3601590394973755,
+     "text": "-4, Aventador J\n720 PS (530 kW; 710 bhp) at 8,250 rpm\tAventador LP 720-4 50° Anniversario\n740 PS (544 kW; 730 bhp) at 8,400 rpm\tAventador S\n750 PS (552 kW; 740 bhp) at 8,400 rpm\tAventador LP 750-4 SuperVeloce and Veneno\n770 PS (566 kW; 759 bhp) at 8,500 rpm\t720 N⋅m (531 lbf⋅ft) at 6,720 rpm\tCentenario, Aventador LP770-4 SVJ and SC18 Alston, Lamborghini SC20\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAv",
+     "relevant": false
+    },
+    {
+     "rank": 5,
+     "id": "aventador.txt::3",
+     "source": "aventador.txt",
+     "chunk_index": 3,
+     "distance": 0.3696819543838501,
+     "text": ". By March 2016, Lamborghini had built 5,000 Aventadors. At the time, it was the second-best selling Lamborghini model ever.\n\nThe Aventador was replaced by the Revuelto in 2023.\n\nSpecifications and performance\nSpecifications\nEngine\nThe Aventador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the ",
+     "relevant": false
+    },
+    {
+     "rank": 6,
+     "id": "aventador.txt::63",
+     "source": "aventador.txt",
+     "chunk_index": 63,
+     "distance": 0.3778548240661621,
+     "text": " to celebrate Lamborghini's 50th anniversary, it was introduced at the 2013 Geneva Motor Show with a price of US$4,000,000, making it one of the most expensive production cars in the world. The 6.5-litre naturally aspirated V12 generated 552 kW (740 hp; 750 PS) at 8,400 rpm and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. The increase in power was achieved by enlarging the air intakes and modifying",
+     "relevant": false
+    },
+    {
+     "rank": 7,
+     "id": "aventador.txt::64",
+     "source": "aventador.txt",
+     "chunk_index": 64,
+     "distance": 0.4079551696777344,
+     "text": "2 kW (740 hp; 750 PS) at 8,400 rpm and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. The increase in power was achieved by enlarging the air intakes and modifying the exhaust system. Just four Coupés were built: one retained for the factory, and three cars for customers, all of which had different accent colours representing the Italian flag. A further nine roadster versions were produced.\n\nCentenar",
+     "relevant": false
+    },
+    {
+     "rank": 8,
+     "id": "aventador.txt::28",
+     "source": "aventador.txt",
+     "chunk_index": 28,
+     "distance": 0.4088488221168518,
+     "text": "9 hp; 29 kW), more than the original Aventador), and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. It could accelerate from 0 to 97 km/h (0 to 60 mph) in 2.9 seconds with a top speed of 217 mph (350.0 km/h).\n\nThe S came with four-wheel steering, permanent four-wheel-drive and updated suspension. Suspension was controlled by the 'Lamborghini Dinamica Veicolo Attiva' (LDVA) control unit with four sele",
+     "relevant": false
+    },
+    {
+     "rank": 9,
+     "id": "v12-engine.txt::35",
+     "source": "v12-engine.txt",
+     "chunk_index": 35,
+     "distance": 0.416942298412323,
+     "text": "bhp) at 8,500 rpm\t720 N⋅m (531 lbf⋅ft) at 6,720 rpm\tCentenario, Aventador LP770-4 SVJ and SC18 Alston, Lamborghini SC20\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAventador LP780-4 Ultimae, Countach LPI 800-4\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAutentica\n780 PS (574 kW; 769 bhp) at 6,750 rpm\tInvencible\n785 PS (577 kW; 774 bhp) at 8,500 rpm\tSián FKP 37\n830 PS (610 kW; 819 bhp) at 8,500 rpm\t760 N⋅m (56",
+     "relevant": false
+    },
+    {
+     "rank": 10,
+     "id": "aventador.txt::88",
+     "source": "aventador.txt",
+     "chunk_index": 88,
+     "distance": 0.4194006323814392,
+     "text": " and Driver titled their article \"The Best Lamborghini Ever.\" Motor Trend described it as \"the friendliest V12 supercar in the world.\" Praise for the new V12 powerplant centered on the engine's responsiveness, torque, and smooth power output. Criticism centered mainly around the Aventador's unrefined single-disc clutch.\n\nOn 31 July 2011, the Aventador was reviewed by the motorsport show Top Gear. ",
+     "relevant": false
+    }
+   ],
+   "metrics": {
+    "1": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "3": {
+     "hit": 1,
+     "recall": 0.5
+    },
+    "5": {
+     "hit": 1,
+     "recall": 0.5
+    },
+    "10": {
+     "hit": 1,
+     "recall": 0.5
+    }
+   },
+   "grade": null,
+   "failure_kind": null
+  },
+  {
+   "id": "o04",
+   "question": "Which Lamborghini Aventador model had the feature of ALA?",
+   "type": "exact_identifier",
+   "answerable": true,
+   "retrieved": [
+    {
+     "rank": 1,
+     "id": "aventador.txt::3",
+     "source": "aventador.txt",
+     "chunk_index": 3,
+     "distance": 0.2947351336479187,
+     "text": ". By March 2016, Lamborghini had built 5,000 Aventadors. At the time, it was the second-best selling Lamborghini model ever.\n\nThe Aventador was replaced by the Revuelto in 2023.\n\nSpecifications and performance\nSpecifications\nEngine\nThe Aventador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the ",
+     "relevant": false
+    },
+    {
+     "rank": 2,
+     "id": "aventador.txt::0",
+     "source": "aventador.txt",
+     "chunk_index": 0,
+     "distance": 0.3139578104019165,
+     "text": "The Lamborghini Aventador (Spanish pronunciation: ) is a mid-engine, two-seater sports car manufactured and marketed by Lamborghini from 2011 until 2022. Named after a prominent Spanish fighting bull that fought in Zaragoza, Aragón, in 1993, the Aventador succeeded the Murciélago and was manufactured in Sant'Agata Bolognese, Italy.\n\nHistory\nThe Aventador was launched on 28 February 2011 at the Gen",
+     "relevant": false
+    },
+    {
+     "rank": 3,
+     "id": "aventador.txt::1",
+     "source": "aventador.txt",
+     "chunk_index": 1,
+     "distance": 0.33017998933792114,
+     "text": ", the Aventador succeeded the Murciélago and was manufactured in Sant'Agata Bolognese, Italy.\n\nHistory\nThe Aventador was launched on 28 February 2011 at the Geneva Motor Show, five months after its initial unveiling in Sant'Agata Bolognese. Internally codenamed LB834, it was designed to replace the then-decade-old Murciélago as the new flagship model.\n\nSoon after its unveiling, Lamborghini announc",
+     "relevant": false
+    },
+    {
+     "rank": 4,
+     "id": "aventador.txt::48",
+     "source": "aventador.txt",
+     "chunk_index": 48,
+     "distance": 0.3351048231124878,
+     "text": "y including the model on a data sheet on its website. Lamborghini officially unveiled the Aventador J to the world at the 2012 Geneva Motor Show. The barchetta concept car used the same V12 engine as the standard Aventador, producing 700 PS (690 hp; 515 kW) with the same transmission as the coupé. It did not have air conditioning or radio to save further weight, for a total of 3,472 lb (1,575 kg).",
+     "relevant": false
+    },
+    {
+     "rank": 5,
+     "id": "revuelto.txt::4",
+     "source": "revuelto.txt",
+     "chunk_index": 4,
+     "distance": 0.35798120498657227,
+     "text": " of brand new Y-shaped day-time running LED lights with the main headlights located at the top corners of the running lights. The car also features Lamborghini's ALA (Aerodinamica Lamborghini Attiva) system, which is said to be 80% lighter than regular sports car hydraulic systems having redesigned vents underneath the headlights and behind the scissor doors.\n\nAt the rear, the Revuelto features an",
+     "relevant": false
+    },
+    {
+     "rank": 6,
+     "id": "aventador.txt::46",
+     "source": "aventador.txt",
+     "chunk_index": 46,
+     "distance": 0.3610192537307739,
+     "text": "July 2022. It was customized as an homage to a one-of-a-kind 1968 Lamborghini Miura P400, painted in Azzuro Flake blue with silver wheels and white leather interior.\n\nIn April 2022, the last Lamborghini Aventador LP 780-4 Ultimae Coupé ever produced was sold at an RM Sotheby's auction for over US$1.6 million, paired with a 1 of 1 NFT.\n\nSpecial editions\nAventador J\n\nAventador J\nSix months after unv",
+     "relevant": false
+    },
+    {
+     "rank": 7,
+     "id": "aventador.txt::38",
+     "source": "aventador.txt",
+     "chunk_index": 38,
+     "distance": 0.36734986305236816,
+     "text": "nd the Nürburgring Nordschleife in July 2018, beating the previous record-holder, the Porsche 911 GT2 RS.\n\nThe SVJ was the first production V12 Lamborghini model to feature the Aerodinamica Lamborghini Attiva (ALA) system adding aerodynamic components including a disconnected front splitter, tri-dimensional air outlet on the bonnet, large carbon fibre rear wing with central fin, underbody vortex g",
+     "relevant": true
+    },
+    {
+     "rank": 8,
+     "id": "revuelto.txt::15",
+     "source": "revuelto.txt",
+     "chunk_index": 15,
+     "distance": 0.3739877939224243,
+     "text": "ar: 390×32 mm, 4 piston calipers\nBattery\nType\tLithium-ion\nRated capacity\t3.8 kWh\nRange (WLTP)\t10 km (6.2 mi)\nModels\nRevuelto SV (2026)\nOn 14 August 2026, Lamborghini unveiled the new Revuelto SV.\n\nVariants\nOpera Unica (2024)\nThrough their Ad Personam division, Lamborghini has built a handful of one-off \"Opera Unica\" models based on standard Revueltos, and featuring unique, hand-painted liveries an",
+     "relevant": false
+    },
+    {
+     "rank": 9,
+     "id": "aventador.txt::2",
+     "source": "aventador.txt",
+     "chunk_index": 2,
+     "distance": 0.3773185610771179,
+     "text": " Internally codenamed LB834, it was designed to replace the then-decade-old Murciélago as the new flagship model.\n\nSoon after its unveiling, Lamborghini announced that it had sold 12 cars, with deliveries starting in the second half of 2011. By March 2016, Lamborghini had built 5,000 Aventadors. At the time, it was the second-best selling Lamborghini model ever.\n\nThe Aventador was replaced by the ",
+     "relevant": false
+    },
+    {
+     "rank": 10,
+     "id": "aventador.txt::43",
+     "source": "aventador.txt",
+     "chunk_index": 43,
+     "distance": 0.38687676191329956,
+     "text": "2021. It was limited to 600 units (350 Coupés, 250 Roadsters). It came with the standard features of the Aventador S and SVJ. The engine produces 780 PS (574 kW; 769 hp) and the same 720 N⋅m (531 lb⋅ft) of torque as the SVJ. Lamborghini claimed acceleration from 0–100 km/h (0–62 mph) in 2.84 seconds, with a top speed of 220 mph (354 km/h). The Coupé has a claimed kerb weight of 1,550 kg (3,417 lb)",
+     "relevant": false
+    }
+   ],
+   "metrics": {
+    "1": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "3": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "5": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "10": {
+     "hit": 1,
+     "recall": 1.0
+    }
+   },
+   "grade": null,
+   "failure_kind": null
+  },
+  {
+   "id": "o05",
+   "question": "How much electric power did the Lamborghini Revuelto produce from its total of 1015 PS?",
+   "type": "other",
+   "answerable": true,
+   "retrieved": [
+    {
+     "rank": 1,
+     "id": "revuelto.txt::11",
+     "source": "revuelto.txt",
+     "chunk_index": 11,
+     "distance": 0.3596547842025757,
+     "text": " Torsional rigidity has been improved by 25% and the front frame is 20% lighter. Lamborghini has used carbon fibre in the construction, and the back of the chassis contains high-strength aluminium alloys.\n\nPowertrain\nThe Revuelto features a new 6.5-liter V12 engine, complemented by three electric motors that produce a combined power of 746.5 kW (1,015 PS).\n\nEngine\tV12\nElectric motor\tFront e-axle\nI",
+     "relevant": false
+    },
+    {
+     "rank": 2,
+     "id": "aventador.txt::63",
+     "source": "aventador.txt",
+     "chunk_index": 63,
+     "distance": 0.3805680274963379,
+     "text": " to celebrate Lamborghini's 50th anniversary, it was introduced at the 2013 Geneva Motor Show with a price of US$4,000,000, making it one of the most expensive production cars in the world. The 6.5-litre naturally aspirated V12 generated 552 kW (740 hp; 750 PS) at 8,400 rpm and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. The increase in power was achieved by enlarging the air intakes and modifying",
+     "relevant": false
+    },
+    {
+     "rank": 3,
+     "id": "v12-engine.txt::34",
+     "source": "v12-engine.txt",
+     "chunk_index": 34,
+     "distance": 0.38592272996902466,
+     "text": "-4, Aventador J\n720 PS (530 kW; 710 bhp) at 8,250 rpm\tAventador LP 720-4 50° Anniversario\n740 PS (544 kW; 730 bhp) at 8,400 rpm\tAventador S\n750 PS (552 kW; 740 bhp) at 8,400 rpm\tAventador LP 750-4 SuperVeloce and Veneno\n770 PS (566 kW; 759 bhp) at 8,500 rpm\t720 N⋅m (531 lbf⋅ft) at 6,720 rpm\tCentenario, Aventador LP770-4 SVJ and SC18 Alston, Lamborghini SC20\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAv",
+     "relevant": false
+    },
+    {
+     "rank": 4,
+     "id": "aventador.txt::4",
+     "source": "aventador.txt",
+     "chunk_index": 4,
+     "distance": 0.401031494140625,
+     "text": "tador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the L539, it was Lamborghini's fifth in-house engine and second V12 design since the 3.5-litre power plant found in the 350GT.\n\nDisplacement\t6,498 cc (396.5 cu in)\nMax. power\t700 PS (515 kW; 690 hp) at 8,250 rpm\nMin. power to weight\t378 PS (278",
+     "relevant": false
+    },
+    {
+     "rank": 5,
+     "id": "v12-engine.txt::35",
+     "source": "v12-engine.txt",
+     "chunk_index": 35,
+     "distance": 0.4077156186103821,
+     "text": "bhp) at 8,500 rpm\t720 N⋅m (531 lbf⋅ft) at 6,720 rpm\tCentenario, Aventador LP770-4 SVJ and SC18 Alston, Lamborghini SC20\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAventador LP780-4 Ultimae, Countach LPI 800-4\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAutentica\n780 PS (574 kW; 769 bhp) at 6,750 rpm\tInvencible\n785 PS (577 kW; 774 bhp) at 8,500 rpm\tSián FKP 37\n830 PS (610 kW; 819 bhp) at 8,500 rpm\t760 N⋅m (56",
+     "relevant": false
+    },
+    {
+     "rank": 6,
+     "id": "aventador.txt::66",
+     "source": "aventador.txt",
+     "chunk_index": 66,
+     "distance": 0.4370831251144409,
+     "text": "va Motor Show\nThe Centenario was based on the Aventador SV. The coupé was unveiled at the 2016 Geneva Motor Show and the roadster was unveiled at The Quail, during Monterey Car Week 2016 to celebrate the 100th birthday of Ferruccio Lamborghini. Power comes from a tuned version of the 6.5-litre naturally aspirated V12 generating 566 kW (759 hp; 770 PS) at 8,500 rpm and 690 N⋅m (509 lb⋅ft) of torque",
+     "relevant": false
+    },
+    {
+     "rank": 7,
+     "id": "aventador.txt::3",
+     "source": "aventador.txt",
+     "chunk_index": 3,
+     "distance": 0.44751042127609253,
+     "text": ". By March 2016, Lamborghini had built 5,000 Aventadors. At the time, it was the second-best selling Lamborghini model ever.\n\nThe Aventador was replaced by the Revuelto in 2023.\n\nSpecifications and performance\nSpecifications\nEngine\nThe Aventador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the ",
+     "relevant": false
+    },
+    {
+     "rank": 8,
+     "id": "revuelto.txt::15",
+     "source": "revuelto.txt",
+     "chunk_index": 15,
+     "distance": 0.45650553703308105,
+     "text": "ar: 390×32 mm, 4 piston calipers\nBattery\nType\tLithium-ion\nRated capacity\t3.8 kWh\nRange (WLTP)\t10 km (6.2 mi)\nModels\nRevuelto SV (2026)\nOn 14 August 2026, Lamborghini unveiled the new Revuelto SV.\n\nVariants\nOpera Unica (2024)\nThrough their Ad Personam division, Lamborghini has built a handful of one-off \"Opera Unica\" models based on standard Revueltos, and featuring unique, hand-painted liveries an",
+     "relevant": false
+    },
+    {
+     "rank": 9,
+     "id": "aventador.txt::64",
+     "source": "aventador.txt",
+     "chunk_index": 64,
+     "distance": 0.4612562656402588,
+     "text": "2 kW (740 hp; 750 PS) at 8,400 rpm and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. The increase in power was achieved by enlarging the air intakes and modifying the exhaust system. Just four Coupés were built: one retained for the factory, and three cars for customers, all of which had different accent colours representing the Italian flag. A further nine roadster versions were produced.\n\nCentenar",
+     "relevant": false
+    },
+    {
+     "rank": 10,
+     "id": "aventador.txt::48",
+     "source": "aventador.txt",
+     "chunk_index": 48,
+     "distance": 0.46616077423095703,
+     "text": "y including the model on a data sheet on its website. Lamborghini officially unveiled the Aventador J to the world at the 2012 Geneva Motor Show. The barchetta concept car used the same V12 engine as the standard Aventador, producing 700 PS (690 hp; 515 kW) with the same transmission as the coupé. It did not have air conditioning or radio to save further weight, for a total of 3,472 lb (1,575 kg).",
+     "relevant": false
+    }
+   ],
+   "metrics": {
+    "1": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "3": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "5": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "10": {
+     "hit": 0,
+     "recall": 0.0
+    }
+   },
+   "grade": null,
+   "failure_kind": null
+  },
+  {
+   "id": "o06",
+   "question": "What is the compression ratio of the engine used in the original Lamborghini Aventador LP 700-4?",
+   "type": "two_hop",
+   "answerable": true,
+   "retrieved": [
+    {
+     "rank": 1,
+     "id": "aventador.txt::4",
+     "source": "aventador.txt",
+     "chunk_index": 4,
+     "distance": 0.3996686339378357,
+     "text": "tador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the L539, it was Lamborghini's fifth in-house engine and second V12 design since the 3.5-litre power plant found in the 350GT.\n\nDisplacement\t6,498 cc (396.5 cu in)\nMax. power\t700 PS (515 kW; 690 hp) at 8,250 rpm\nMin. power to weight\t378 PS (278",
+     "relevant": true
+    },
+    {
+     "rank": 2,
+     "id": "aventador.txt::43",
+     "source": "aventador.txt",
+     "chunk_index": 43,
+     "distance": 0.4055349826812744,
+     "text": "2021. It was limited to 600 units (350 Coupés, 250 Roadsters). It came with the standard features of the Aventador S and SVJ. The engine produces 780 PS (574 kW; 769 hp) and the same 720 N⋅m (531 lb⋅ft) of torque as the SVJ. Lamborghini claimed acceleration from 0–100 km/h (0–62 mph) in 2.84 seconds, with a top speed of 220 mph (354 km/h). The Coupé has a claimed kerb weight of 1,550 kg (3,417 lb)",
+     "relevant": false
+    },
+    {
+     "rank": 3,
+     "id": "aventador.txt::3",
+     "source": "aventador.txt",
+     "chunk_index": 3,
+     "distance": 0.4349762201309204,
+     "text": ". By March 2016, Lamborghini had built 5,000 Aventadors. At the time, it was the second-best selling Lamborghini model ever.\n\nThe Aventador was replaced by the Revuelto in 2023.\n\nSpecifications and performance\nSpecifications\nEngine\nThe Aventador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the ",
+     "relevant": false
+    },
+    {
+     "rank": 4,
+     "id": "v12-engine.txt::35",
+     "source": "v12-engine.txt",
+     "chunk_index": 35,
+     "distance": 0.45453333854675293,
+     "text": "bhp) at 8,500 rpm\t720 N⋅m (531 lbf⋅ft) at 6,720 rpm\tCentenario, Aventador LP770-4 SVJ and SC18 Alston, Lamborghini SC20\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAventador LP780-4 Ultimae, Countach LPI 800-4\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAutentica\n780 PS (574 kW; 769 bhp) at 6,750 rpm\tInvencible\n785 PS (577 kW; 774 bhp) at 8,500 rpm\tSián FKP 37\n830 PS (610 kW; 819 bhp) at 8,500 rpm\t760 N⋅m (56",
+     "relevant": false
+    },
+    {
+     "rank": 5,
+     "id": "aventador.txt::85",
+     "source": "aventador.txt",
+     "chunk_index": 85,
+     "distance": 0.4571878910064697,
+     "text": "ight ratio of 1.66 kg per hp and generates a downforce of 1,200 kg (2,600 lb) at 249 km/h (155 mph), more than a typical GT3 race car. Production was limited to 40 units and was planned to have its own one-make racing series.\n\nCountach LPI 800-4\nMain article: Lamborghini Countach LPI 800-4\n\nLamborghini Countach LPI 800-4 front view\nA 2021 limited edition hybrid derivative that took inspiration fro",
+     "relevant": false
+    },
+    {
+     "rank": 6,
+     "id": "v12-engine.txt::34",
+     "source": "v12-engine.txt",
+     "chunk_index": 34,
+     "distance": 0.4649343490600586,
+     "text": "-4, Aventador J\n720 PS (530 kW; 710 bhp) at 8,250 rpm\tAventador LP 720-4 50° Anniversario\n740 PS (544 kW; 730 bhp) at 8,400 rpm\tAventador S\n750 PS (552 kW; 740 bhp) at 8,400 rpm\tAventador LP 750-4 SuperVeloce and Veneno\n770 PS (566 kW; 759 bhp) at 8,500 rpm\t720 N⋅m (531 lbf⋅ft) at 6,720 rpm\tCentenario, Aventador LP770-4 SVJ and SC18 Alston, Lamborghini SC20\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAv",
+     "relevant": false
+    },
+    {
+     "rank": 7,
+     "id": "aventador.txt::35",
+     "source": "aventador.txt",
+     "chunk_index": 35,
+     "distance": 0.4657711386680603,
+     "text": "n improvement over the SV, with 900 units produced. The 6.5-litre L539 V12 engine used in the entire Aventador lineage was reworked and to generate a maximum power output of 770 PS (566 kW; 759 hp) at 8,500 rpm and 720 N⋅m (531 lb⋅ft) of torque at 6,750 rpm. Measures such as extensive use of carbon fibre, and titanium in the exhaust system brought the weight down to 1,525 kg (3,362 lb), giving the",
+     "relevant": false
+    },
+    {
+     "rank": 8,
+     "id": "aventador.txt::86",
+     "source": "aventador.txt",
+     "chunk_index": 86,
+     "distance": 0.4665224552154541,
+     "text": "800-4\nMain article: Lamborghini Countach LPI 800-4\n\nLamborghini Countach LPI 800-4 front view\nA 2021 limited edition hybrid derivative that took inspiration from the original Countach and elements from the Sián FKP 37. 0-100 km/h (62 mph) acceleration was 2.8 seconds with a top speed of 355 km/h (221 mph). Production was limited to 112 units, a number inspired by the LP112 type code of the origina",
+     "relevant": false
+    },
+    {
+     "rank": 9,
+     "id": "aventador.txt::13",
+     "source": "aventador.txt",
+     "chunk_index": 13,
+     "distance": 0.4706437587738037,
+     "text": " 4,000 vehicles; however, in 2016, it achieved the 5,000 unit milestone. The moulds used to make the carbon fibre monocoque were expected to last 500 moulds each, and only 8 were made.\n\nAventador LP 700-4 Roadster (2013–2016)\n\nAventador LP 700-4 Roadster\nThe Roadster model was announced for production on 27 December 2012. Equipped with the same V12 engine as the coupé, Lamborghini claimed that it ",
+     "relevant": false
+    },
+    {
+     "rank": 10,
+     "id": "aventador.txt::42",
+     "source": "aventador.txt",
+     "chunk_index": 42,
+     "distance": 0.47596895694732666,
+     "text": "n-fibre hard top and retained the coupé powertrain with the same performance figures.\n\nAventador LP 780-4 Ultimae (2021–2022)\n\nAventador LP 780-4 Ultimae\n\nRear view\nThe last variant was announced at on Lamborghini's social channels in July 2021. It was limited to 600 units (350 Coupés, 250 Roadsters). It came with the standard features of the Aventador S and SVJ. The engine produces 780 PS (574 kW",
+     "relevant": false
+    }
+   ],
+   "metrics": {
+    "1": {
+     "hit": 1,
+     "recall": 0.5
+    },
+    "3": {
+     "hit": 1,
+     "recall": 0.5
+    },
+    "5": {
+     "hit": 1,
+     "recall": 0.5
+    },
+    "10": {
+     "hit": 1,
+     "recall": 0.5
+    }
+   },
+   "grade": null,
+   "failure_kind": null
+  },
+  {
+   "id": "o07",
+   "question": "What powers the Lamborghini Revuelto, and how big is its battery?",
+   "type": "split_answer",
+   "answerable": true,
+   "retrieved": [
+    {
+     "rank": 1,
+     "id": "revuelto.txt::15",
+     "source": "revuelto.txt",
+     "chunk_index": 15,
+     "distance": 0.42404842376708984,
+     "text": "ar: 390×32 mm, 4 piston calipers\nBattery\nType\tLithium-ion\nRated capacity\t3.8 kWh\nRange (WLTP)\t10 km (6.2 mi)\nModels\nRevuelto SV (2026)\nOn 14 August 2026, Lamborghini unveiled the new Revuelto SV.\n\nVariants\nOpera Unica (2024)\nThrough their Ad Personam division, Lamborghini has built a handful of one-off \"Opera Unica\" models based on standard Revueltos, and featuring unique, hand-painted liveries an",
+     "relevant": true
+    },
+    {
+     "rank": 2,
+     "id": "revuelto.txt::11",
+     "source": "revuelto.txt",
+     "chunk_index": 11,
+     "distance": 0.4358377456665039,
+     "text": " Torsional rigidity has been improved by 25% and the front frame is 20% lighter. Lamborghini has used carbon fibre in the construction, and the back of the chassis contains high-strength aluminium alloys.\n\nPowertrain\nThe Revuelto features a new 6.5-liter V12 engine, complemented by three electric motors that produce a combined power of 746.5 kW (1,015 PS).\n\nEngine\tV12\nElectric motor\tFront e-axle\nI",
+     "relevant": true
+    },
+    {
+     "rank": 3,
+     "id": "revuelto.txt::0",
+     "source": "revuelto.txt",
+     "chunk_index": 0,
+     "distance": 0.45431625843048096,
+     "text": "The Lamborghini Revuelto (Spanish pronunciation: ) is a mid-engine plug-in hybrid sports car produced by the Italian automobile manufacturer Lamborghini. It was officially unveiled on 29 March 2023 as a successor to the Aventador. The Revuelto's namesake is a Spanish fighting bull that fought in the arena of Barcelona in the 1880s.\n\nThe Revuelto entered full production by July 2023, with the first",
+     "relevant": false
+    },
+    {
+     "rank": 4,
+     "id": "aventador.txt::66",
+     "source": "aventador.txt",
+     "chunk_index": 66,
+     "distance": 0.456734836101532,
+     "text": "va Motor Show\nThe Centenario was based on the Aventador SV. The coupé was unveiled at the 2016 Geneva Motor Show and the roadster was unveiled at The Quail, during Monterey Car Week 2016 to celebrate the 100th birthday of Ferruccio Lamborghini. Power comes from a tuned version of the 6.5-litre naturally aspirated V12 generating 566 kW (759 hp; 770 PS) at 8,500 rpm and 690 N⋅m (509 lb⋅ft) of torque",
+     "relevant": false
+    },
+    {
+     "rank": 5,
+     "id": "aventador.txt::63",
+     "source": "aventador.txt",
+     "chunk_index": 63,
+     "distance": 0.4900481700897217,
+     "text": " to celebrate Lamborghini's 50th anniversary, it was introduced at the 2013 Geneva Motor Show with a price of US$4,000,000, making it one of the most expensive production cars in the world. The 6.5-litre naturally aspirated V12 generated 552 kW (740 hp; 750 PS) at 8,400 rpm and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. The increase in power was achieved by enlarging the air intakes and modifying",
+     "relevant": false
+    },
+    {
+     "rank": 6,
+     "id": "revuelto.txt::3",
+     "source": "revuelto.txt",
+     "chunk_index": 3,
+     "distance": 0.4975695013999939,
+     "text": "ised a mild form of a hybrid propulsion system, mainly to improve low-speed drivability, the Revuelto is the first Lamborghini to make use of a true form of a hybrid drivetrain.\n\nRear view, interior\nAt the front, the Revuelto includes a set of brand new Y-shaped day-time running LED lights with the main headlights located at the top corners of the running lights. The car also features Lamborghini'",
+     "relevant": false
+    },
+    {
+     "rank": 7,
+     "id": "v12-engine.txt::34",
+     "source": "v12-engine.txt",
+     "chunk_index": 34,
+     "distance": 0.5015391111373901,
+     "text": "-4, Aventador J\n720 PS (530 kW; 710 bhp) at 8,250 rpm\tAventador LP 720-4 50° Anniversario\n740 PS (544 kW; 730 bhp) at 8,400 rpm\tAventador S\n750 PS (552 kW; 740 bhp) at 8,400 rpm\tAventador LP 750-4 SuperVeloce and Veneno\n770 PS (566 kW; 759 bhp) at 8,500 rpm\t720 N⋅m (531 lbf⋅ft) at 6,720 rpm\tCentenario, Aventador LP770-4 SVJ and SC18 Alston, Lamborghini SC20\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAv",
+     "relevant": false
+    },
+    {
+     "rank": 8,
+     "id": "aventador.txt::4",
+     "source": "aventador.txt",
+     "chunk_index": 4,
+     "distance": 0.5015475153923035,
+     "text": "tador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the L539, it was Lamborghini's fifth in-house engine and second V12 design since the 3.5-litre power plant found in the 350GT.\n\nDisplacement\t6,498 cc (396.5 cu in)\nMax. power\t700 PS (515 kW; 690 hp) at 8,250 rpm\nMin. power to weight\t378 PS (278",
+     "relevant": false
+    },
+    {
+     "rank": 9,
+     "id": "v12-engine.txt::8",
+     "source": "v12-engine.txt",
+     "chunk_index": 8,
+     "distance": 0.5059994459152222,
+     "text": "dged adequate, and when fitted with production carburettors, all the auxiliary systems, and detuned for road use, the engine still made 280 brake horsepower (209 kW; 284 PS).\n\nLamborghini Murciélago Roadster with its V12 engine on display\nOver the years, this V12 engine has nearly doubled in displacement - first to 6,192 cubic centimetres (377.9 cu in), and later to 6,496 cubic centimetres (396.4 ",
+     "relevant": false
+    },
+    {
+     "rank": 10,
+     "id": "v12-engine.txt::4",
+     "source": "v12-engine.txt",
+     "chunk_index": 4,
+     "distance": 0.5099227428436279,
+     "text": "ini to design the engine for his car and, according to some accounts, paid him a bonus for every horsepower over what Ferrari's V12 could produce. The finished 3.5-litre (214 cu in) V12, with minor improvements, went on to become the 6.5 litre powering the Lamborghini Murciélago LP 640, and completed its service for Lamborghini with the final version of the Murciélago, the Murciélago LP 670-4 Supe",
+     "relevant": false
+    }
+   ],
+   "metrics": {
+    "1": {
+     "hit": 1,
+     "recall": 0.5
+    },
+    "3": {
+     "hit": 1,
+     "recall": 1.0
+    },
+    "5": {
+     "hit": 1,
+     "recall": 1.0
+    },
+    "10": {
+     "hit": 1,
+     "recall": 1.0
+    }
+   },
+   "grade": null,
+   "failure_kind": null
+  },
+  {
+   "id": "o08",
+   "question": "How far can the Lamborghini Revuelto go on electricity only?",
+   "type": "vocabulary",
+   "answerable": true,
+   "retrieved": [
+    {
+     "rank": 1,
+     "id": "revuelto.txt::11",
+     "source": "revuelto.txt",
+     "chunk_index": 11,
+     "distance": 0.4797314405441284,
+     "text": " Torsional rigidity has been improved by 25% and the front frame is 20% lighter. Lamborghini has used carbon fibre in the construction, and the back of the chassis contains high-strength aluminium alloys.\n\nPowertrain\nThe Revuelto features a new 6.5-liter V12 engine, complemented by three electric motors that produce a combined power of 746.5 kW (1,015 PS).\n\nEngine\tV12\nElectric motor\tFront e-axle\nI",
+     "relevant": false
+    },
+    {
+     "rank": 2,
+     "id": "revuelto.txt::15",
+     "source": "revuelto.txt",
+     "chunk_index": 15,
+     "distance": 0.4941278100013733,
+     "text": "ar: 390×32 mm, 4 piston calipers\nBattery\nType\tLithium-ion\nRated capacity\t3.8 kWh\nRange (WLTP)\t10 km (6.2 mi)\nModels\nRevuelto SV (2026)\nOn 14 August 2026, Lamborghini unveiled the new Revuelto SV.\n\nVariants\nOpera Unica (2024)\nThrough their Ad Personam division, Lamborghini has built a handful of one-off \"Opera Unica\" models based on standard Revueltos, and featuring unique, hand-painted liveries an",
+     "relevant": true
+    },
+    {
+     "rank": 3,
+     "id": "v12-engine.txt::34",
+     "source": "v12-engine.txt",
+     "chunk_index": 34,
+     "distance": 0.5046999454498291,
+     "text": "-4, Aventador J\n720 PS (530 kW; 710 bhp) at 8,250 rpm\tAventador LP 720-4 50° Anniversario\n740 PS (544 kW; 730 bhp) at 8,400 rpm\tAventador S\n750 PS (552 kW; 740 bhp) at 8,400 rpm\tAventador LP 750-4 SuperVeloce and Veneno\n770 PS (566 kW; 759 bhp) at 8,500 rpm\t720 N⋅m (531 lbf⋅ft) at 6,720 rpm\tCentenario, Aventador LP770-4 SVJ and SC18 Alston, Lamborghini SC20\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAv",
+     "relevant": false
+    },
+    {
+     "rank": 4,
+     "id": "revuelto.txt::3",
+     "source": "revuelto.txt",
+     "chunk_index": 3,
+     "distance": 0.5150832533836365,
+     "text": "ised a mild form of a hybrid propulsion system, mainly to improve low-speed drivability, the Revuelto is the first Lamborghini to make use of a true form of a hybrid drivetrain.\n\nRear view, interior\nAt the front, the Revuelto includes a set of brand new Y-shaped day-time running LED lights with the main headlights located at the top corners of the running lights. The car also features Lamborghini'",
+     "relevant": false
+    },
+    {
+     "rank": 5,
+     "id": "revuelto.txt::0",
+     "source": "revuelto.txt",
+     "chunk_index": 0,
+     "distance": 0.5209723711013794,
+     "text": "The Lamborghini Revuelto (Spanish pronunciation: ) is a mid-engine plug-in hybrid sports car produced by the Italian automobile manufacturer Lamborghini. It was officially unveiled on 29 March 2023 as a successor to the Aventador. The Revuelto's namesake is a Spanish fighting bull that fought in the arena of Barcelona in the 1880s.\n\nThe Revuelto entered full production by July 2023, with the first",
+     "relevant": false
+    },
+    {
+     "rank": 6,
+     "id": "aventador.txt::4",
+     "source": "aventador.txt",
+     "chunk_index": 4,
+     "distance": 0.5222597718238831,
+     "text": "tador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the L539, it was Lamborghini's fifth in-house engine and second V12 design since the 3.5-litre power plant found in the 350GT.\n\nDisplacement\t6,498 cc (396.5 cu in)\nMax. power\t700 PS (515 kW; 690 hp) at 8,250 rpm\nMin. power to weight\t378 PS (278",
+     "relevant": false
+    },
+    {
+     "rank": 7,
+     "id": "revuelto.txt::4",
+     "source": "revuelto.txt",
+     "chunk_index": 4,
+     "distance": 0.5280974507331848,
+     "text": " of brand new Y-shaped day-time running LED lights with the main headlights located at the top corners of the running lights. The car also features Lamborghini's ALA (Aerodinamica Lamborghini Attiva) system, which is said to be 80% lighter than regular sports car hydraulic systems having redesigned vents underneath the headlights and behind the scissor doors.\n\nAt the rear, the Revuelto features an",
+     "relevant": false
+    },
+    {
+     "rank": 8,
+     "id": "aventador.txt::63",
+     "source": "aventador.txt",
+     "chunk_index": 63,
+     "distance": 0.5281480550765991,
+     "text": " to celebrate Lamborghini's 50th anniversary, it was introduced at the 2013 Geneva Motor Show with a price of US$4,000,000, making it one of the most expensive production cars in the world. The 6.5-litre naturally aspirated V12 generated 552 kW (740 hp; 750 PS) at 8,400 rpm and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. The increase in power was achieved by enlarging the air intakes and modifying",
+     "relevant": false
+    },
+    {
+     "rank": 9,
+     "id": "aventador.txt::43",
+     "source": "aventador.txt",
+     "chunk_index": 43,
+     "distance": 0.5320038795471191,
+     "text": "2021. It was limited to 600 units (350 Coupés, 250 Roadsters). It came with the standard features of the Aventador S and SVJ. The engine produces 780 PS (574 kW; 769 hp) and the same 720 N⋅m (531 lb⋅ft) of torque as the SVJ. Lamborghini claimed acceleration from 0–100 km/h (0–62 mph) in 2.84 seconds, with a top speed of 220 mph (354 km/h). The Coupé has a claimed kerb weight of 1,550 kg (3,417 lb)",
+     "relevant": false
+    },
+    {
+     "rank": 10,
+     "id": "v12-engine.txt::35",
+     "source": "v12-engine.txt",
+     "chunk_index": 35,
+     "distance": 0.5358309149742126,
+     "text": "bhp) at 8,500 rpm\t720 N⋅m (531 lbf⋅ft) at 6,720 rpm\tCentenario, Aventador LP770-4 SVJ and SC18 Alston, Lamborghini SC20\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAventador LP780-4 Ultimae, Countach LPI 800-4\n780 PS (574 kW; 769 bhp) at 8,500 rpm\tAutentica\n780 PS (574 kW; 769 bhp) at 6,750 rpm\tInvencible\n785 PS (577 kW; 774 bhp) at 8,500 rpm\tSián FKP 37\n830 PS (610 kW; 819 bhp) at 8,500 rpm\t760 N⋅m (56",
+     "relevant": false
+    }
+   ],
+   "metrics": {
+    "1": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "3": {
+     "hit": 1,
+     "recall": 1.0
+    },
+    "5": {
+     "hit": 1,
+     "recall": 1.0
+    },
+    "10": {
+     "hit": 1,
+     "recall": 1.0
+    }
+   },
+   "grade": null,
+   "failure_kind": null
+  },
+  {
+   "id": "o09",
+   "question": "How much does a new Lamborghini Revuelto cost?",
+   "type": "not_in_corpus",
+   "answerable": false,
+   "retrieved": [
+    {
+     "rank": 1,
+     "id": "aventador.txt::63",
+     "source": "aventador.txt",
+     "chunk_index": 63,
+     "distance": 0.36684155464172363,
+     "text": " to celebrate Lamborghini's 50th anniversary, it was introduced at the 2013 Geneva Motor Show with a price of US$4,000,000, making it one of the most expensive production cars in the world. The 6.5-litre naturally aspirated V12 generated 552 kW (740 hp; 750 PS) at 8,400 rpm and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. The increase in power was achieved by enlarging the air intakes and modifying",
+     "relevant": false
+    },
+    {
+     "rank": 2,
+     "id": "revuelto.txt::0",
+     "source": "revuelto.txt",
+     "chunk_index": 0,
+     "distance": 0.3749409317970276,
+     "text": "The Lamborghini Revuelto (Spanish pronunciation: ) is a mid-engine plug-in hybrid sports car produced by the Italian automobile manufacturer Lamborghini. It was officially unveiled on 29 March 2023 as a successor to the Aventador. The Revuelto's namesake is a Spanish fighting bull that fought in the arena of Barcelona in the 1880s.\n\nThe Revuelto entered full production by July 2023, with the first",
+     "relevant": false
+    },
+    {
+     "rank": 3,
+     "id": "revuelto.txt::15",
+     "source": "revuelto.txt",
+     "chunk_index": 15,
+     "distance": 0.38232821226119995,
+     "text": "ar: 390×32 mm, 4 piston calipers\nBattery\nType\tLithium-ion\nRated capacity\t3.8 kWh\nRange (WLTP)\t10 km (6.2 mi)\nModels\nRevuelto SV (2026)\nOn 14 August 2026, Lamborghini unveiled the new Revuelto SV.\n\nVariants\nOpera Unica (2024)\nThrough their Ad Personam division, Lamborghini has built a handful of one-off \"Opera Unica\" models based on standard Revueltos, and featuring unique, hand-painted liveries an",
+     "relevant": false
+    },
+    {
+     "rank": 4,
+     "id": "aventador.txt::3",
+     "source": "aventador.txt",
+     "chunk_index": 3,
+     "distance": 0.40904682874679565,
+     "text": ". By March 2016, Lamborghini had built 5,000 Aventadors. At the time, it was the second-best selling Lamborghini model ever.\n\nThe Aventador was replaced by the Revuelto in 2023.\n\nSpecifications and performance\nSpecifications\nEngine\nThe Aventador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the ",
+     "relevant": false
+    },
+    {
+     "rank": 5,
+     "id": "aventador.txt::93",
+     "source": "aventador.txt",
+     "chunk_index": 93,
+     "distance": 0.4194377064704895,
+     "text": " produced a 1/8-scale model Aventador LP 700-4 that was sold at auction December 2011 with starting bid price of US$4,700,000 (€3,500,000). A second model, featuring a 25 kg gold body, was set to go for sale at auction with a starting bid price of US$7,500,000.\n\nBMC Switzerland produced a 50-unit edition of Lamborghini 50th Anniversary Edition Impec bicycles inspired by the Aventador. The bikes co",
+     "relevant": false
+    },
+    {
+     "rank": 6,
+     "id": "revuelto.txt::3",
+     "source": "revuelto.txt",
+     "chunk_index": 3,
+     "distance": 0.42140674591064453,
+     "text": "ised a mild form of a hybrid propulsion system, mainly to improve low-speed drivability, the Revuelto is the first Lamborghini to make use of a true form of a hybrid drivetrain.\n\nRear view, interior\nAt the front, the Revuelto includes a set of brand new Y-shaped day-time running LED lights with the main headlights located at the top corners of the running lights. The car also features Lamborghini'",
+     "relevant": false
+    },
+    {
+     "rank": 7,
+     "id": "aventador.txt::46",
+     "source": "aventador.txt",
+     "chunk_index": 46,
+     "distance": 0.4473704695701599,
+     "text": "July 2022. It was customized as an homage to a one-of-a-kind 1968 Lamborghini Miura P400, painted in Azzuro Flake blue with silver wheels and white leather interior.\n\nIn April 2022, the last Lamborghini Aventador LP 780-4 Ultimae Coupé ever produced was sold at an RM Sotheby's auction for over US$1.6 million, paired with a 1 of 1 NFT.\n\nSpecial editions\nAventador J\n\nAventador J\nSix months after unv",
+     "relevant": false
+    },
+    {
+     "rank": 8,
+     "id": "revuelto.txt::2",
+     "source": "revuelto.txt",
+     "chunk_index": 2,
+     "distance": 0.4644862413406372,
+     "text": " car on March 22, 2023 on a Twitter post, and was unveiled in an online event on 29 March 2023. The car is the first of the brand to adopt a plug-in hybrid propulsion system. While models like the Sián FKP 37 and Countach LPI 800-4 had utilised a mild form of a hybrid propulsion system, mainly to improve low-speed drivability, the Revuelto is the first Lamborghini to make use of a true form of a h",
+     "relevant": false
+    },
+    {
+     "rank": 9,
+     "id": "revuelto.txt::11",
+     "source": "revuelto.txt",
+     "chunk_index": 11,
+     "distance": 0.46476447582244873,
+     "text": " Torsional rigidity has been improved by 25% and the front frame is 20% lighter. Lamborghini has used carbon fibre in the construction, and the back of the chassis contains high-strength aluminium alloys.\n\nPowertrain\nThe Revuelto features a new 6.5-liter V12 engine, complemented by three electric motors that produce a combined power of 746.5 kW (1,015 PS).\n\nEngine\tV12\nElectric motor\tFront e-axle\nI",
+     "relevant": false
+    },
+    {
+     "rank": 10,
+     "id": "aventador.txt::47",
+     "source": "aventador.txt",
+     "chunk_index": 47,
+     "distance": 0.4704957604408264,
+     "text": " produced was sold at an RM Sotheby's auction for over US$1.6 million, paired with a 1 of 1 NFT.\n\nSpecial editions\nAventador J\n\nAventador J\nSix months after unveiling the Aventador, plans for a roadster version were leaked by the U.S. EPA by including the model on a data sheet on its website. Lamborghini officially unveiled the Aventador J to the world at the 2012 Geneva Motor Show. The barchetta ",
+     "relevant": false
+    }
+   ],
+   "metrics": null,
+   "grade": null,
+   "failure_kind": null
+  },
+  {
+   "id": "o10",
+   "question": "What is the fuel tank capacity of the Lamborghini Aventador?",
+   "type": "not_in_corpus",
+   "answerable": false,
+   "retrieved": [
+    {
+     "rank": 1,
+     "id": "aventador.txt::43",
+     "source": "aventador.txt",
+     "chunk_index": 43,
+     "distance": 0.4224201440811157,
+     "text": "2021. It was limited to 600 units (350 Coupés, 250 Roadsters). It came with the standard features of the Aventador S and SVJ. The engine produces 780 PS (574 kW; 769 hp) and the same 720 N⋅m (531 lb⋅ft) of torque as the SVJ. Lamborghini claimed acceleration from 0–100 km/h (0–62 mph) in 2.84 seconds, with a top speed of 220 mph (354 km/h). The Coupé has a claimed kerb weight of 1,550 kg (3,417 lb)",
+     "relevant": false
+    },
+    {
+     "rank": 2,
+     "id": "aventador.txt::3",
+     "source": "aventador.txt",
+     "chunk_index": 3,
+     "distance": 0.4348018169403076,
+     "text": ". By March 2016, Lamborghini had built 5,000 Aventadors. At the time, it was the second-best selling Lamborghini model ever.\n\nThe Aventador was replaced by the Revuelto in 2023.\n\nSpecifications and performance\nSpecifications\nEngine\nThe Aventador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the ",
+     "relevant": false
+    },
+    {
+     "rank": 3,
+     "id": "aventador.txt::48",
+     "source": "aventador.txt",
+     "chunk_index": 48,
+     "distance": 0.4413611888885498,
+     "text": "y including the model on a data sheet on its website. Lamborghini officially unveiled the Aventador J to the world at the 2012 Geneva Motor Show. The barchetta concept car used the same V12 engine as the standard Aventador, producing 700 PS (690 hp; 515 kW) with the same transmission as the coupé. It did not have air conditioning or radio to save further weight, for a total of 3,472 lb (1,575 kg).",
+     "relevant": false
+    },
+    {
+     "rank": 4,
+     "id": "aventador.txt::63",
+     "source": "aventador.txt",
+     "chunk_index": 63,
+     "distance": 0.4445435404777527,
+     "text": " to celebrate Lamborghini's 50th anniversary, it was introduced at the 2013 Geneva Motor Show with a price of US$4,000,000, making it one of the most expensive production cars in the world. The 6.5-litre naturally aspirated V12 generated 552 kW (740 hp; 750 PS) at 8,400 rpm and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. The increase in power was achieved by enlarging the air intakes and modifying",
+     "relevant": false
+    },
+    {
+     "rank": 5,
+     "id": "v12-engine.txt::4",
+     "source": "v12-engine.txt",
+     "chunk_index": 4,
+     "distance": 0.4501124620437622,
+     "text": "ini to design the engine for his car and, according to some accounts, paid him a bonus for every horsepower over what Ferrari's V12 could produce. The finished 3.5-litre (214 cu in) V12, with minor improvements, went on to become the 6.5 litre powering the Lamborghini Murciélago LP 640, and completed its service for Lamborghini with the final version of the Murciélago, the Murciélago LP 670-4 Supe",
+     "relevant": false
+    },
+    {
+     "rank": 6,
+     "id": "v12-engine.txt::39",
+     "source": "v12-engine.txt",
+     "chunk_index": 39,
+     "distance": 0.4656568765640259,
+     "text": "; 824 bhp) at 9,250 rpm\tFenomeno\nFormula One\nFurther information: Lamborghini LE3512\n\nLamborghini's 3.5L V12 Formula One engine, the 3512, at the Lamborghini Museum.\nLamborghini made the move to Formula One in 1989 when the FIA outlawed turbocharged engines. Former Scuderia Ferrari designer / engineer Mauro Forghieri was commissioned to design and build a new, 3.5 litre V12 engine for use by the F",
+     "relevant": false
+    },
+    {
+     "rank": 7,
+     "id": "v12-engine.txt::32",
+     "source": "v12-engine.txt",
+     "chunk_index": 32,
+     "distance": 0.4671574831008911,
+     "text": "09 lbf⋅ft) at 5,500 rpm\nEmission class: Euro 6 – LEV 2\nEmissions control system: Catalytic converters with lambda sensors\nCooling system: Water and oil cooling system in the rear with variable air inlets\nEngine management system: Lamborghini Iniezione Elettronica (LIE) with Ion current analysis\nLubrication system: Dry sump\nWeight: 235 kg (518 lb)\nDisplacement\tPower\tTorque\tApplications\n6.5\t700 PS (",
+     "relevant": false
+    },
+    {
+     "rank": 8,
+     "id": "aventador.txt::0",
+     "source": "aventador.txt",
+     "chunk_index": 0,
+     "distance": 0.4795451760292053,
+     "text": "The Lamborghini Aventador (Spanish pronunciation: ) is a mid-engine, two-seater sports car manufactured and marketed by Lamborghini from 2011 until 2022. Named after a prominent Spanish fighting bull that fought in Zaragoza, Aragón, in 1993, the Aventador succeeded the Murciélago and was manufactured in Sant'Agata Bolognese, Italy.\n\nHistory\nThe Aventador was launched on 28 February 2011 at the Gen",
+     "relevant": false
+    },
+    {
+     "rank": 9,
+     "id": "aventador.txt::85",
+     "source": "aventador.txt",
+     "chunk_index": 85,
+     "distance": 0.4899919033050537,
+     "text": "ight ratio of 1.66 kg per hp and generates a downforce of 1,200 kg (2,600 lb) at 249 km/h (155 mph), more than a typical GT3 race car. Production was limited to 40 units and was planned to have its own one-make racing series.\n\nCountach LPI 800-4\nMain article: Lamborghini Countach LPI 800-4\n\nLamborghini Countach LPI 800-4 front view\nA 2021 limited edition hybrid derivative that took inspiration fro",
+     "relevant": false
+    },
+    {
+     "rank": 10,
+     "id": "aventador.txt::28",
+     "source": "aventador.txt",
+     "chunk_index": 28,
+     "distance": 0.4913675785064697,
+     "text": "9 hp; 29 kW), more than the original Aventador), and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. It could accelerate from 0 to 97 km/h (0 to 60 mph) in 2.9 seconds with a top speed of 217 mph (350.0 km/h).\n\nThe S came with four-wheel steering, permanent four-wheel-drive and updated suspension. Suspension was controlled by the 'Lamborghini Dinamica Veicolo Attiva' (LDVA) control unit with four sele",
+     "relevant": false
+    }
+   ],
+   "metrics": null,
+   "grade": null,
+   "failure_kind": null
+  },
+  {
+   "id": "o11",
+   "question": "How much does the Lamborghini Revuelto weigh?",
+   "type": "versions",
+   "answerable": true,
+   "retrieved": [
+    {
+     "rank": 1,
+     "id": "aventador.txt::43",
+     "source": "aventador.txt",
+     "chunk_index": 43,
+     "distance": 0.4076404571533203,
+     "text": "2021. It was limited to 600 units (350 Coupés, 250 Roadsters). It came with the standard features of the Aventador S and SVJ. The engine produces 780 PS (574 kW; 769 hp) and the same 720 N⋅m (531 lb⋅ft) of torque as the SVJ. Lamborghini claimed acceleration from 0–100 km/h (0–62 mph) in 2.84 seconds, with a top speed of 220 mph (354 km/h). The Coupé has a claimed kerb weight of 1,550 kg (3,417 lb)",
+     "relevant": false
+    },
+    {
+     "rank": 2,
+     "id": "revuelto.txt::10",
+     "source": "revuelto.txt",
+     "chunk_index": 10,
+     "distance": 0.42786461114883423,
+     "text": "l display located in front of the passenger that monitors the speed, selected gear and the car's state.\n\nSpecifications\nBody\nThe Revuelto has a monocoque composed entirely of carbon fibre, making it 10% lighter than the Aventador's chassis. Torsional rigidity has been improved by 25% and the front frame is 20% lighter. Lamborghini has used carbon fibre in the construction, and the back of the chas",
+     "relevant": false
+    },
+    {
+     "rank": 3,
+     "id": "revuelto.txt::15",
+     "source": "revuelto.txt",
+     "chunk_index": 15,
+     "distance": 0.43060559034347534,
+     "text": "ar: 390×32 mm, 4 piston calipers\nBattery\nType\tLithium-ion\nRated capacity\t3.8 kWh\nRange (WLTP)\t10 km (6.2 mi)\nModels\nRevuelto SV (2026)\nOn 14 August 2026, Lamborghini unveiled the new Revuelto SV.\n\nVariants\nOpera Unica (2024)\nThrough their Ad Personam division, Lamborghini has built a handful of one-off \"Opera Unica\" models based on standard Revueltos, and featuring unique, hand-painted liveries an",
+     "relevant": false
+    },
+    {
+     "rank": 4,
+     "id": "aventador.txt::48",
+     "source": "aventador.txt",
+     "chunk_index": 48,
+     "distance": 0.43744558095932007,
+     "text": "y including the model on a data sheet on its website. Lamborghini officially unveiled the Aventador J to the world at the 2012 Geneva Motor Show. The barchetta concept car used the same V12 engine as the standard Aventador, producing 700 PS (690 hp; 515 kW) with the same transmission as the coupé. It did not have air conditioning or radio to save further weight, for a total of 3,472 lb (1,575 kg).",
+     "relevant": false
+    },
+    {
+     "rank": 5,
+     "id": "revuelto.txt::11",
+     "source": "revuelto.txt",
+     "chunk_index": 11,
+     "distance": 0.4484177827835083,
+     "text": " Torsional rigidity has been improved by 25% and the front frame is 20% lighter. Lamborghini has used carbon fibre in the construction, and the back of the chassis contains high-strength aluminium alloys.\n\nPowertrain\nThe Revuelto features a new 6.5-liter V12 engine, complemented by three electric motors that produce a combined power of 746.5 kW (1,015 PS).\n\nEngine\tV12\nElectric motor\tFront e-axle\nI",
+     "relevant": false
+    },
+    {
+     "rank": 6,
+     "id": "aventador.txt::63",
+     "source": "aventador.txt",
+     "chunk_index": 63,
+     "distance": 0.4496842622756958,
+     "text": " to celebrate Lamborghini's 50th anniversary, it was introduced at the 2013 Geneva Motor Show with a price of US$4,000,000, making it one of the most expensive production cars in the world. The 6.5-litre naturally aspirated V12 generated 552 kW (740 hp; 750 PS) at 8,400 rpm and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. The increase in power was achieved by enlarging the air intakes and modifying",
+     "relevant": false
+    },
+    {
+     "rank": 7,
+     "id": "revuelto.txt::0",
+     "source": "revuelto.txt",
+     "chunk_index": 0,
+     "distance": 0.4543236494064331,
+     "text": "The Lamborghini Revuelto (Spanish pronunciation: ) is a mid-engine plug-in hybrid sports car produced by the Italian automobile manufacturer Lamborghini. It was officially unveiled on 29 March 2023 as a successor to the Aventador. The Revuelto's namesake is a Spanish fighting bull that fought in the arena of Barcelona in the 1880s.\n\nThe Revuelto entered full production by July 2023, with the first",
+     "relevant": false
+    },
+    {
+     "rank": 8,
+     "id": "aventador.txt::32",
+     "source": "aventador.txt",
+     "chunk_index": 32,
+     "distance": 0.46347081661224365,
+     "text": "he Frankfurt International Motor Show. It was mechanically identical to the coupé with the only difference being the engine cover (identical to the standard Aventador roadster), two carbon fibre removable roof panels (weighing less than 6 kg (13 lb) stow-able in the front compartment), and new optional wheels. It was 50 kg (110 lb) heavier than the coupé due to chassis reinforcing components. Acce",
+     "relevant": false
+    },
+    {
+     "rank": 9,
+     "id": "aventador.txt::3",
+     "source": "aventador.txt",
+     "chunk_index": 3,
+     "distance": 0.48018842935562134,
+     "text": ". By March 2016, Lamborghini had built 5,000 Aventadors. At the time, it was the second-best selling Lamborghini model ever.\n\nThe Aventador was replaced by the Revuelto in 2023.\n\nSpecifications and performance\nSpecifications\nEngine\nThe Aventador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the ",
+     "relevant": false
+    },
+    {
+     "rank": 10,
+     "id": "aventador.txt::28",
+     "source": "aventador.txt",
+     "chunk_index": 28,
+     "distance": 0.4823650121688843,
+     "text": "9 hp; 29 kW), more than the original Aventador), and 690 N⋅m (509 lb⋅ft) of torque at 5,500 rpm. It could accelerate from 0 to 97 km/h (0 to 60 mph) in 2.9 seconds with a top speed of 217 mph (350.0 km/h).\n\nThe S came with four-wheel steering, permanent four-wheel-drive and updated suspension. Suspension was controlled by the 'Lamborghini Dinamica Veicolo Attiva' (LDVA) control unit with four sele",
+     "relevant": false
+    }
+   ],
+   "metrics": {
+    "1": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "3": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "5": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "10": {
+     "hit": 0,
+     "recall": 0.0
+    }
+   },
+   "grade": null,
+   "failure_kind": null
+  },
+  {
+   "id": "o12",
+   "question": "What happened to 15 Lamborghini Aventador Ultimae cars in February 2022, and what did Lamborghini do about it?",
+   "type": "other",
+   "answerable": true,
+   "retrieved": [
+    {
+     "rank": 1,
+     "id": "aventador.txt::2",
+     "source": "aventador.txt",
+     "chunk_index": 2,
+     "distance": 0.3456931710243225,
+     "text": " Internally codenamed LB834, it was designed to replace the then-decade-old Murciélago as the new flagship model.\n\nSoon after its unveiling, Lamborghini announced that it had sold 12 cars, with deliveries starting in the second half of 2011. By March 2016, Lamborghini had built 5,000 Aventadors. At the time, it was the second-best selling Lamborghini model ever.\n\nThe Aventador was replaced by the ",
+     "relevant": false
+    },
+    {
+     "rank": 2,
+     "id": "aventador.txt::46",
+     "source": "aventador.txt",
+     "chunk_index": 46,
+     "distance": 0.34653210639953613,
+     "text": "July 2022. It was customized as an homage to a one-of-a-kind 1968 Lamborghini Miura P400, painted in Azzuro Flake blue with silver wheels and white leather interior.\n\nIn April 2022, the last Lamborghini Aventador LP 780-4 Ultimae Coupé ever produced was sold at an RM Sotheby's auction for over US$1.6 million, paired with a 1 of 1 NFT.\n\nSpecial editions\nAventador J\n\nAventador J\nSix months after unv",
+     "relevant": false
+    },
+    {
+     "rank": 3,
+     "id": "aventador.txt::45",
+     "source": "aventador.txt",
+     "chunk_index": 45,
+     "distance": 0.35719501972198486,
+     "text": " carrier ship Felicity Ace, caught fire and sank near the Azores. Lamborghini restarted production of the Ultimae to replace those 15 destroyed cars. The very last Ultimae, and thus the very last production Aventador rolled off the line in July 2022. It was customized as an homage to a one-of-a-kind 1968 Lamborghini Miura P400, painted in Azzuro Flake blue with silver wheels and white leather inte",
+     "relevant": true
+    },
+    {
+     "rank": 4,
+     "id": "aventador.txt::0",
+     "source": "aventador.txt",
+     "chunk_index": 0,
+     "distance": 0.38209420442581177,
+     "text": "The Lamborghini Aventador (Spanish pronunciation: ) is a mid-engine, two-seater sports car manufactured and marketed by Lamborghini from 2011 until 2022. Named after a prominent Spanish fighting bull that fought in Zaragoza, Aragón, in 1993, the Aventador succeeded the Murciélago and was manufactured in Sant'Agata Bolognese, Italy.\n\nHistory\nThe Aventador was launched on 28 February 2011 at the Gen",
+     "relevant": false
+    },
+    {
+     "rank": 5,
+     "id": "aventador.txt::44",
+     "source": "aventador.txt",
+     "chunk_index": 44,
+     "distance": 0.38489770889282227,
+     "text": "imed acceleration from 0–100 km/h (0–62 mph) in 2.84 seconds, with a top speed of 220 mph (354 km/h). The Coupé has a claimed kerb weight of 1,550 kg (3,417 lb).\n\nIn February 2022, after production had ended, 15 cars were destroyed when car carrier ship Felicity Ace, caught fire and sank near the Azores. Lamborghini restarted production of the Ultimae to replace those 15 destroyed cars. The very l",
+     "relevant": true
+    },
+    {
+     "rank": 6,
+     "id": "aventador.txt::3",
+     "source": "aventador.txt",
+     "chunk_index": 3,
+     "distance": 0.40031862258911133,
+     "text": ". By March 2016, Lamborghini had built 5,000 Aventadors. At the time, it was the second-best selling Lamborghini model ever.\n\nThe Aventador was replaced by the Revuelto in 2023.\n\nSpecifications and performance\nSpecifications\nEngine\nThe Aventador LP 700–4 used Lamborghini's 700 PS (515 kW; 690 hp) 6,498 cc (6.5 L; 396.5 cu in) 60° V12 engine, weighing about 235 kg (518 lb). Known internally as the ",
+     "relevant": false
+    },
+    {
+     "rank": 7,
+     "id": "aventador.txt::1",
+     "source": "aventador.txt",
+     "chunk_index": 1,
+     "distance": 0.41177481412887573,
+     "text": ", the Aventador succeeded the Murciélago and was manufactured in Sant'Agata Bolognese, Italy.\n\nHistory\nThe Aventador was launched on 28 February 2011 at the Geneva Motor Show, five months after its initial unveiling in Sant'Agata Bolognese. Internally codenamed LB834, it was designed to replace the then-decade-old Murciélago as the new flagship model.\n\nSoon after its unveiling, Lamborghini announc",
+     "relevant": false
+    },
+    {
+     "rank": 8,
+     "id": "aventador.txt::43",
+     "source": "aventador.txt",
+     "chunk_index": 43,
+     "distance": 0.42181211709976196,
+     "text": "2021. It was limited to 600 units (350 Coupés, 250 Roadsters). It came with the standard features of the Aventador S and SVJ. The engine produces 780 PS (574 kW; 769 hp) and the same 720 N⋅m (531 lb⋅ft) of torque as the SVJ. Lamborghini claimed acceleration from 0–100 km/h (0–62 mph) in 2.84 seconds, with a top speed of 220 mph (354 km/h). The Coupé has a claimed kerb weight of 1,550 kg (3,417 lb)",
+     "relevant": false
+    },
+    {
+     "rank": 9,
+     "id": "revuelto.txt::0",
+     "source": "revuelto.txt",
+     "chunk_index": 0,
+     "distance": 0.44611549377441406,
+     "text": "The Lamborghini Revuelto (Spanish pronunciation: ) is a mid-engine plug-in hybrid sports car produced by the Italian automobile manufacturer Lamborghini. It was officially unveiled on 29 March 2023 as a successor to the Aventador. The Revuelto's namesake is a Spanish fighting bull that fought in the arena of Barcelona in the 1880s.\n\nThe Revuelto entered full production by July 2023, with the first",
+     "relevant": false
+    },
+    {
+     "rank": 10,
+     "id": "aventador.txt::59",
+     "source": "aventador.txt",
+     "chunk_index": 59,
+     "distance": 0.4501858949661255,
+     "text": "ecial edition of the SVJ, unveiled at Monterey Car Week in August 2019. It paid tribute to the 2018 and 2019 24 Hours of Daytona and 12 Hours of Sebring victories. 63 were built, the number representing Lamborghini's founding in 1963. Technical specifications were the same as the SVJ Roadster.\n\nAventador SVJ Roadster Xago Edition (2020)\nThe Xago Edition was unveiled on July 17, 2020, for clients o",
+     "relevant": false
+    }
+   ],
+   "metrics": {
+    "1": {
+     "hit": 0,
+     "recall": 0.0
+    },
+    "3": {
+     "hit": 1,
+     "recall": 1.0
+    },
+    "5": {
+     "hit": 1,
+     "recall": 1.0
+    },
+    "10": {
+     "hit": 1,
+     "recall": 1.0
+    }
+   },
+   "grade": null,
+   "failure_kind": null
+  }
+ ]
+}

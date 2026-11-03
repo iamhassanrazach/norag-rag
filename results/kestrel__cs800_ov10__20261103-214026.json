@@ -134,7 +134,7 @@
    }
   }
  },
- "unreachable_evidence": [],
+ "unreachable_evidence": ,
  "questions": [
   {
    "id": "q01",

@@ -1,0 +1,136 @@
+The Lamborghini V12 refers to the flagship V12 engine used by Lamborghini. Lamborghini has had three generations of V12 engines through their history, all of which were developed in-house. The first-generation Lamborghini V12 was a sixty degree (60°) V12 petrol engine designed by Lamborghini, and was the first internal combustion engine ever produced by the firm.
+
+It entered production in 1963 as a 3.5 litre displacing 3,465 cubic centimetres (211.4 cu in) fitted on Lamborghini's first car, the Lamborghini 350GT. The engine remained in use for almost fifty years; the final version of 6.5 litre displacement was installed in the Lamborghini Murciélago. Lamborghini discontinued their first-generation V12 after the Murcielago, opting for a brand-new V12 that first saw use on the Lamborghini Aventador.
+
+History
+
+An early Lamborghini V12 engine used in the Espada and Jarama
+When Ferruccio Lamborghini set out to compete with Ferrari, he contracted Giotto Bizzarrini to design the engine for his car and, according to some accounts, paid him a bonus for every horsepower over what Ferrari's V12 could produce. The finished 3.5-litre (214 cu in) V12, with minor improvements, went on to become the 6.5 litre powering the Lamborghini Murciélago LP 640, and completed its service for Lamborghini with the final version of the Murciélago, the Murciélago LP 670-4 SuperVeloce.
+
+Technical overview
+The engine was designed from the start to be a quad cam 60 degree V12 - as an intentional snub to Ferrari's single overhead camshaft per-bank design. When the 3,464-cubic-centimetre (211.4 cu in) prototype was tested in 1963, it was able to produce 370 brake horsepower (276 kW; 375 PS) at 9,000 (rpm), or almost 107 brake horsepower (80 kW; 108 PS) per litre. Bizzarrini insisted the engine was mechanically capable of reaching 400 brake horsepower (298 kW; 406 PS) at 11,000 rpm with an uprated fuel system, but the design was judged adequate, and when fitted with production carburettors, all the auxiliary systems, and detuned for road use, the engine still made 280 brake horsepower (209 kW; 284 PS).
+
+
+Lamborghini Murciélago Roadster with its V12 engine on display
+Over the years, this V12 engine has nearly doubled in displacement - first to 6,192 cubic centimetres (377.9 cu in), and later to 6,496 cubic centimetres (396.4 cu in). It has seen the modification of the cylinder heads to allow four valves per cylinder, the replacement of Weber carburettors with electronic fuel injection, and the re-engineering of the lubrication system from a wet to a dry sump design. However, the engine that powers the Murciélago LP 640 can trace its lineage directly to the F1-inspired design of Bizzarrini and his team more than forty years ago.
+
+Audi ownership and V12 successor
+
+The V12 engine used in the Lamborghini Aventador LP 700-4
+When Automobili Lamborghini was purchased in 1998 by the German Volkswagen Group subsidiary Audi AG, the V12 engine continued undergoing constant upgrades, growing its displacement from 5.7 litres (Diablo VT) to the final displacement of 6.5 litres in the Murciélago LP670-4 Superveloce.
+
+It took years to decide that a new engine was needed to be built from scratch, finally an all-new engine codenamed L539 having a displacement of 6.5 litres for the 2011 Aventador was developed. The new engine has a maximum power output of 700 PS (515 kW; 690 hp), is 18 kg lighter, is over-square (95 mm bore, 76.4 mm stroke) and has a different firing order: 1–12–4–9–2–11–6–7–3–10–5–8 instead of 1–7–4–10–2–8–6–12–3–9–5–11.
+
+Specifications
+First generation
+engine configuration — 3.5 & 3.9
+ 60° V12 engine; wet sump lubrication system
+engine configuration — 6.2 & 6.5
+60° V12 engine; dry sump lubrication system
+engine displacement etc.
+3.5: 3,465 cc (211.4 cu in), bore x stroke: 77 mm × 62 mm (3.03 in × 2.44 in) (stroke ratio: 1.24:1 - 'oversquare/short-stroke engine'); 288.7 cc (17.6 cu in) per cylinder
+3.9: 3,929 cc (239.8 cu in), bore x stroke: 82 mm × 62 mm (3.23 in × 2.44 in)
+4.8: 4,754 cc (290.1 cu in), bore x stroke: 85.5 mm x 69 mm (3.37 in x 2.72 in).
+5.2: 5,167 cc (315.3 cu in), bore x stroke: 85.5 mm × 75 mm (3.37 in × 2.95 in), compression ratio 9.5:1 and downdraft 6X2 barrel Weber carburetors.
+5.7: 5,707 cc (348.3 cu in), bore x stroke: 87 mm × 80 mm (3.43 in × 3.15 in)
+6.0: 5,992 cc (365.7 cu in), bore x stroke: 87 mm × 84 mm (3.43 in × 3.31 in)
+6.2: 6,192 cc (377.9 cu in), bore x stroke: 87 mm × 86.8 mm (3.43 in × 3.42 in) (stroke ratio: 1.00:1 - 'square engine'); 516 cc (31.5 cu in) per cylinder; compression ratio: 10.7:1
+6.5: 6,495.71 cc (396.4 cu in), bore x stroke: 88 mm × 89 mm (3.46 in × 3.50 in) (stroke ratio: 0.99:1 - 'square engine'); 541.3 cc (33.0 cu in) per cylinder; compression ratio: 11.2:1
+cylinder block & crankcase
+ cast aluminium alloy; pressed-in cylinder liners
+cylinder heads & valvetrain — 3.5, 3.9, 4.8
+ cast aluminium alloy; two valves per cylinder, 24 valves total, chain-driven double overhead camshaft
+cylinder heads & valvetrain — 6.2 & 6.5
+cast aluminium alloy; 4 valves per cylinder, 48 valves total, chain-driven double overhead camshaft
+aspiration, fuel system & ignition system — 3.5
+ six twin-barrel side-draught 40 DCOE 2 Weber carburetors; one or two ignition distributors
+aspiration, fuel system & ignition system — 3.98
+six twin-barrel down-draught carburettors; one or two ignition distributors
+aspiration, fuel system & ignition system — 6.2 & 6.5
+two air filters, four cast alloy throttle bodies each with Magneti Marelli electronically controlled 'drive by wire' throttle butterfly valves, cast magnesium alloy intake manifold; two linked common rail fuel distributor rails, electronic sequential multi-point indirect fuel injection with intake manifold-sited fuel injectors; centrally positioned spark plugs, mapped direct ignition with 12 individual direct-acting single spark coils
+exhaust system — 6.2 & 6.5
+two 3-branch exhaust manifolds per cylinder bank, connected to dual-inlet catalytic converters, heated oxygen sensors (lambda) monitoring pre- and post-catalyst exhaust gasses
+Displacement	Power	Torque	Applications
+3.5	284 PS (209 kW; 280 bhp) at 6,500 rpm	325 N⋅m (240 lbf⋅ft) at 4,500 rpm	350 GT
+324 PS (238 kW; 320 bhp) at 7,000 rpm		350 GTV
+3.9	385 PS (283 kW; 380 bhp) at 7,850 rpm	400 N⋅m (295 lbf⋅ft) at 5,750 rpm	400 GT, Miura P400 SV, Islero, Jarama, Espada and Countach LP400
+4.8	375 PS (276 kW; 370 bhp) at 7,000 rpm	410 N⋅m (302 lbf⋅ft) at 4,500 rpm	Countach LP500 S
+5.2	455 PS (335 kW; 449 bhp) at 7,000 rpm	500 N⋅m (369 lbf⋅ft) at 5,200 rpm	Countach LP5000 Quattrovalvole, LM002, and Centenaire
+5.7	From 485 PS (357 kW; 478 bhp) to 603 PS (444 kW; 595 bhp) at 7,300 rpm	From 582 N•m (428 lb•ft ) to 639 N⋅m (471 lbf⋅ft) at 4,800 rpm	Diablo, Diablo VT, Diablo SV, Diablo SE30 Jota, and Vector M12
+6.0	575 PS (423 kW; 567 bhp) at 7,300 rpm	630 N⋅m (465 lbf⋅ft) at 5,500 rpm	Diablo GT and Diablo VT 6.0 SE
+6.2	580 PS (427 kW; 572 bhp) at 7,500 rpm	650 N⋅m (479 lbf⋅ft) at 4,000 rpm	Murciélago
+6.5	640 PS (471 kW; 631 bhp) at 8,000 rpm	660 N⋅m (487 lbf⋅ft) at 6,000 rpm	Murciélago LP 640 Coupé and Roadster
+650 PS (478 kW; 641 bhp) at 8,000 rpm	Reventón and Murciélago LP 650-4 Roadster
+670 PS (493 kW; 661 bhp) at 8,000 rpm	660 N⋅m (487 lbf⋅ft) at 6,500 rpm	Murciélago LP 670-4 SuperVeloce
+Second generation
+Type: 60° V12 fuel feed by Multi Point Fuel Injection
+Displacement: 6,498.48 cc (6.5 L; 396.6 cu in)
+Bore x stroke: 95 mm × 76.4 mm (3.74 in × 3.01 in) 541.54 cc (0.5 L; 33.0 cu in)
+Valvetrain: Variable valve timing electronically controlled
+Compression ratio: 11.8 (± 0.2) : 1
+Maximum power: 700 PS (690 bhp; 515 kW) at 8,250 rpm
+Maximum torque: 690 N⋅m (509 lbf⋅ft) at 5,500 rpm
+Emission class: Euro 6 – LEV 2
+Emissions control system: Catalytic converters with lambda sensors
+Cooling system: Water and oil cooling system in the rear with variable air inlets
+Engine management system: Lamborghini Iniezione Elettronica (LIE) with Ion current analysis
+Lubrication system: Dry sump
+Weight: 235 kg (518 lb)
+Displacement	Power	Torque	Applications
+6.5	700 PS (515 kW; 690 bhp) at 8,250 rpm	690 N⋅m (509 lbf⋅ft) at 5,500 rpm	Aventador LP 700-4, Aventador J
+720 PS (530 kW; 710 bhp) at 8,250 rpm	Aventador LP 720-4 50° Anniversario
+740 PS (544 kW; 730 bhp) at 8,400 rpm	Aventador S
+750 PS (552 kW; 740 bhp) at 8,400 rpm	Aventador LP 750-4 SuperVeloce and Veneno
+770 PS (566 kW; 759 bhp) at 8,500 rpm	720 N⋅m (531 lbf⋅ft) at 6,720 rpm	Centenario, Aventador LP770-4 SVJ and SC18 Alston, Lamborghini SC20
+780 PS (574 kW; 769 bhp) at 8,500 rpm	Aventador LP780-4 Ultimae, Countach LPI 800-4
+780 PS (574 kW; 769 bhp) at 8,500 rpm	Autentica
+780 PS (574 kW; 769 bhp) at 6,750 rpm	Invencible
+785 PS (577 kW; 774 bhp) at 8,500 rpm	Sián FKP 37
+830 PS (610 kW; 819 bhp) at 8,500 rpm	760 N⋅m (561 lbf⋅ft) at 7,000 rpm	Essenza SCV12
+Third generation
+Type: 60° V12 fuel feed by Multi Point Fuel Injection
+Displacement: 6,498.48 cc (6.5 L; 396.6 cu in)
+Bore x stroke: 95 mm × 76.4 mm (3.74 in × 3.01 in) 541.54 cc (0.5 L; 33.0 cu in)
+Compression ratio: 12.6 : 1
+Maximum power: 825 PS (814 bhp; 607 kW) at 9,250 rpm
+Maximum torque: 725 N⋅m (535 lbf⋅ft) at 6,750 rpm
+Emission class: Euro 6 – LEV 3
+Weight: 218 kg (481 lb)
+Displacement	Power	Torque	Applications
+6.5	825 PS (607 kW; 814 bhp) at 9,250 rpm	725 N⋅m (535 lbf⋅ft) at 6,750 rpm	Revuelto
+835 PS (614 kW; 824 bhp) at 9,250 rpm	Fenomeno
+Formula One
+Further information: Lamborghini LE3512
+
+Lamborghini's 3.5L V12 Formula One engine, the 3512, at the Lamborghini Museum.
+Lamborghini made the move to Formula One in 1989 when the FIA outlawed turbocharged engines. Former Scuderia Ferrari designer / engineer Mauro Forghieri was commissioned to design and build a new, 3.5 litre V12 engine for use by the French Larrousse team in 1989. Dubbed the Lamborghini LE3512, (Lamborghini Engineering 3.5 liters 12 cylinders) the 3,493 cc (213.2 cu in), 80° V12 engine was reported to be the best sounding engine of the new 3.5L naturally aspirated formula. Lamborghini representatives stated at the engines début race, the 1989 Brazilian Grand Prix in Rio de Janeiro, that they chose a lower ranked team to join Formula One (Larrousse was in its third season using Lola chassis') as it was felt at the early stage of its development the 3512 would not be able to do justice to one of the teams usually closer to the front of the grid. Also, the front running teams already had existing engine suppliers in place (McLaren with Honda, Williams with Renault, Benetton with Ford, and Ferrari who made their own V12 engines).
+
+The Lamborghini V12 did impress many in 1989 despite its unreliability, and the engines best result in its first year came thanks to fast but accident prone Larrousse driver Philippe Alliot when he qualified his Lola LC89 in 5th position for the Spanish Grand Prix at Jerez, only 1.417 seconds slower than the V10 McLaren-Honda of pole winner Ayrton Senna. Alliot then backed up that performance by scoring the engine's first point in Formula One by finishing 6th in the race and setting the 4th fastest race lap in the process. Unfortunately, Alliot's teammate for the second half of 1989, former Ferrari driver Michele Alboreto, never came to grips with either the Lola or the Lamborghini. In his eight races for Larrousse he recorded four DNF's, two failures to pre-qualify, one failure to qualify, and a single 11th-place finish in Portugal.
+
+The Lamborghini V12's best finish came when Larrousse driver Aguri Suzuki finished 3rd in the infamous 1990 Japanese Grand Prix at Suzuka. Its time in Formula One (1989-1993) would prove to be frustrating though as poor reliability became the norm for the engine, despite being used by Grand Prix winning teams such as Lotus and Ligier who could boast driving talent such as Derek Warwick (Lotus - 1990), and Thierry Boutsen (Ligier - 1991). In a 2014 interview, Warwick said of the 3512 that it was "All noise and no go".
+
+In 1993 after four years in Formula One with only one significant result for the engine, Bob Lutz of Lamborghini's parent company Chrysler, did a hand-shake deal with McLaren boss Ron Dennis for the team to test the LE3512 to evaluate its potential as a race winner. McLaren made a modified version of their 1993 race car, the McLaren MP4/8 dubbed the MP4/8B, to test the engine (the test car took three months to modify to fit the longer and heavier V12). Testing was completed by triple World Champion Ayrton Senna, and future dual World Champion Mika Häkkinen at both the Silverstone Circuit in England and the Estoril circuit in Portugal. After his first drive of the car at Silverstone, Senna suggested certain changes to Forghieri (a less brutal 'top end' and a fatter mid-range), and he complied with engine power increased from 710 bhp (529 kW; 720 PS) to approximately 750 bhp (559 kW; 760 PS) and both drivers were very impressed despite the engine still being somewhat unreliable (Häkkinen reported a massive engine blow up while testing at Silverstone, though he did manage to lap the 5.226 km (3.260 mi) circuit some 1.4 seconds faster than the teams MP4/8 race car powered by a 680 bhp (507 kW; 689 PS) Ford V8 engine). According to reports, Senna even wanted to race the engine at the Japanese Grand Prix believing that while reliability might be a problem (according to McLaren engineers, the most they got out of any of the V12s post-Forghieri's changes was 19 laps at Silverstone before the engine blew up), at least he would be quicker than with the Ford powered race car (ironically Senna would win in both Japan and the last race in Australia with the existing MP4/8). Despite this however, Ron Dennis decided to go with Peugeot V10 engines in 1994 due to a better commercial agreement that would give long term stability to the team and at the end of the 1993 season, the Lamborghini LE3512 was retired from Grand Prix racing after the company was sold by Chrysler to an Indonesian investor group led by Tommy Suharto.
+
+The Lamborghini, which on all cars it powered carried the words "Chrysler powered by Lamborghini" (other than the McLaren MP4/8B which was all virgin white, though the test engines were badged as Chrysler), was one of only five V12 engines used in the naturally aspirated era from 1989–2013, the others being from Ferrari (1989-1995), Honda (1991-1992), Yamaha (1991-1992), and Porsche (1991). The only other 12 cylinder engines in Formula One during this time were disastrous efforts by Life Racing Engines with their W12 engine and Subaru who reintroduced the Flat 12 to the sport, both appearing in the first half of 1990.
+
+LE3512 power output
+1989 - 600 bhp (447 kW; 608 PS)
+1990 - 640 bhp (477 kW; 649 PS)
+1991 - 640 bhp (477 kW; 649 PS)
+1992 - 700 bhp (522 kW; 710 PS)
+1993 - 710 bhp (529 kW; 720 PS)
+1993 - 750 bhp (559 kW; 760 PS) (McLaren tests only)
+F1 statistics 1989-1993
+Races - 80 (49 starts)
+First Race - 1989 Brazilian Grand Prix at Jacarepaguá
+First Chassis - Larrousse Lola LC88C
+Last Race - 1993 Australian Grand Prix at Adelaide
+Last Chassis - Larrousse LH93
+Wins - 0
+Pole Positions - 0
+Podiums - 1 (3rd - 1990 Japanese Grand Prix at Suzuka, Aguri Suzuki, Larrousse Lola LC90)
+Points - 20
+Teams - Larrousse (1989, 1990, 1992, 1993), Lotus (1990), Ligier (1991), Modena Team (1991), Minardi (1992)
+Best Qualifying - 5th, Philippe Alliot, Larrousse Lola LC89, 1989 Spanish Grand Prix at Jerez
+Best Constructors' Championship - 6th, Larrousse, 1990 (11 points)
+Best Drivers' Championship - 12th, Aguri Suzuki, 1990 (6 points)

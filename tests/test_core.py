@@ -50,5 +50,5 @@ def test_api_search_words_and_errors():
     assert r.status_code == 200 and len(r.json()["chunks"]) == 3
     assert client.get("/api/words/vocabulary", params={"corpus": "kestrel"}).json()["distinct_words"] > 100
     assert client.post("/api/search", json={"corpus": "nope", "question": "x"}).status_code == 400
-    assert client.post("/api/search", json={"corpus": "own", "question": "x"}).status_code == 400  # empty corpus
+    assert client.post("/api/search", json={"corpus": "nonexistent", "question": "x"}).status_code == 400  # empty corpus
     assert client.post("/api/search", json={"corpus": "kestrel", "question": "x", "k": 99}).status_code == 422
