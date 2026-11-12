@@ -79,9 +79,9 @@ Three ways to find chunks, each switched on or off, then merged by RRF:
 |---|---|---|
 | `dense` | embeddings (meaning), as in V2 | done |
 | `bm25` | keywords scored by rarity (own implementation, `bm25.py`) | done |
-| `graph` | concept graph (Kestrel only) | coming |
+| `graph` | concept graph built by the LLM (Kestrel), walked without any LLM call | done (`graph.py`) |
 
-**Switch them in the UI:** the checkboxes *dense* / *BM25* in the top bar apply to Ask and Evaluation.
+**Switch them in the UI:** the checkboxes *dense* / *BM25* / *graph* in the top bar apply to Ask and Evaluation.
 `Candidates` is how many chunks each retriever hands to the fusion, `RRF k` is the constant of
 score = 1 / (k + rank). In the Ask tab each chunk shows which retriever found it, at which rank.
 
@@ -101,3 +101,35 @@ Results files are named `<corpus>__<retrievers>__cs<size>_ov<overlap>__<time>.js
 
 BM25 index: JSON file in `bm25_index/` (ignored by Git), rebuilt automatically when a document, the chunk size or the
 overlap changes. See the top of `bm25.py` for the tokenization.
+
+### Concept graph (`graph.py`)
+
+The LLM reads **every chunk once** and writes (entity, relation, entity) triples. Nothing is asked of the LLM at query time.
+
+```powershell
+python graph.py build kestrel --chunk-size 800 --overlap 20     # ~47 Gemini calls; cached in graph_index\, safe to stop and restart
+python graph.py stats kestrel --chunk-size 800 --overlap 20     # nodes, edges, build cost (calls, tokens, seconds)
+python graph.py ask   kestrel "Which team owns the service that raises KST-2044?" --chunk-size 800 --overlap 20
+python graph.py sample kestrel --chunk-size 800 --overlap 20    # writes results\graph_triples_kestrel.json (10 random triples)
+python graph.py grades results\graph_triples_kestrel.json       # counts your correct / wrong / unsupported
+python evaluate.py kestrel --retrievers dense,bm25,graph --chunk-size 800 --overlap 20
+python evaluate.py kestrel --retrievers dense,bm25,graph --weights graph=2 --candidates 30   # give the graph more say
+```
+
+Rate limit (429): put several keys in `.env` as `GOOGLE_API_KEYS="key1,key2"` (the code rotates and waits), or use `--pause 4`.
+The graph is **chunk-size specific**: it is built for one chunk size/overlap and the cache name contains a hash of the documents.
+
+**Schema (fixed).** Entities: Service, Team, ErrorCode, Plan, Feature, Policy, Channel.
+Relations: OWNED_BY, ESCALATED_TO, REPLACES, DEPENDS_ON, RAISED_BY, AVAILABLE_ON, GOVERNED_BY.
+A triple outside the schema is dropped (counted in `dropped_triples`).
+
+**Entity resolution (simple).** Same type + same normalised name (lower case, without "the", trailing "service" / "team" / "plan"),
+or one name listed as an alias by the LLM. Known limits: two different things with the same name merge; one thing with two
+names that the LLM did not list as aliases stays split. Look at `python graph.py stats` and the sample to find real examples.
+
+**Retrieval (no LLM).** Nodes whose name appears in the question (word-boundary match) are the *seeds*. The seed's own chunks
+score 1; walking 1 or 2 hops in the graph, each edge adds 1/(distance+1) to the chunks that state it. The ranked chunks go into RRF
+like any other retriever. In the Ask tab each graph chunk shows its **path** (the edges that led to it).
+
+**Cost.** One build (calls / tokens / seconds, in the cache file and in `graph.py stats`) and then 0 LLM calls per question.
+Re-running `build` after the cache exists costs nothing; changing `PROMPT_VERSION` in `graph.py` forces a new extraction.

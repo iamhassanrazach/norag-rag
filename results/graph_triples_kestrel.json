@@ -1,0 +1,82 @@
+[
+ {
+  "chunk_id": "support-runbook-errors.md::4",
+  "chunk_text": "Security → Single sign-on**.\n**Escalate:** to Identity if the metadata is correct and the error persists.\n\n## Connectors (KST-2xxx)\n\n### KST-2040 — Connection timed out\n\n**User sees:** \"Kestrel could not reach your data source in time.\"\n**Cause:** the database is down, overloaded, or behind a firewall that silently drops the connection.\n**Support action:** ask the customer to confirm the database is reachable from outside their network, on the host and port configured in the connector.\n**Escalate:** to Data Integrations if several customers report it for the same source type at the same time.\n\n### KST-2044 — Source refused the connection\n\n**User sees:** \"Your data source refused the connection from Kestrel.\"\n**Cause:** the database only accepts connections from an allowlist of IP addresses",
+  "triple": "Single sign-on (Feature) -ESCALATED_TO-> Identity (Team)",
+  "evidence": "**Escalate:** to Identity if the metadata is correct and the error persists.",
+  "grade": null,
+  "note": ""
+ },
+ {
+  "chunk_id": "service-catalog.md::1",
+  "chunk_text": "**Platform**.\n\n### auth\n\nSign-in with password, two-factor authentication, single sign-on (SAML) and SCIM provisioning. Issues the session tokens used by every other service.\nOwner: **Identity**.\n\n### connector-hub\n\nStores connector credentials (encrypted with per-workspace keys) and opens the connections to customer data sources. All outgoing connections leave through two fixed addresses, 203.0.113.10 and 203.0.113.11.\nOwner: **Data Integrations**.\n\n### query-engine\n\nRuns dataset queries, enforces the 120-second query time limit, and caches results for dashboards.\nOwner: **Analytics Engine**.\n\n### scheduler\n\nTriggers dataset refreshes and scheduled reports at the right time, in the time zone of each schedule. Generates the report PDFs and hands them over for delivery.\nOwner: **Analytics E",
+  "triple": "auth (Service) -OWNED_BY-> Identity (Team)",
+  "evidence": "Owner: **Identity**.",
+  "grade": null,
+  "note": ""
+ },
+ {
+  "chunk_id": "service-catalog.md::3",
+  "chunk_text": "shboards embedded in customer applications.\nOwner: **Platform**.\n\n### ledger\n\nSubscriptions, seats, invoices and payments. Generates invoice PDFs, runs the automatic payment retries, and applies the grace period and read-only rules of the Billing and Refund Policy. Talks to the payment processor; never stores full card numbers.\nOwner: **Payments Core**.\n\n### audit-log\n\nRecords security-relevant events (sign-ins, role changes, connector edits, exports) for workspaces on Business and Enterprise plans.\nOwner: **Identity**.\n\n## 2. Teams\n\n| Team | Engineering lead | On-call channel | Working hours (Paris time) |\n|---|---|---|---|\n| Platform | Samuel Okafor | #oncall-platform | 24/7 rotation |\n| Identity | Priya Raman | #oncall-identity | 24/7 rotation |\n| Data Integrations | Tomasz Wójcik | #on",
+  "triple": "ledger (Service) -OWNED_BY-> Payments Core (Team)",
+  "evidence": "Owner: **Payments Core**.",
+  "grade": null,
+  "note": ""
+ },
+ {
+  "chunk_id": "support-runbook-errors.md::6",
+  "chunk_text": "ser was removed.\n**Support action:** an Admin must edit the connector and enter the new credentials. Support cannot see stored credentials.\n**Escalate:** no.\n\n## Queries and dashboards (KST-3xxx)\n\n### KST-3012 — Query time limit exceeded\n\n**User sees:** \"This query took too long and was stopped.\"\n**Cause:** a dataset query ran for more than 120 seconds.\n**Support action:** suggest adding a filter, pre-aggregating in the source database, or refreshing less often. The time limit is the same on every plan and cannot be raised.\n**Escalate:** to Analytics Engine only if a query that used to finish quickly suddenly times out for many datasets of the same customer.\n\n### KST-3020 — Dataset refresh failed\n\n**User sees:** a red clock on the tiles.\n**Cause:** the tooltip shows a second code with the ",
+  "triple": "KST-3012 (ErrorCode) -ESCALATED_TO-> Analytics Engine (Team)",
+  "evidence": "Escalate: to Analytics Engine only if a query that used to finish quickly suddenly times out for many datasets of the same customer.",
+  "grade": null,
+  "note": ""
+ },
+ {
+  "chunk_id": "service-catalog.md::2",
+  "chunk_text": "hes and scheduled reports at the right time, in the time zone of each schedule. Generates the report PDFs and hands them over for delivery.\nOwner: **Analytics Engine**.\n\n### postroom\n\nSends every e-mail that leaves Kestrel: scheduled reports, invitations, password resets, ownership transfer confirmations and billing notifications. Tracks bounces and removes a recipient from a schedule after three rejections.\nOwner: **Messaging**.\n\npostroom replaced the older mailman service in November 2025. mailman is switched off; old alerts or documents that mention it refer to postroom today.\n\n### embed-svc\n\nIssues and checks embed tokens for dashboards embedded in customer applications.\nOwner: **Platform**.\n\n### ledger\n\nSubscriptions, seats, invoices and payments. Generates invoice PDFs, runs the auto",
+  "triple": "postroom (Service) -REPLACES-> mailman (Service)",
+  "evidence": "postroom replaced the older mailman service in November 2025.",
+  "grade": null,
+  "note": ""
+ },
+ {
+  "chunk_id": "service-catalog.md::2",
+  "chunk_text": "hes and scheduled reports at the right time, in the time zone of each schedule. Generates the report PDFs and hands them over for delivery.\nOwner: **Analytics Engine**.\n\n### postroom\n\nSends every e-mail that leaves Kestrel: scheduled reports, invitations, password resets, ownership transfer confirmations and billing notifications. Tracks bounces and removes a recipient from a schedule after three rejections.\nOwner: **Messaging**.\n\npostroom replaced the older mailman service in November 2025. mailman is switched off; old alerts or documents that mention it refer to postroom today.\n\n### embed-svc\n\nIssues and checks embed tokens for dashboards embedded in customer applications.\nOwner: **Platform**.\n\n### ledger\n\nSubscriptions, seats, invoices and payments. Generates invoice PDFs, runs the auto",
+  "triple": "postroom (Service) -OWNED_BY-> Messaging (Team)",
+  "evidence": "Owner: **Messaging**.",
+  "grade": null,
+  "note": ""
+ },
+ {
+  "chunk_id": "support-runbook-errors.md::11",
+  "chunk_text": "pired card, or a security block.\n**Support action:** ask the Owner to update the payment method before the next automatic retry. Follow the current Billing and Refund Policy for retries, grace period and read-only rules. Support cannot take card details over e-mail or chat.\n**Escalate:** to Payments Core only if the customer shows that the bank approved the payment.\n\n### KST-6010 — Duplicate charge detected\n\n**User sees:** nothing; this code appears in the admin console when two charges for the same period are found.\n**Cause:** a retry and a manual payment went through for the same invoice.\n**Support action:** confirm the duplicate in the admin console and request a full refund of the second charge; billing errors are always refunded.\n**Escalate:** to Payments Core if more than three custo",
+  "triple": "KST-6010 (ErrorCode) -ESCALATED_TO-> Payments Core (Team)",
+  "evidence": "**Escalate:** to Payments Core if more than three custo",
+  "grade": null,
+  "note": ""
+ },
+ {
+  "chunk_id": "service-catalog.md::1",
+  "chunk_text": "**Platform**.\n\n### auth\n\nSign-in with password, two-factor authentication, single sign-on (SAML) and SCIM provisioning. Issues the session tokens used by every other service.\nOwner: **Identity**.\n\n### connector-hub\n\nStores connector credentials (encrypted with per-workspace keys) and opens the connections to customer data sources. All outgoing connections leave through two fixed addresses, 203.0.113.10 and 203.0.113.11.\nOwner: **Data Integrations**.\n\n### query-engine\n\nRuns dataset queries, enforces the 120-second query time limit, and caches results for dashboards.\nOwner: **Analytics Engine**.\n\n### scheduler\n\nTriggers dataset refreshes and scheduled reports at the right time, in the time zone of each schedule. Generates the report PDFs and hands them over for delivery.\nOwner: **Analytics E",
+  "triple": "connector-hub (Service) -OWNED_BY-> Data Integrations (Team)",
+  "evidence": "Owner: **Data Integrations**.",
+  "grade": null,
+  "note": ""
+ },
+ {
+  "chunk_id": "support-runbook-errors.md::3",
+  "chunk_text": "\n**Support action:** ask the user to turn on automatic date and time on their device and try again. If they have lost their device, follow the second-factor reset procedure in the Product Guide (an Admin of the workspace resets it; support only does it after identity verification).\n**Escalate:** no.\n\n### KST-1012 — SSO response rejected\n\n**User sees:** \"Your identity provider returned an invalid response.\"\n**Cause:** the identity provider certificate has expired or was rotated, or the clock of the identity provider is out of sync.\n**Support action:** ask a workspace Admin to upload the new identity provider metadata in **Settings → Security → Single sign-on**.\n**Escalate:** to Identity if the metadata is correct and the error persists.\n\n## Connectors (KST-2xxx)\n\n### KST-2040 — Connection t",
+  "triple": "KST-1012 (ErrorCode) -ESCALATED_TO-> Identity (Team)",
+  "evidence": "Escalate: to Identity if the metadata is correct and the error persists.",
+  "grade": null,
+  "note": ""
+ },
+ {
+  "chunk_id": "service-catalog.md::1",
+  "chunk_text": "**Platform**.\n\n### auth\n\nSign-in with password, two-factor authentication, single sign-on (SAML) and SCIM provisioning. Issues the session tokens used by every other service.\nOwner: **Identity**.\n\n### connector-hub\n\nStores connector credentials (encrypted with per-workspace keys) and opens the connections to customer data sources. All outgoing connections leave through two fixed addresses, 203.0.113.10 and 203.0.113.11.\nOwner: **Data Integrations**.\n\n### query-engine\n\nRuns dataset queries, enforces the 120-second query time limit, and caches results for dashboards.\nOwner: **Analytics Engine**.\n\n### scheduler\n\nTriggers dataset refreshes and scheduled reports at the right time, in the time zone of each schedule. Generates the report PDFs and hands them over for delivery.\nOwner: **Analytics E",
+  "triple": "scheduler (Service) -OWNED_BY-> Analytics E (Team)",
+  "evidence": "Owner: **Analytics E",
+  "grade": null,
+  "note": ""
+ }
+]

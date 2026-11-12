@@ -1,0 +1,249 @@
+{
+ "extractions": {
+  "billing-policy-2025.md::0": [],
+  "billing-policy-2025.md::1": [],
+  "billing-policy-2025.md::2": [],
+  "billing-policy-2025.md::3": [],
+  "billing-policy-2025.md::4": [],
+  "billing-policy-2025.md::5": [],
+  "billing-policy-2025.md::6": [],
+  "billing-policy-2026.md::0": [],
+  "billing-policy-2026.md::1": [],
+  "billing-policy-2026.md::2": [],
+  "billing-policy-2026.md::3": [],
+  "billing-policy-2026.md::4": [],
+  "billing-policy-2026.md::5": [],
+  "billing-policy-2026.md::6": [],
+  "billing-policy-2026.md::7": [],
+  "product-guide.md::0": [],
+  "product-guide.md::1": [],
+  "product-guide.md::2": [],
+  "product-guide.md::3": [],
+  "product-guide.md::4": [],
+  "product-guide.md::5": [],
+  "product-guide.md::6": [],
+  "product-guide.md::7": [],
+  "product-guide.md::8": [],
+  "product-guide.md::9": [],
+  "product-guide.md::10": [],
+  "product-guide.md::11": [],
+  "product-guide.md::12": [],
+  "product-guide.md::13": [],
+  "service-catalog.md::0": [
+   {
+    "subject": "gateway",
+    "subject_type": "Service",
+    "subject_aliases": [],
+    "relation": "OWNED_BY",
+    "object": "Platform",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Owner: **Platform**."
+   },
+   {
+    "subject": "auth",
+    "subject_type": "Service",
+    "subject_aliases": [],
+    "relation": "OWNED_BY",
+    "object": "Platform team",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Owner: Platform team"
+   }
+  ],
+  "service-catalog.md::1": [
+   {
+    "subject": "auth",
+    "subject_type": "Service",
+    "subject_aliases": [],
+    "relation": "OWNED_BY",
+    "object": "Identity",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Owner: **Identity**."
+   },
+   {
+    "subject": "connector-hub",
+    "subject_type": "Service",
+    "subject_aliases": [],
+    "relation": "OWNED_BY",
+    "object": "Data Integrations",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Owner: **Data Integrations**."
+   },
+   {
+    "subject": "query-engine",
+    "subject_type": "Service",
+    "subject_aliases": [],
+    "relation": "OWNED_BY",
+    "object": "Analytics Engine",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Owner: **Analytics Engine**."
+   },
+   {
+    "subject": "scheduler",
+    "subject_type": "Service",
+    "subject_aliases": [],
+    "relation": "OWNED_BY",
+    "object": "Analytics E",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Owner: **Analytics E"
+   }
+  ],
+  "service-catalog.md::2": [
+   {
+    "subject": "postroom",
+    "subject_type": "Service",
+    "subject_aliases": [],
+    "relation": "OWNED_BY",
+    "object": "Messaging",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Owner: **Messaging**."
+   },
+   {
+    "subject": "postroom",
+    "subject_type": "Service",
+    "subject_aliases": [],
+    "relation": "REPLACES",
+    "object": "mailman",
+    "object_type": "Service",
+    "object_aliases": [],
+    "evidence": "postroom replaced the older mailman service in November 2025."
+   },
+   {
+    "subject": "embed-svc",
+    "subject_type": "Service",
+    "subject_aliases": [],
+    "relation": "OWNED_BY",
+    "object": "Platform",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Owner: **Platform**."
+   }
+  ],
+  "service-catalog.md::3": [
+   {
+    "subject": "ledger",
+    "subject_type": "Service",
+    "subject_aliases": [],
+    "relation": "OWNED_BY",
+    "object": "Payments Core",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Owner: **Payments Core**."
+   },
+   {
+    "subject": "audit-log",
+    "subject_type": "Service",
+    "subject_aliases": [],
+    "relation": "OWNED_BY",
+    "object": "Identity",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Owner: **Identity**."
+   }
+  ],
+  "service-catalog.md::4": [],
+  "service-catalog.md::5": [],
+  "support-runbook-errors.md::0": [],
+  "support-runbook-errors.md::1": [],
+  "support-runbook-errors.md::2": [],
+  "support-runbook-errors.md::3": [
+   {
+    "subject": "KST-1012",
+    "subject_type": "ErrorCode",
+    "subject_aliases": [],
+    "relation": "ESCALATED_TO",
+    "object": "Identity",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Escalate: to Identity if the metadata is correct and the error persists."
+   }
+  ],
+  "support-runbook-errors.md::4": [
+   {
+    "subject": "Single sign-on",
+    "subject_type": "Feature",
+    "subject_aliases": [],
+    "relation": "ESCALATED_TO",
+    "object": "Identity",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "**Escalate:** to Identity if the metadata is correct and the error persists."
+   },
+   {
+    "subject": "KST-2040",
+    "subject_type": "ErrorCode",
+    "subject_aliases": [],
+    "relation": "ESCALATED_TO",
+    "object": "Data Integrations",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "**Escalate:** to Data Integrations if several customers report it for the same source type at the same time."
+   }
+  ],
+  "support-runbook-errors.md::5": [],
+  "support-runbook-errors.md::6": [
+   {
+    "subject": "KST-3012",
+    "subject_type": "ErrorCode",
+    "subject_aliases": [],
+    "relation": "ESCALATED_TO",
+    "object": "Analytics Engine",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Escalate: to Analytics Engine only if a query that used to finish quickly suddenly times out for many datasets of the same customer."
+   }
+  ],
+  "support-runbook-errors.md::7": [],
+  "support-runbook-errors.md::8": [],
+  "support-runbook-errors.md::9": [
+   {
+    "subject": "KST-5031",
+    "subject_type": "ErrorCode",
+    "subject_aliases": [],
+    "relation": "RAISED_BY",
+    "object": "postroom",
+    "object_type": "Service",
+    "object_aliases": [],
+    "evidence": "This error is raised by postroom"
+   }
+  ],
+  "support-runbook-errors.md::10": [],
+  "support-runbook-errors.md::11": [
+   {
+    "subject": "KST-6010",
+    "subject_type": "ErrorCode",
+    "subject_aliases": [],
+    "relation": "ESCALATED_TO",
+    "object": "Payments Core",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "**Escalate:** to Payments Core if more than three custo"
+   }
+  ],
+  "support-runbook-errors.md::12": [
+   {
+    "subject": "billing errors",
+    "subject_type": "ErrorCode",
+    "subject_aliases": [],
+    "relation": "ESCALATED_TO",
+    "object": "Payments Core",
+    "object_type": "Team",
+    "object_aliases": [],
+    "evidence": "Escalate: to Payments Core if more than three customers are affected on the same day"
+   }
+  ]
+ },
+ "failed": {},
+ "cost": {
+  "calls": 48,
+  "tokens": 42452,
+  "seconds": 35.41,
+  "dropped_triples": 0
+ }
+}

@@ -20,8 +20,10 @@ a.w{cursor:pointer;color:#0645ad;text-decoration:underline}
  Retrievers
  <label><input type="checkbox" id="r-dense" checked> dense</label>
  <label><input type="checkbox" id="r-bm25"> BM25</label>
+ <label><input type="checkbox" id="r-graph"> graph</label>
  Candidates <input id="cand" type="number" value="20" min="1" max="50" style="width:3.5rem">
  RRF k <input id="rrfk" type="number" value="60" min="1" style="width:4rem">
+ Graph weight <input id="gw" type="number" value="1" min="0" step="0.5" style="width:3.5rem">
 </div>
 <nav><button data-t="ask" class="on">Ask</button> <button data-t="eval">Evaluation</button> <button data-t="words">Words</button></nav>
 <div id="msg" class="err"></div>
@@ -58,7 +60,7 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const cfg=()=>({corpus:$('corpus').value,chunk_size:+$('cs').value,overlap_percent:+$('ov').value});
 const qs=o=>new URLSearchParams(o).toString();
-const retr=()=>({retrievers:['dense','bm25'].filter(r=>$('r-'+r).checked),candidates:+$('cand').value,rrf_k:+$('rrfk').value});
+const retr=()=>({retrievers:['dense','bm25','graph'].filter(r=>$('r-'+r).checked),candidates:+$('cand').value,rrf_k:+$('rrfk').value,weights:{graph:+$('gw').value}});
 let QUESTIONS=[];
 
 async function api(url,body){
@@ -70,7 +72,7 @@ async function api(url,body){
     return d;
   }catch(e){$('msg').textContent='Cannot reach the server: '+e;return null}
 }
-const chunkHtml=c=>`<div class="chunk"><b>${esc(c.source)}</b> #${c.chunk_index}${c.found_by?' · found by '+Object.entries(c.found_by).map(([n,r])=>n+' #'+r).join(', '):''}${c.distance!==undefined?` · distance ${c.distance.toFixed(3)}`:''}${c.bm25_score!==undefined?` · bm25 ${c.bm25_score}`:''}${c.relevant===true?' <span class="ok">relevant</span>':''}\n${esc(c.text)}</div>`;
+const chunkHtml=c=>`<div class="chunk"><b>${esc(c.source)}</b> #${c.chunk_index}${c.found_by?' · found by '+Object.entries(c.found_by).map(([n,r])=>n+' #'+r).join(', '):''}${c.distance!==undefined?` · distance ${c.distance.toFixed(3)}`:''}${c.bm25_score!==undefined?` · bm25 ${c.bm25_score}`:''}${c.relevant===true?' <span class="ok">relevant</span>':''}${c.path?'<div class="muted"><b>graph path</b> (score '+c.graph_score+'):<br>'+c.path.map(esc).join('<br>')+'</div>':''}\n${esc(c.text)}</div>`;
 
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));

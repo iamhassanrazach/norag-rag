@@ -60,7 +60,7 @@ def cost_summary(rows):
 
 
 def run_eval(corpus, chunk_size=800, overlap_percent=10, with_answers=False, answer_k=5, questions=None,
-             retrievers=("dense",), candidates=20, rrf_k=60):
+             retrievers=("dense",), candidates=20, rrf_k=60, weights=None):
     retrievers = tuple(retrievers)
     questions = questions if questions is not None else rag.load_questions(corpus)
     if not questions:
@@ -80,7 +80,7 @@ def run_eval(corpus, chunk_size=800, overlap_percent=10, with_answers=False, ans
         t0 = time.perf_counter()
         retrieved = rag.search(corpus, q["question"], k=max(KS), chunk_size=chunk_size,
                                overlap_percent=overlap_percent, retrievers=retrievers,
-                               candidates=candidates, rrf_k=rrf_k)
+                               candidates=candidates, rrf_k=rrf_k, weights=weights)
         retrieval_ms = round((time.perf_counter() - t0) * 1000, 1)
         for c in retrieved:
             c["relevant"] = bool(matches(c, evidence))
@@ -111,7 +111,7 @@ def run_eval(corpus, chunk_size=800, overlap_percent=10, with_answers=False, ans
 
     return {
         "meta": {"corpus": corpus, "chunk_size": chunk_size, "overlap_percent": overlap_percent,
-                 "retrievers": list(retrievers), "candidates": candidates, "rrf_k": rrf_k, "ks": KS, "with_answers": with_answers, "answer_k": answer_k if with_answers else None,
+                 "retrievers": list(retrievers), "candidates": candidates, "rrf_k": rrf_k, "weights": weights or {}, "ks": KS, "with_answers": with_answers, "answer_k": answer_k if with_answers else None,
                  "n_chunks": len(all_chunks), "n_questions": len(questions), "n_scored": len(scored),
                  "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")},
         "summary": {**summarize(scored), "cost_per_question": cost_summary(results)},
@@ -177,9 +177,10 @@ if __name__ == "__main__":
     p.add_argument("--overlap", type=int, default=10, help="overlap in percent")
     p.add_argument("--with-answers", action="store_true", help="also generate answers (LLM calls)")
     p.add_argument("--answer-k", type=int, default=5, help="how many chunks the answer is generated from")
-    p.add_argument("--retrievers", default="dense", help="comma list among: dense,bm25 (default dense = V2)")
+    p.add_argument("--retrievers", default="dense", help="comma list among: dense,bm25,graph (default dense = V2)")
     p.add_argument("--candidates", type=int, default=20, help="how many chunks each retriever hands to the fusion")
     p.add_argument("--rrf-k", type=int, default=60, help="the k of RRF: score = 1 / (k + rank)")
+    p.add_argument("--weights", default="", help="RRF weights, e.g. graph=2,bm25=1 (default: all 1)")
     p.add_argument("--grades", metavar="FILE", help="print the hand grades of a results file")
     p.add_argument("--table", nargs="+", metavar="FILE", help="markdown comparison table of results files")
     a = p.parse_args()
@@ -189,7 +190,8 @@ if __name__ == "__main__":
         print_grades(a.grades)
     elif a.corpus:
         res = run_eval(a.corpus, a.chunk_size, a.overlap, a.with_answers, a.answer_k,
-                       retrievers=a.retrievers.split(","), candidates=a.candidates, rrf_k=a.rrf_k)
+                       retrievers=a.retrievers.split(","), candidates=a.candidates, rrf_k=a.rrf_k,
+                       weights={k: float(v) for k, v in (x.split("=") for x in a.weights.split(",") if x)})
         print_summary(res)
         print("\nSaved:", save(res))
     else:

@@ -9,14 +9,19 @@ from chromadb.api.types import EmbeddingFunction
 
 import bm25
 import fusion
+import graph
 import words
 
 CORPORA_DIR = os.getenv("CORPORA_DIR", "corpora")
 CHROMA_PATH = os.getenv("CHROMA_PATH", "./chroma_db")
 MIN_PARAGRAPH_LENGTH = 20
+# The base code drops every paragraph shorter than 20 characters. In Markdown that also drops the HEADINGS
+# ("### query-engine"), so the text no longer says which service a paragraph is about. We keep them by default
+# (KEEP_HEADINGS=0 gives the old behaviour, for a before/after comparison).
+KEEP_HEADINGS = os.getenv("KEEP_HEADINGS", "1") != "0"
 MAX_K = 10
 MAX_CANDIDATES = 50
-RETRIEVERS = ("dense", "bm25")  # "graph" comes next
+RETRIEVERS = ("dense", "bm25", "graph")
 
 _client = None
 _ef = None
@@ -94,7 +99,8 @@ def read_documents(corpus):
 def chunk_text(text, chunk_size, overlap_percent):
     """Same idea as ask_rag_google.py: a window of chunk_size characters slides over the text,
     each chunk starts with the last overlap_percent % of the previous one."""
-    paragraphs = [p.strip() for p in text.split("\n\n") if len(p.strip()) >= MIN_PARAGRAPH_LENGTH]
+    paragraphs = [p.strip() for p in text.split("\n\n") if len(p.strip()) >= MIN_PARAGRAPH_LENGTH
+                  or (KEEP_HEADINGS and p.strip().startswith("#"))]
     text = "\n\n".join(paragraphs)
     step = max(1, chunk_size - chunk_size * overlap_percent // 100)
     chunks = []
@@ -119,7 +125,7 @@ def _collection(corpus, chunk_size, overlap_percent):
     Edit a document and a fresh index is built; no stale index."""
     docs = read_documents(corpus)
     digest = hashlib.md5("".join(f"{k}{v}" for k, v in docs.items()).encode()).hexdigest()[:8]
-    name = f"{corpus}_{chunk_size}_{overlap_percent}_{digest}"
+    name = f"{corpus}_{chunk_size}_{overlap_percent}_{digest}{'_h' if KEEP_HEADINGS else ''}" + ("_fake" if os.getenv("FAKE_EMBED") else "")
     col = _chroma().get_or_create_collection(name=name, embedding_function=_embedding_function())
     if col.count() == 0:
         chunks = build_chunks(corpus, chunk_size, overlap_percent)
@@ -133,7 +139,7 @@ def _collection(corpus, chunk_size, overlap_percent):
 def _index_name(corpus, chunk_size, overlap_percent):
     docs = read_documents(corpus)
     digest = hashlib.md5("".join(f"{k}{v}" for k, v in docs.items()).encode()).hexdigest()[:8]
-    return f"{corpus}_{chunk_size}_{overlap_percent}_{digest}"
+    return f"{corpus}_{chunk_size}_{overlap_percent}_{digest}{'_h' if KEEP_HEADINGS else ''}"
 
 
 def _dense(corpus, question, n, chunk_size, overlap_percent):
@@ -154,12 +160,26 @@ def _bm25(corpus, question, n, chunk_size, overlap_percent):
             for rank, (cid, score) in enumerate(index.search(question, n), start=1)]
 
 
+def _graph(corpus, question, n, chunk_size, overlap_percent):
+    """Graph retriever: uses the graph that `python graph.py build <corpus>` saved. No LLM call here."""
+    name = _index_name(corpus, chunk_size, overlap_percent)
+    chunks = build_chunks(corpus, chunk_size, overlap_percent)
+    g = graph.get_graph(name, chunks)
+    if not g["nodes"]:
+        raise CorpusError(f"No concept graph for '{corpus}' with these chunk settings. "
+                          f"Build it first: python graph.py build {corpus} --chunk-size {chunk_size} --overlap {overlap_percent}")
+    got, _seeds = graph.retrieve(g, {c["id"]: c for c in chunks}, question, n)
+    return got
+
+
 def prepare(corpus, chunk_size=800, overlap_percent=10, retrievers=("dense",)):
     """Build the indexes now (so that timings do not include the one-off build)."""
     if "dense" in retrievers:
         _collection(corpus, chunk_size, overlap_percent)
     if "bm25" in retrievers:
         _bm25(corpus, "warm up", 1, chunk_size, overlap_percent)
+    if "graph" in retrievers:
+        _graph(corpus, "warm up", 1, chunk_size, overlap_percent)
 
 
 def search(corpus, question, k=5, chunk_size=800, overlap_percent=10,
@@ -178,6 +198,8 @@ def search(corpus, question, k=5, chunk_size=800, overlap_percent=10,
         lists["dense"] = _dense(corpus, question, candidates, chunk_size, overlap_percent)
     if "bm25" in retrievers:
         lists["bm25"] = _bm25(corpus, question, candidates, chunk_size, overlap_percent)
+    if "graph" in retrievers:
+        lists["graph"] = _graph(corpus, question, candidates, chunk_size, overlap_percent)
     return fusion.rrf(lists, k=rrf_k, weights=weights, top=k)
 
 

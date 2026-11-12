@@ -24,6 +24,7 @@ class SearchIn(Config):
     retrievers: list[str] = ["dense"]
     candidates: int = Field(20, ge=1, le=50)
     rrf_k: int = Field(60, ge=1, le=1000)
+    weights: dict[str, float] = {}
 
 
 class EvalIn(Config):
@@ -32,6 +33,7 @@ class EvalIn(Config):
     retrievers: list[str] = ["dense"]
     candidates: int = Field(20, ge=1, le=50)
     rrf_k: int = Field(60, ge=1, le=1000)
+    weights: dict[str, float] = {}
 
 
 class QuestionWordsIn(Config):
@@ -70,13 +72,13 @@ def questions(corpus: str):
 @app.post("/api/search")
 def search(body: SearchIn):
     return {"chunks": rag.search(body.corpus, body.question, body.k, body.chunk_size, body.overlap_percent,
-                                 body.retrievers, body.candidates, body.rrf_k)}
+                                 body.retrievers, body.candidates, body.rrf_k, body.weights)}
 
 
 @app.post("/api/ask")
 def ask(body: SearchIn):
     chunks = rag.search(body.corpus, body.question, body.k, body.chunk_size, body.overlap_percent,
-                        body.retrievers, body.candidates, body.rrf_k)
+                        body.retrievers, body.candidates, body.rrf_k, body.weights)
     a = llm.answer_with_context(body.question, chunks)
     return {"answer": a.answer, "in_documents": a.in_documents, "chunks": chunks}
 
@@ -84,9 +86,22 @@ def ask(body: SearchIn):
 @app.post("/api/eval/run")
 def run_eval(body: EvalIn):
     result = evaluate.run_eval(body.corpus, body.chunk_size, body.overlap_percent, body.with_answers, body.answer_k,
-                               retrievers=body.retrievers, candidates=body.candidates, rrf_k=body.rrf_k)
+                               retrievers=body.retrievers, candidates=body.candidates, rrf_k=body.rrf_k, weights=body.weights)
     result["saved_to"] = evaluate.save(result)
     return result
+
+
+@app.get("/api/graph")
+def graph_info(corpus: str, chunk_size: int = 800, overlap_percent: int = 10, question: str = ""):
+    """Stats of the concept graph (build cost included) and, if a question is given, the seeds it matches."""
+    import graph
+    chunks = rag.build_chunks(corpus, chunk_size, overlap_percent)
+    g = graph.get_graph(rag._index_name(corpus, chunk_size, overlap_percent), chunks)
+    out = {"stats": graph.stats(g)}
+    if question:
+        got, seeds = graph.retrieve(g, {c["id"]: c for c in chunks}, question, 10)
+        out.update(seeds=seeds, chunks=[{"id": c["id"], "graph_score": c["graph_score"], "path": c["path"]} for c in got])
+    return out
 
 
 def _chunks(corpus, chunk_size, overlap_percent):
