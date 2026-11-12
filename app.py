@@ -21,11 +21,17 @@ class Config(BaseModel):
 class SearchIn(Config):
     question: str
     k: int = Field(5, ge=1, le=10)
+    retrievers: list[str] = ["dense"]
+    candidates: int = Field(20, ge=1, le=50)
+    rrf_k: int = Field(60, ge=1, le=1000)
 
 
 class EvalIn(Config):
     with_answers: bool = False
     answer_k: int = Field(5, ge=1, le=10)
+    retrievers: list[str] = ["dense"]
+    candidates: int = Field(20, ge=1, le=50)
+    rrf_k: int = Field(60, ge=1, le=1000)
 
 
 class QuestionWordsIn(Config):
@@ -63,19 +69,22 @@ def questions(corpus: str):
 
 @app.post("/api/search")
 def search(body: SearchIn):
-    return {"chunks": rag.search(body.corpus, body.question, body.k, body.chunk_size, body.overlap_percent)}
+    return {"chunks": rag.search(body.corpus, body.question, body.k, body.chunk_size, body.overlap_percent,
+                                 body.retrievers, body.candidates, body.rrf_k)}
 
 
 @app.post("/api/ask")
 def ask(body: SearchIn):
-    chunks = rag.search(body.corpus, body.question, body.k, body.chunk_size, body.overlap_percent)
+    chunks = rag.search(body.corpus, body.question, body.k, body.chunk_size, body.overlap_percent,
+                        body.retrievers, body.candidates, body.rrf_k)
     a = llm.answer_with_context(body.question, chunks)
     return {"answer": a.answer, "in_documents": a.in_documents, "chunks": chunks}
 
 
 @app.post("/api/eval/run")
 def run_eval(body: EvalIn):
-    result = evaluate.run_eval(body.corpus, body.chunk_size, body.overlap_percent, body.with_answers, body.answer_k)
+    result = evaluate.run_eval(body.corpus, body.chunk_size, body.overlap_percent, body.with_answers, body.answer_k,
+                               retrievers=body.retrievers, candidates=body.candidates, rrf_k=body.rrf_k)
     result["saved_to"] = evaluate.save(result)
     return result
 

@@ -4,7 +4,7 @@ venv/
 
 # Python cache/artifacts
 __pycache__/
-*.py
+*.py[cod]
 *.pyo
 *.pyd
 .Python
@@ -26,3 +26,6 @@ chroma_db/
 
 # Files located in the future/ directory must be ignored
 future/
+
+# BM25 index files (rebuilt automatically)
+bm25_index/

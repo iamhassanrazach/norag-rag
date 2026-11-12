@@ -68,3 +68,36 @@ wrong answers, `failure_kind` (`retrieval` or `generation`). Grading rules are w
 ```powershell
 python -m pytest -q tests     # uses a fake embedding, no model download, no API key
 ```
+
+---
+
+## V3: retrievers, fusion, evaluation
+
+Three ways to find chunks, each switched on or off, then merged by RRF:
+
+| Retriever | Idea | Status |
+|---|---|---|
+| `dense` | embeddings (meaning), as in V2 | done |
+| `bm25` | keywords scored by rarity (own implementation, `bm25.py`) | done |
+| `graph` | concept graph (Kestrel only) | coming |
+
+**Switch them in the UI:** the checkboxes *dense* / *BM25* in the top bar apply to Ask and Evaluation.
+`Candidates` is how many chunks each retriever hands to the fusion, `RRF k` is the constant of
+score = 1 / (k + rank). In the Ask tab each chunk shows which retriever found it, at which rank.
+
+**Switch them in the terminal:**
+
+```powershell
+python evaluate.py kestrel --retrievers dense                  # = V2
+python evaluate.py kestrel --retrievers bm25
+python evaluate.py kestrel --retrievers dense,bm25             # hybrid (RRF)
+python evaluate.py own     --retrievers dense,bm25
+python evaluate.py kestrel --retrievers dense,bm25 --candidates 30 --rrf-k 60
+python evaluate.py --table results\a.json results\b.json      # markdown table to paste in REPORT.md
+```
+
+Results files are named `<corpus>__<retrievers>__cs<size>_ov<overlap>__<time>.json` and also contain, per question,
+`found_by` (retriever -> rank) for every retrieved chunk, and the cost (retrieval ms, LLM calls, tokens, answer ms).
+
+BM25 index: JSON file in `bm25_index/` (ignored by Git), rebuilt automatically when a document, the chunk size or the
+overlap changes. See the top of `bm25.py` for the tokenization.

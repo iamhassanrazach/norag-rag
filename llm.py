@@ -9,6 +9,7 @@ from pydantic import BaseModel, ValidationError
 load_dotenv()
 MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite")
 NOT_IN_DOCS = "Not in the documents."
+STATS = {"calls": 0, "tokens": 0}  # running totals; evaluate.py reads the difference per question
 
 
 class LLMError(Exception):
@@ -31,6 +32,8 @@ def _complete(prompt):
     try:
         r = _client().chat.completions.create(model=MODEL, temperature=0,
                                               messages=[{"role": "user", "content": prompt}])
+        STATS["calls"] += 1
+        STATS["tokens"] += getattr(getattr(r, "usage", None), "total_tokens", 0) or 0
         return r.choices[0].message.content or ""
     except LLMError:
         raise

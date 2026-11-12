@@ -7,12 +7,16 @@ import zlib
 import chromadb
 from chromadb.api.types import EmbeddingFunction
 
+import bm25
+import fusion
 import words
 
 CORPORA_DIR = os.getenv("CORPORA_DIR", "corpora")
 CHROMA_PATH = os.getenv("CHROMA_PATH", "./chroma_db")
 MIN_PARAGRAPH_LENGTH = 20
 MAX_K = 10
+MAX_CANDIDATES = 50
+RETRIEVERS = ("dense", "bm25")  # "graph" comes next
 
 _client = None
 _ef = None
@@ -126,15 +130,55 @@ def _collection(corpus, chunk_size, overlap_percent):
     return col
 
 
-def search(corpus, question, k=5, chunk_size=800, overlap_percent=10):
-    if not question.strip():
-        raise CorpusError("The question is empty.")
+def _index_name(corpus, chunk_size, overlap_percent):
+    docs = read_documents(corpus)
+    digest = hashlib.md5("".join(f"{k}{v}" for k, v in docs.items()).encode()).hexdigest()[:8]
+    return f"{corpus}_{chunk_size}_{overlap_percent}_{digest}"
+
+
+def _dense(corpus, question, n, chunk_size, overlap_percent):
     col = _collection(corpus, chunk_size, overlap_percent)
-    k = max(1, min(k, MAX_K, col.count()))
-    r = col.query(query_texts=[question], n_results=k)
+    n = max(1, min(n, col.count()))
+    r = col.query(query_texts=[question], n_results=n)
     return [{"rank": rank + 1, "id": r["ids"][0][rank], "source": r["metadatas"][0][rank]["source"],
              "chunk_index": r["metadatas"][0][rank]["chunk_index"], "distance": r["distances"][0][rank],
              "text": r["documents"][0][rank]} for rank in range(len(r["ids"][0]))]
+
+
+def _bm25(corpus, question, n, chunk_size, overlap_percent):
+    name = _index_name(corpus, chunk_size, overlap_percent)
+    chunks = build_chunks(corpus, chunk_size, overlap_percent)
+    by_id = {c["id"]: c for c in chunks}
+    index = bm25.get_index(name, chunks)
+    return [{**by_id[cid], "rank": rank, "bm25_score": score}
+            for rank, (cid, score) in enumerate(index.search(question, n), start=1)]
+
+
+def prepare(corpus, chunk_size=800, overlap_percent=10, retrievers=("dense",)):
+    """Build the indexes now (so that timings do not include the one-off build)."""
+    if "dense" in retrievers:
+        _collection(corpus, chunk_size, overlap_percent)
+    if "bm25" in retrievers:
+        _bm25(corpus, "warm up", 1, chunk_size, overlap_percent)
+
+
+def search(corpus, question, k=5, chunk_size=800, overlap_percent=10,
+           retrievers=("dense",), candidates=20, rrf_k=60, weights=None):
+    """Ask every retriever that is switched on for `candidates` chunks, fuse with RRF, keep the top k.
+    Each returned chunk has 'found_by': {retriever: rank}. With dense only, the order is exactly V2's."""
+    if not question.strip():
+        raise CorpusError("The question is empty.")
+    retrievers = tuple(retrievers)
+    if not retrievers or any(r not in RETRIEVERS for r in retrievers):
+        raise CorpusError(f"Retrievers must be a non-empty subset of {list(RETRIEVERS)}.")
+    k = max(1, min(k, MAX_K))
+    candidates = max(k, min(candidates, MAX_CANDIDATES))
+    lists = {}
+    if "dense" in retrievers:
+        lists["dense"] = _dense(corpus, question, candidates, chunk_size, overlap_percent)
+    if "bm25" in retrievers:
+        lists["bm25"] = _bm25(corpus, question, candidates, chunk_size, overlap_percent)
+    return fusion.rrf(lists, k=rrf_k, weights=weights, top=k)
 
 
 def load_questions(corpus):
