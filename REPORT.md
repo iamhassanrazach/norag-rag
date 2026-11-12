@@ -1,64 +1,56 @@
 # REPORT - RAG project
 
 ## Team
-- **Developer**: Solo project (all work, coding, evaluation, and report writing done by me).
+Hassan, GitHub: `iamhassanrazach`. I am the only one in my team and I did all the work.
 
-## Results table (V2)
+## Results table
+Final runs, 800-character chunks, 20% overlap, 10 scored questions per corpus.
+(Generate the full per-type table with: `python evaluate.py --table results\kestrel__*.json results\own__*.json`)
 
-### Kestrel Corpus (Config: cs800_ov10)
-| Corpus | Config | Type | n | hit@1 | hit@3 | hit@5 | hit@10 | rec@1 | rec@3 | rec@5 | rec@10 |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| kestrel | cs800_ov10 | OVERALL | 8 | [Fill from kestrel json] | ... | ... | ... | ... | ... | ... | ... |
+| Corpus | Configuration | hit@1 | hit@3 | hit@5 | hit@10 | recall@10 |
+|---|---|---|---|---|---|---|
+| Kestrel | dense | 0.7 | 0.9 | 0.9 | 1.0 | 0.95 |
+| Kestrel | bm25 | 0.7 | 0.8 | 0.8 | 0.8 | 0.675 |
+| Kestrel | dense + bm25 | 0.7 | 0.8 | 0.8 | 0.8 | 0.8 |
+| Kestrel | dense + bm25 + graph | 0.6 | 0.9 | 0.9 | 0.9 | 0.85 |
+| Own (cars) | dense | 0.6 | 0.7 | 0.8 | 0.9 | 0.8 |
+| Own (cars) | dense + bm25 | 0.5 | 0.7 | 0.8 | 1.0 | 0.9 |
 
-### Own Corpus (Config 1: cs800_ov20)
-| Corpus | Config | Type | n | hit@1 | hit@3 | hit@5 | hit@10 | rec@1 | rec@3 | rec@5 | rec@10 |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| own | cs800_ov20 | OVERALL | 10 | 0.6 | 0.7 | 0.8 | 0.9 | 0.5 | 0.65 | 0.75 | 0.8 |
-| own | cs800_ov20 | exact_identifier | 1 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
-| own | cs800_ov20 | other | 3 | 0.667 | 0.667 | 0.667 | 1.0 | 0.667 | 0.667 | 0.667 | 0.833 |
-| own | cs800_ov20 | split_answer | 1 | 1.0 | 1.0 | 1.0 | 1.0 | 0.5 | 1.0 | 1.0 | 1.0 |
-| own | cs800_ov20 | two_hop | 1 | 1.0 | 1.0 | 1.0 | 1.0 | 0.5 | 0.5 | 0.5 | 0.5 |
-| own | cs800_ov20 | versions | 3 | 0.667 | 1.0 | 1.0 | 1.0 | 0.667 | 1.0 | 1.0 | 1.0 |
-| own | cs800_ov20 | vocabulary | 1 | 0.0 | 0.0 | 1.0 | 1.0 | 0.0 | 0.0 | 1.0 | 1.0 |
+## Default configuration
+I would choose the corpus: kestrel and config: dense as default. It is quickest and the simplest configuration. The gap between car corpus is a single question as there are total of 10 questions. one is wrong. The graph costs 48 gemini calls and covers only part of the kestrel.
 
-### Own Corpus (Config 2: cs400_ov40)
-| Corpus | Config | Type | n | hit@1 | hit@3 | hit@5 | hit@10 | rec@1 | rec@3 | rec@5 | rec@10 |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| own | cs400_ov40 | OVERALL | 10 | 0.2 | 0.7 | 0.7 | 0.8 | 0.1 | 0.6 | 0.6 | 0.7 |
-| own | cs400_ov40 | exact_identifier | 1 | 0.0 | 0.0 | 0.0 | 1.0 | 0.0 | 0.0 | 0.0 | 1.0 |
-| own | cs400_ov40 | other | 3 | 0.0 | 0.667 | 0.667 | 0.667 | 0.0 | 0.5 | 0.5 | 0.5 |
-| own | cs400_ov40 | split_answer | 1 | 1.0 | 1.0 | 1.0 | 1.0 | 0.5 | 1.0 | 1.0 | 1.0 |
-| own | cs400_ov40 | top_hop | 1 | 1.0 | 1.0 | 1.0 | 1.0 | 0.5 | 0.5 | 0.5 | 0.5 |
-| own | cs400_ov40 | versions | 3 | 0.0 | 0.667 | 0.667 | 0.667 | 0.0 | 0.667 | 0.667 | 0.667 |
-| own | cs400_ov40 | vocabulary | 1 | 0.0 | 1.0 | 1.0 | 1.0 | 0.0 | 1.0 | 1.0 | 1.0 |
+## BM25 and the vocabulary question
+BM25 is designed to find exact words. It considers phone and phones two different words, and the word phone is not even in the Kestrel documents, that is why it misses the word phone.
 
-## What I changed between configurations, and what moved
-- **Changes made**: I adjusted the pipeline chunk size from `800` (overlap `20`, giving 71 chunks) down to `400` (overlap `40`, giving 185 chunks).
-- **Observed impact**: Hit@1 dropped sharply from `0.6` to `0.2` because smaller chunks split the text context away from the answer sentences, hurting top-1 placement. However, Hit@3 and Hit@5 recovered back to `0.7`, showing the correct chunks were still retrieved within the top results even if their initial ranking slipped.
+## Why dense did better than the hybrid
+Dense found the correct chunks, and because BM25 did not rank those chunks highly, the correct chunks did not rise up and instead fell out of the top 10 even though they were the right chunks. This is why dense did better than hybrid.
 
-## Two diagnosed misses (Words tab, question mode)
-### Kestrel: question [e.g., KST-2044 or phone query]
-- **Observation**: Looked up via the Words tab in question mode[cite: 12, 14]. Certain search words (like "phone") were entirely absent from the Kestrel corpus vocabulary, resulting in zero embedding matches for those specific terms[cite: 14].
+## The concept graph
+It costs upfront (48 Gemini calls, once) and then afterwards its cost is zero. But it is not very efficient and sometimes it takes cut off words and makes them nodes that are of no use and are not present anywhere else in the text. Some important words are not even in nodes, and it only returns the chunks that its nodes came from, so what is left out stays out, like KST-2044, which was not present in the graph at all. For q11 the right chunk was missing from the hybrid top 10 and the graph brought it to rank 2.
 
-### Own corpus: question [e.g., exact_identifier query]
-- **Observation**: The exact identifier query missed at top-1 under the smaller chunk size because breaking documents into 400-character blocks fragmented the specifications table layout, scattering code names across chunk boundaries.
+Extraction quality (10 random triples graded by hand): 8 correct, 2 wrong, 0 unsupported. File: `results/graph_triples_kestrel.json`.
+
+## Entity resolution
+The graph should look at words cut by the chunk boundary and instead of treating the words at the end like whole words should treat them as half and should try to find their right node. Like "Analytics E" should have been merged with "Analytics Engine" as it was the same word but cut off by the chunk boundary. And the graph should understand that two mentions at different places can be the same thing and should be one node (it already does this when the names are written the same).
 
 ## No-context test
-- **Findings**: Because my custom corpus is based on well-known modern supercars, the LLM successfully answered several questions (like acceleration times and battery capacity) straight from its pre-training memory without needing RAG retrieval[cite: 8]. Unanswerable questions (`o09` price, `o10` fuel tank) caused the model to hallucinate details despite missing data[cite: 8].
-- **Decision**: I kept these questions in the test set to deliberately highlight the difference between a model's internal memory versus grounded RAG retrieval[cite: 8].
+I would keep the questions and explain what Gemini is doing with inventing the answers and answering from memory rather than from documents. As the answers are not in documents, instead of saying not found it invents an answer.
 
-## Answer grading
-- **Grading rules**: Answers were graded as *correct*, *partial*, *wrong*, or *unsupported*[cite: 11]. For unanswerable questions, a correct response had to explicitly state "not in the documents"[cite: 11].
-- **Results**: Most answerable questions succeeded once the right chunk was fetched, demonstrating that retrieval failure (not generation failure) was the primary hurdle for tricky categories like exact identifiers.
+## Two diagnosed misses (Words tab, question mode)
+
+### Kestrel: q01 ("What does error KST-2044 mean and how do I fix it?")
+KST-2044 appears in only one chunk. The words "mean" and "fix" are found nowhere in the corpus. The actual answer was in the next chunk, which did not contain any distinctive words from the question, so BM25 failed to find it and dense found it at rank 3.
+
+### Own corpus: o06 (compression ratio of the original Aventador's engine)
+The word "compression" appears in 5 chunks and "ratio" in 10 chunks, and both are in the answer chunk in the V12 file. But the words "lamborghini" and "aventador" are mentioned everywhere and carry almost no weight. The ratio however sits under the "Second generation" heading but does not mention the name Aventador. The file named aventador names the engine and the V12 file holds the numbers, so the question needs two files.
 
 ## Decision log
-- **Relevance**: Defined as right source file plus the exact quote contained inside the chunk boundary (chunks where quotes get cut by boundaries fail to match).
-- **Metrics**: HitRate@k and Recall@k are used, excluding unanswerable questions from retrieval calculations[cite: 10].
-- **Words Analytics**: Words are lowercased, hyphenated identifiers kept whole (e.g., `L539`), with no stemming and a minimal stop list.
-- **Overlapping chunks**: A word falling into the overlap zone counts toward both adjacent chunks.
-- **Index naming**: Dynamically includes a hash of the underlying document contents to ensure clean isolation.
-- **LLM generation**: Configured with temperature 0, strict Pydantic/Zod validation schemas, and fallback to "Not in the documents." when `in_documents` is false.
+- **Keep the headings.** The base code discarded every paragraph shorter than 20 characters, and that also discarded the headings, so Gemini did not know what a paragraph belonged to and wrote nonsense facts at first. After keeping the headings, BM25's two-hop hit@1 improved from 0.33 to 1.0 (recall@10 dipped a little, from 0.725 to 0.675).
+- **Drop wrong-direction triples.** A wrong triple is dropped, not repaired, because a dropped fact is just a missed fact, while repairing a triple is guessing and could be wrong, and we do not want wrong facts.
+- **Relevance = right file and the quote inside the chunk.** The right file alone is not enough: a big file has many chunks and only one has the answer. The quote proves that the chunk actually contains the answer. The file also matters because files can have almost the same text but different years or versions. A side effect: if the quote is cut by a chunk boundary, no chunk can ever match it.
 
 ## Known failures
-- Exact product codes and specific part identifiers are hard to rank at $k=1$ if they are buried inside dense paragraphs or tables.
-- Publicly famous topics (like supercar specs) risk high pre-training memory accuracy, which hides RAG failures unless unanswerable or out-of-domain questions are strictly tested[cite: 8].
+- BM25 only matches exact words, so it misses a word that is not in the documents ("phone").
+- The graph sometimes turns words cut by a chunk boundary into useless nodes ("Analytics E").
+- Important words are missing from the graph (KST-2044 is not in it at all), and the billing and product texts gave no facts.
+- In the hybrid, the right chunks that only dense found fell out of the top 10.
