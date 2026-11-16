@@ -17,6 +17,7 @@ How it works (the four design decisions):
   4. PROVENANCE: every node and every edge remembers the chunk ids (and the quote) it came from.
      The retriever returns CHUNKS, ranked, so it can be fused with dense and BM25 by RRF.
 """
+import hashlib
 import json
 import os
 import random
@@ -28,6 +29,8 @@ from collections import defaultdict, deque
 from pydantic import BaseModel, ValidationError
 
 import llm
+import pii
+import tracing
 
 GRAPH_DIR = os.getenv("GRAPH_DIR", "graph_index")
 RESULTS_DIR = "results"
@@ -55,6 +58,26 @@ REL_TYPES = {
 MAX_ASSIGNED_HOPS = 2
 PROMPT_VERSION = 3  # change the prompt => change this number => the cache is not reused
 
+# Two schemas ("profiles"). The V3 one is designed for the Kestrel support knowledge base and stays untouched (our V3
+# measurements depend on it). Any OTHER corpus (documents uploaded from the UI) uses the general one: broader types,
+# fewer constraints. Choosing a profile is automatic: profile_for(corpus).
+GENERAL_TYPES = ("Concept", "Person", "Organization", "Place", "Product", "Event")
+GENERAL_RELATIONS = {
+    "PART_OF":    "X -> Y (X is a part, component, version or member of Y)",
+    "CREATED_BY": "X -> Person or Organization (made, built, founded, written or decided by)",
+    "LOCATED_IN": "X -> Place (where X is, is made, or happened)",
+    "REPLACES":   "X -> Y of the same type (X replaced or succeeded Y)",
+    "USES":       "X -> Y (X uses, needs, contains or depends on Y)",
+    "RELATED_TO": "X -> Y (any other clear relationship that the text states in so many words)",
+}
+SUPPORT = {"name": "support", "version": PROMPT_VERSION, "types": ENTITY_TYPES, "relations": RELATIONS, "rel_types": REL_TYPES}
+GENERAL = {"name": "general", "version": 1, "types": GENERAL_TYPES, "relations": GENERAL_RELATIONS, "rel_types": {}}
+SUPPORT_CORPORA = {"kestrel"}
+
+
+def profile_for(corpus):
+    return SUPPORT if corpus in SUPPORT_CORPORA else GENERAL
+
 
 class Triple(BaseModel):
     subject: str
@@ -71,7 +94,9 @@ class Extraction(BaseModel):
     triples: list[Triple]
 
 
-def _prompt(chunk):
+def _prompt(chunk, profile=SUPPORT):
+    if profile["name"] == "general":
+        return _general_prompt(chunk)
     rels = "\n".join(f"  {r}: {d}" for r, d in RELATIONS.items())
     return f"""Extract a knowledge graph from the text below. Use ONLY facts written in the text.
 
@@ -104,6 +129,38 @@ TEXT (from {chunk['source']}):
 {chunk['text']}"""
 
 
+def _general_prompt(chunk):
+    rels = "\n".join(f"  {r}: {d}" for r, d in GENERAL_RELATIONS.items())
+    return f"""Extract a knowledge graph from the text below. Use ONLY facts written in the text.
+
+Entity types (use exactly these): {", ".join(GENERAL_TYPES)}
+Relations (use exactly these):
+{rels}
+
+Rules:
+- Write one triple for every relationship of these types that the text states, including ones in tables and headings.
+- The subject comes first, as in the relation list. Use the most specific relation; RELATED_TO only when no other fits.
+- Only write a triple if the text states it. Never guess. Return an empty list only if the text really states none.
+- Use the name as written in the text, short and without articles ("Aventador", "V12 engine", "Sant'Agata Bolognese").
+- subject_aliases / object_aliases: other names the SAME text uses for the SAME thing (usually empty).
+- evidence: a short quote copied from the text that supports the triple.
+Example (made-up text): "The Zeta 3 replaced the Zeta 2 in 2021. Its battery pack is built by Voltix in Lyon."
+  ANSWER: {{"triples": [
+    {{"subject": "Zeta 3", "subject_type": "Product", "subject_aliases": [], "relation": "REPLACES",
+      "object": "Zeta 2", "object_type": "Product", "object_aliases": [], "evidence": "The Zeta 3 replaced the Zeta 2"}},
+    {{"subject": "battery pack", "subject_type": "Concept", "subject_aliases": [], "relation": "CREATED_BY",
+      "object": "Voltix", "object_type": "Organization", "object_aliases": [], "evidence": "battery pack is built by Voltix"}},
+    {{"subject": "Voltix", "subject_type": "Organization", "subject_aliases": [], "relation": "LOCATED_IN",
+      "object": "Lyon", "object_type": "Place", "object_aliases": [], "evidence": "built by Voltix in Lyon"}}]}}
+
+Reply with JSON only, no markdown fence:
+{{"triples": [{{"subject": "...", "subject_type": "...", "subject_aliases": [], "relation": "...",
+  "object": "...", "object_type": "...", "object_aliases": [], "evidence": "..."}}]}}
+
+TEXT (from {chunk['source']}):
+{chunk['text']}"""
+
+
 def _parse(raw):
     raw = raw.strip()
     if raw.startswith("```"):
@@ -111,19 +168,23 @@ def _parse(raw):
     return Extraction.model_validate(json.loads(raw))
 
 
-def _valid(t):
-    return t.subject_type in ENTITY_TYPES and t.object_type in ENTITY_TYPES and t.relation in RELATIONS \
+def _valid(t, profile=SUPPORT):
+    ok = t.subject_type in profile["types"] and t.object_type in profile["types"] and t.relation in profile["relations"] \
         and t.subject.strip() and t.object.strip() and t.subject.strip().lower() != t.object.strip().lower() \
-        and t.subject_type in REL_TYPES[t.relation][0] and t.object_type in REL_TYPES[t.relation][1] \
         and (t.relation != "REPLACES" or t.subject_type == t.object_type)
+    allowed = profile["rel_types"].get(t.relation)
+    return bool(ok and (allowed is None or (t.subject_type in allowed[0] and t.object_type in allowed[1])))
 
 
-def extract_chunk(chunk):
+def extract_chunk(chunk, profile=SUPPORT):
     """One LLM call (a second one if the JSON is invalid). Returns (kept triples as dicts, dropped count).
+    The chunk goes to the provider with its personal data replaced; the triples get the real values back.
     Raises llm.LLMError when the model cannot be reached or answers twice with invalid JSON."""
+    red = pii.Redactor()
+    safe = {**chunk, "text": red.redact(chunk["text"])}
     last = None
     for _ in range(2):
-        raw = llm._complete(_prompt(chunk))
+        raw = llm._complete(_prompt(safe, profile))
         try:
             ex = _parse(raw)
             break
@@ -131,12 +192,15 @@ def extract_chunk(chunk):
             last = e
     else:
         raise llm.LLMError(f"invalid JSON twice for {chunk['id']}: {last}")
-    canon_t = {x.lower(): x for x in ENTITY_TYPES}
+    canon_t = {x.lower(): x for x in profile["types"]}
     for t in ex.triples:  # tolerate "owned_by" / "service" written in another case
         t.relation = t.relation.strip().upper().replace(" ", "_")
         t.subject_type = canon_t.get(t.subject_type.strip().lower(), t.subject_type)
         t.object_type = canon_t.get(t.object_type.strip().lower(), t.object_type)
-    kept = [t.model_dump() for t in ex.triples if _valid(t)]
+        t.subject, t.object, t.evidence = red.restore(t.subject), red.restore(t.object), red.restore(t.evidence)
+        t.subject_aliases = [red.restore(a) for a in t.subject_aliases]
+        t.object_aliases = [red.restore(a) for a in t.object_aliases]
+    kept = [t.model_dump() for t in ex.triples if _valid(t, profile)]
     return kept, len(ex.triples) - len(kept)
 
 
@@ -179,62 +243,105 @@ def label(graph, key):
 
 # --------------------------------------------------------------------- build (cached on disk)
 
-def _path(name):
-    return os.path.join(GRAPH_DIR, f"{name}__v{PROMPT_VERSION}.json")
+def _path(name, profile=SUPPORT):
+    # the support profile keeps the V3 file name ("<index>__v3.json"), so the graph already built is still found
+    tag = f"v{profile['version']}" if profile["name"] == "support" else f"{profile['name']}_v{profile['version']}"
+    return os.path.join(GRAPH_DIR, f"{name}__{tag}.json")
 
 
-def load_cache(name):
+def _empty_cache():
+    return {"extractions": {}, "failed": {}, "cost": {"calls": 0, "tokens": 0, "seconds": 0.0, "dropped_triples": 0}}
+
+
+def _read_json(path, default):
     try:
-        with open(_path(name), encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             return json.load(f)
     except (OSError, ValueError):
-        return {"extractions": {}, "failed": {}, "cost": {"calls": 0, "tokens": 0, "seconds": 0.0, "dropped_triples": 0}}
+        return default
 
 
-def save_cache(name, cache):
+def _write_json(path, data):
     os.makedirs(GRAPH_DIR, exist_ok=True)
-    tmp = _path(name) + ".tmp"
+    tmp = path + ".tmp"
     with open(tmp, "w", encoding="utf-8") as f:
-        json.dump(cache, f, ensure_ascii=False, indent=1)
-    os.replace(tmp, _path(name))
+        json.dump(data, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, path)
 
 
-def build_cache(name, chunks, pause=0.0, log=print):
-    """Extract every chunk that is not yet in the cache. Safe to stop and restart."""
-    cache = load_cache(name)
+def load_cache(name, profile=SUPPORT):
+    return _read_json(_path(name, profile), _empty_cache())
+
+
+def save_cache(name, cache, profile=SUPPORT):
+    _write_json(_path(name, profile), cache)
+
+
+# One extra store, shared by every index of the same profile: chunk text (hash) -> its triples. Upload a 6th document
+# and the 5 documents already read do not cost a single LLM call again.
+def _shared_path(profile):
+    return os.path.join(GRAPH_DIR, f"_by_text_{profile['name']}_v{profile['version']}.json")
+
+
+def _text_hash(chunk):
+    return hashlib.md5(chunk["text"].encode("utf-8")).hexdigest()
+
+
+def build_cache(name, chunks, pause=0.0, log=print, profile=SUPPORT, progress=None):
+    """Extract every chunk that is not yet in the cache. Safe to stop and restart.
+    progress(done, total, chunk_id) is called after each chunk (the UI shows a progress bar with it)."""
+    cache = load_cache(name, profile)
+    shared = _read_json(_shared_path(profile), {})
     todo = [c for c in chunks if c["id"] not in cache["extractions"]]
     for i, c in enumerate(todo, start=1):
         calls0, tokens0, t0 = llm.STATS["calls"], llm.STATS["tokens"], time.perf_counter()
-        try:
-            triples, dropped = extract_chunk(c)
-            cache["extractions"][c["id"]] = triples
-            cache["failed"].pop(c["id"], None)
-            cache["cost"]["dropped_triples"] += dropped
-        except llm.LLMError as e:
-            cache["failed"][c["id"]] = str(e)
+        with tracing.span("graph.chunk", chunk=c["id"]) as sp:
+            h = _text_hash(c)
+            if h in shared:  # same text already read (another document set): reuse, no LLM call
+                cache["extractions"][c["id"]] = shared[h]
+                cache["failed"].pop(c["id"], None)
+                sp.set(cache_hit=True, triples=len(shared[h]))
+            else:
+                try:
+                    triples, dropped = extract_chunk(c, profile)
+                    cache["extractions"][c["id"]] = triples
+                    shared[h] = triples
+                    cache["failed"].pop(c["id"], None)
+                    cache["cost"]["dropped_triples"] += dropped
+                    used = llm.STATS["calls"] - calls0
+                    sp.set(cache_hit=False, triples=len(triples), dropped=dropped, llm_calls=used, retried=used > 1)
+                    if not triples:
+                        sp.set(note="no triples")  # quiet failure: a chunk with no triples raises no error
+                except llm.LLMError as e:
+                    cache["failed"][c["id"]] = str(e)
+                    sp.error(e)
         cache["cost"]["calls"] += llm.STATS["calls"] - calls0
         cache["cost"]["tokens"] += llm.STATS["tokens"] - tokens0
         cache["cost"]["seconds"] = round(cache["cost"]["seconds"] + time.perf_counter() - t0, 2)
         if log:
             log(f"  [{i}/{len(todo)}] {c['id']}: " + (f"{len(cache['extractions'][c['id']])} triples"
                 if c["id"] in cache["extractions"] else "FAILED (will be retried on the next build)"))
+        if progress:
+            progress(i, len(todo), c["id"])
         if i % 5 == 0:
-            save_cache(name, cache)
+            save_cache(name, cache, profile)
+            _write_json(_shared_path(profile), shared)
         if pause:
             time.sleep(pause)
-    save_cache(name, cache)
+    save_cache(name, cache, profile)
+    _write_json(_shared_path(profile), shared)
     return cache
 
 
 _graphs = {}
 
 
-def get_graph(name, chunks, build=False):
+def get_graph(name, chunks, build=False, profile=SUPPORT):
     """The resolved graph for these chunks. build=False: use only what is in the cache (never calls the LLM)."""
-    cache = build_cache(name, chunks) if build else load_cache(name)
+    cache = build_cache(name, chunks, profile=profile) if build else load_cache(name, profile)
     ids = {c["id"] for c in chunks}
     ex = {cid: t for cid, t in cache["extractions"].items() if cid in ids}
-    sig = (name, tuple(sorted((cid, len(t)) for cid, t in ex.items())))
+    sig = (name, profile["name"], tuple(sorted((cid, len(t)) for cid, t in ex.items())))
     if sig not in _graphs:
         g = build_graph(ex)
         g["cost"], g["failed"], g["chunks_done"], g["chunks_total"] = cache["cost"], cache["failed"], len(ex), len(ids)
@@ -252,6 +359,54 @@ def stats(graph):
     return {"nodes": len(graph["nodes"]), "edges": len(graph["edges"]), "nodes_by_type": dict(kinds),
             "edges_by_relation": dict(rels), "chunks_done": graph["chunks_done"], "chunks_total": graph["chunks_total"],
             "build_cost": graph["cost"], "failed_chunks": graph["failed"]}
+
+
+# --------------------------------------------------------------------- the concept map explorer (V4, part B)
+
+def node_id(key):
+    return f"{key[0]}|{key[1]}"
+
+
+def _key(graph, nid):
+    return next((k for k in graph["nodes"] if node_id(k) == nid), None)
+
+
+def explore(graph, limit=150):
+    """Nodes and edges for the map. At most `limit` nodes (the best connected ones) so that the page stays readable."""
+    degree = defaultdict(int)
+    for e in graph["edges"]:
+        degree[e["src"]] += 1
+        degree[e["dst"]] += 1
+    keys = sorted(graph["nodes"], key=lambda k: (-degree[k], graph["nodes"][k]["name"]))[:limit]
+    kept = set(keys)
+    return {"nodes": [{"id": node_id(k), "name": graph["nodes"][k]["name"], "type": graph["nodes"][k]["type"],
+                       "degree": degree[k], "chunks": len(graph["nodes"][k]["chunks"])} for k in keys],
+            "edges": [{"src": node_id(e["src"]), "dst": node_id(e["dst"]), "rel": e["rel"], "chunks": len(e["evidence"])}
+                      for e in graph["edges"] if e["src"] in kept and e["dst"] in kept],
+            "total_nodes": len(graph["nodes"]), "shown_nodes": len(keys)}
+
+
+def node_detail(graph, nid, chunks_by_id):
+    """Everything about one concept: its links (with the quote and the chunk each one was extracted from),
+    the chunks that mention it, and the documents they belong to."""
+    key = _key(graph, nid)
+    if key is None:
+        return None
+    n = graph["nodes"][key]
+    links = []
+    for e in graph["edges"]:
+        if key not in (e["src"], e["dst"]):
+            continue
+        out = e["src"] == key
+        other = e["dst"] if out else e["src"]
+        links.append({"direction": "out" if out else "in", "relation": e["rel"],
+                      "other": {"id": node_id(other), "name": label(graph, other), "type": graph["nodes"][other]["type"]},
+                      "evidence": [{"chunk_id": cid, "quote": q} for cid, q in sorted(e["evidence"].items())]})
+    chunks = [{"id": cid, "source": chunks_by_id[cid]["source"], "chunk_index": chunks_by_id[cid]["chunk_index"],
+               "text": chunks_by_id[cid]["text"]} for cid in sorted(n["chunks"]) if cid in chunks_by_id]
+    return {"id": nid, "name": n["name"], "type": n["type"], "also_called": sorted(n["names"] - {n["name"]}),
+            "links": sorted(links, key=lambda x: (x["relation"], x["other"]["name"])), "chunks": chunks,
+            "documents": sorted({c["source"] for c in chunks})}
 
 
 # --------------------------------------------------------------------- retrieval (no LLM)
@@ -341,7 +496,7 @@ def count_grades(path):
 def _setup(corpus, cs, ov):
     import rag
     chunks = rag.build_chunks(corpus, cs, ov)
-    return chunks, rag._index_name(corpus, cs, ov)
+    return chunks, rag._index_name(corpus, cs, ov), profile_for(corpus)
 
 
 def main(argv):
@@ -357,26 +512,29 @@ def main(argv):
     if a.command == "grades":
         print(count_grades(a.target))
         return
-    chunks, name = _setup(a.target, a.chunk_size, a.overlap)
+    chunks, name, profile = _setup(a.target, a.chunk_size, a.overlap)
     if a.command == "build":
-        c = build_cache(name, chunks, pause=a.pause)
+        with tracing.trace("index", corpus=a.target, via="command line", config={"chunk_size": a.chunk_size,
+                           "chunk_overlap": a.overlap, "graph_profile": profile["name"]}):
+            with tracing.span("graph.extract", profile=profile["name"], chunks=len(chunks)):
+                c = build_cache(name, chunks, pause=a.pause, profile=profile)
         print("\nbuild cost so far:", c["cost"], "| failed chunks:", len(c["failed"]))
     elif a.command == "stats":
-        print(json.dumps(stats(get_graph(name, chunks)), indent=1))
+        print(json.dumps(stats(get_graph(name, chunks, profile=profile)), indent=1))
     elif a.command == "debug":  # python graph.py debug kestrel "service-catalog.md::2"
         chunk = next((c for c in chunks if c["id"] == a.question), None)
         if not chunk:
             sys.exit(f"No chunk {a.question!r}. Example ids: {[c['id'] for c in chunks][:5]}")
-        print("RAW MODEL ANSWER:\n", llm._complete(_prompt(chunk)))
+        print("RAW MODEL ANSWER:\n", llm._complete(_prompt(chunk, profile)))
     elif a.command == "sample":
-        rows = sample_triples(load_cache(name), chunks)
+        rows = sample_triples(load_cache(name, profile), chunks)
         os.makedirs(RESULTS_DIR, exist_ok=True)
         out = os.path.join(RESULTS_DIR, f"graph_triples_{a.target}.json")
         with open(out, "w", encoding="utf-8") as f:
             json.dump(rows, f, ensure_ascii=False, indent=1)
         print(f"Saved {out}. Fill each \"grade\" with correct / wrong / unsupported, then: python graph.py grades {out}")
     elif a.command == "ask":
-        g = get_graph(name, chunks)
+        g = get_graph(name, chunks, profile=profile)
         got, seeds = retrieve(g, {c["id"]: c for c in chunks}, a.question or "")
         print("seed entities:", seeds)
         for c in got:

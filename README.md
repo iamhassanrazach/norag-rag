@@ -1,39 +1,89 @@
-# RAG project - V2
+# RAG project - V4 (final)
 
-Web app to ask questions about a document corpus (answers with references to the chunks used),
-plus a repeatable evaluation and a Words tab. The original course README is in `README_BASE.md`.
+Ask questions about your own documents. Every answer shows the passages it used, and every question and every
+indexing run leaves a **trace** you can open from the answer. The original course README is in `README_BASE.md`.
 
-## Setup (Windows PowerShell)
+## Install and run (Windows PowerShell, 5 minutes)
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-copy .env.example .env     # then put your GOOGLE_API_KEY in .env (remove the word "export" if you like)
-```
-
-## Run the app and reach the Words tab
-
-```powershell
+copy .env.example .env          # then open .env and fill the three LLM_ lines (see below)
 uvicorn app:app --reload
 ```
 
-Open http://127.0.0.1:8000. Three tabs: **Ask**, **Evaluation**, **Words**. The corpus, chunk size,
-overlap and top-k are chosen in the bar at the top. The first search on a new configuration builds its
-index (a few seconds for Kestrel).
+Open http://127.0.0.1:8000. The first question downloads a small embedding model (a minute, once).
 
-## Corpora and question sets
+## Choose the AI model (`.env`)
+
+```
+LLM_URL=...        # address of any OpenAI-compatible server. Empty = Google Gemini (default)
+LLM_API_KEY=...    # your key (several keys separated by commas are rotated when one hits the rate limit)
+LLM_MODEL=...      # model name, e.g. gemini-2.5-flash-lite or a local model
+```
+
+Nothing else in the code needs to change to use another provider. A local server (Ollama, LM Studio...) needs
+no key. The old names `GOOGLE_API_KEY(S)` and `GEMINI_MODEL` still work. The cost shown in traces is an estimate
+from `LLM_PRICE_IN` / `LLM_PRICE_OUT` (USD per million tokens; check them for your model).
+
+## What you can do in the app
+
+| Tab | What it is for |
+|---|---|
+| **Ask** | Ask a question. The answer lists its source passages and which search found each. **Details** opens the trace. |
+| **My documents** | Create a collection, drop `.md` / `.txt` files in it (max 2 MB each, 100 files), press **Prepare**. Tick "build the concept map" to also extract the concept graph (uses the LLM; only new passages cost calls). The provided collections (`kestrel`, `own`) are read-only. |
+| **Concept map** | Explore the concept graph of a collection: click a concept to see its links, the quote each link comes from, and the passages. "Ask a question about it" jumps to Ask. Building the map is the only step that uses the LLM, opening it costs nothing. |
+| **History** | Counts, time per step (median and 95th percentile), tokens and cost per day, and the list of recent requests. |
+| Evaluation, Words | As in V2/V3 (see below). |
+
+Tip: to try the graph on a small collection first (saves quota), upload 2-3 short files and build it there.
+
+Two graph schemas exist: the support schema (Service, Team, ErrorCode...) is used for Kestrel; every other
+collection uses a general one (Concept, Person, Organization, Place, Product, Event).
+
+## Traces (observability)
+
+Each question and each indexing run writes one trace: a tree of steps (spans) with duration, status and details
+(retrieval per retriever, fusion, prompt build, each LLM call with model, tokens, finish reason and cost, validation).
+The final outcome is one of: answered, abstained, invalid_output, error (questions); indexed, partial, error (indexing).
+
+- Stored in `traces/YYYY-MM-DD.jsonl`, one file per day, **on this computer only**, never sent anywhere.
+- Kept 30 days (`TRACE_RETENTION_DAYS`); older files are deleted at start-up.
+- API keys are removed before writing; personal data is hidden (next section); only passage ids are stored, not passage text.
+- Same data via the API: `GET /api/traces`, `/api/traces/{id}`, `/api/metrics?days=7`.
+
+## Privacy: personal data hidden before it is sent
+
+On by default (`PII_REDACTION=0` turns it off). Before the question and the passages go to the AI provider, emails, phone
+numbers, card numbers (Luhn check), IBANs (checksum) and names after a title ("Mr Smith") become placeholders such as
+`[EMAIL_1]`. The provider and the traces only see placeholders; the answer shown to you has the real values put back.
+Names you always want hidden can be listed in `PII_NAMES="Jane Doe,John Roe"`.
+**Not covered:** bare names, postal addresses, dates of birth, IP addresses, national ID numbers. Rules, not magic.
+
+Prompt injection: passages are given to the model as data (inside `<excerpts>` tags) with an instruction not to follow
+orders found in them (prompt version `answer-v4`).
+
+## Tests
+
+```powershell
+python -m pytest -q       # about 50 tests, fake LLM server and fake embeddings: no key, no download, no quota
+python tests\fake_llm.py  # optional: a fake AI server on port 8765 to try the app offline (LLM_URL=http://127.0.0.1:8765)
+```
+
+---
+
+## V2 and V3 (kept)
+
+### Corpora and question sets
 
 ```
 corpora/kestrel/docs/ + questions.jsonl   provided Kestrel KB + its 10 starter questions
-corpora/own/docs/     + questions.jsonl   OUR corpus and OUR questions (same JSONL format)
+corpora/own/docs/     + questions.jsonl   OUR corpus and OUR questions
+user_corpora/<name>/                      collections created in the app (not in Git)
 ```
 
-Question sets stay fixed while comparing configurations: add questions, never edit old ones silently.
-
-## Run the evaluation
-
-From the terminal (one command; results are saved in `results/`):
+### Run the evaluation
 
 ```powershell
 python evaluate.py kestrel                              # retrieval only, fast and free
@@ -43,13 +93,11 @@ python evaluate.py kestrel --with-answers --answer-k 5  # also generates answers
 python evaluate.py --grades results\<file>.json         # count the hand grades
 ```
 
-From the front-end: **Evaluation** tab, optional checkbox "also generate answers", button "Run evaluation".
-Both do the same thing (`evaluate.run_eval`).
+Measures: **HitRate@k** and **Recall@k** for k = 1, 3, 5, 10. A chunk is relevant if it comes from the evidence's source
+file and contains its quote. Unanswerable questions are left out. Hand grades: open an `..._answers_...json` file and fill
+`grade` (`correct`, `partial`, `wrong`, `unsupported`) and, for wrong answers, `failure_kind` (`retrieval` or `generation`).
 
-Measures: **HitRate@k** and **Recall@k** for k = 1, 3, 5, 10, overall and per question type. A chunk is relevant
-if it comes from the evidence's source file and contains its quote. Unanswerable questions are left out.
-
-## No-context test
+### No-context test
 
 ```powershell
 python no_context_test.py kestrel
@@ -58,12 +106,12 @@ python no_context_test.py own
 
 Saves `results/no_context_<corpus>.json`; set `model_correct` by hand for each question.
 
-## Hand grades
+### Hand grades
 
 Open an `..._answers_...json` results file and fill `grade` (`correct`, `partial`, `wrong`, `unsupported`) and, for
 wrong answers, `failure_kind` (`retrieval` or `generation`). Grading rules are written in REPORT.md before grading.
 
-## Tests
+### Tests
 
 ```powershell
 python -m pytest -q tests     # uses a fake embedding, no model download, no API key
@@ -81,7 +129,7 @@ Three ways to find chunks, each switched on or off, then merged by RRF:
 | `bm25` | keywords scored by rarity (own implementation, `bm25.py`) | done |
 | `graph` | concept graph built by the LLM (Kestrel), walked without any LLM call | done (`graph.py`) |
 
-**Switch them in the UI:** the checkboxes *dense* / *BM25* / *graph* in the top bar apply to Ask and Evaluation.
+**Switch them in the UI:** the *Search* menu on the Ask tab (meaning / meaning + exact words / + concept map); the Evaluation tab has its own menu.
 `Candidates` is how many chunks each retriever hands to the fusion, `RRF k` is the constant of
 score = 1 / (k + rank). In the Ask tab each chunk shows which retriever found it, at which rank.
 

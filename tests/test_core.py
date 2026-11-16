@@ -167,14 +167,14 @@ def test_extract_chunk_drops_bad_triples_and_retries_bad_json(monkeypatch):
 def test_build_cache_survives_a_failure_and_resumes(monkeypatch):
     chunks = [{"id": "d::0", "source": "d", "text": "a"}, {"id": "d::1", "source": "d", "text": "b"}]
 
-    def fake(chunk):
+    def fake(chunk, profile=None):
         if chunk["id"] == "d::1":
             raise llm.LLMError("429")
         return [T("s", "Service", "OWNED_BY", "t", "Team")], 0
     monkeypatch.setattr(graph, "extract_chunk", fake)
     c = graph.build_cache("unit-" + str(id(chunks)), chunks, log=None)
     assert "d::0" in c["extractions"] and "d::1" in c["failed"]
-    monkeypatch.setattr(graph, "extract_chunk", lambda ch: ([], 0))
+    monkeypatch.setattr(graph, "extract_chunk", lambda ch, profile=None: ([], 0))
     c = graph.build_cache("unit-" + str(id(chunks)), chunks, log=None)                 # only the failed chunk is called again
     assert "d::1" in c["extractions"] and not c["failed"]
 

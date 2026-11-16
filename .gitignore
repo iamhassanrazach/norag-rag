@@ -29,3 +29,7 @@ future/
 
 # BM25 index files (rebuilt automatically)
 bm25_index/
+
+# V4: traces (local only) and collections uploaded in the app
+traces/
+user_corpora/

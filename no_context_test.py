@@ -29,5 +29,5 @@ if __name__ == "__main__":
                      "expected_answer": q.get("expected_answer"), "model_answer": answer, "model_correct": None})
     os.makedirs("results", exist_ok=True)
     path = f"results/no_context_{corpus}.json"
-    json.dump({"model": llm.MODEL, "questions": rows}, open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    json.dump({"model": llm.model(), "questions": rows}, open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("\nSaved:", path, '-> now set "model_correct" by hand.')
