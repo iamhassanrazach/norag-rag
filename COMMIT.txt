@@ -1,3 +1,0 @@
-git add -A
-git commit -m "V4 part 1: tracing, PII redaction, LLM_* settings, upload and indexing backend"
-git push origin main
