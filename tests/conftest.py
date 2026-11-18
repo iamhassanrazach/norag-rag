@@ -9,5 +9,7 @@ for var in ("CHROMA_PATH", "BM25_DIR", "GRAPH_DIR", "TRACE_DIR", "USER_CORPORA_D
     os.environ[var] = tempfile.mkdtemp()
 for var in ("LLM_URL", "LLM_API_KEY", "LLM_MODEL", "GEMINI_MODEL", "GOOGLE_API_KEY", "GOOGLE_API_KEYS", "PII_NAMES"):
     os.environ.pop(var, None)
+import dotenv  # the tests must never read the real .env (it holds a real key): make load_dotenv do nothing
+dotenv.load_dotenv = lambda *a, **k: False
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
